@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Fixture sintética para estrutura legada e campos opcionais ausentes. -->
+<NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+  <infNFe Id="NFe35261000000000000100550010000001231000001234" versao="2.00">
+    <ide><mod>55</mod><serie>1</serie><nNF>123</nNF><dEmi>2012-03-04</dEmi><dSaiEnt>2012-03-05</dSaiEnt></ide>
+    <emit><CNPJ>00000000000100</CNPJ><xNome>Empresa Fictícia</xNome></emit>
+    <dest><CPF>00000000000</CPF><xNome>Pessoa Fictícia</xNome></dest>
+    <det nItem="1"><prod><cProd>0001</cProd><xProd>Produto Fictício</xProd><NCM>00000000</NCM><CFOP>5102</CFOP><uCom>UN</uCom><qCom>1.0000</qCom><vUnCom>1.0000000000</vUnCom><vProd>1.00</vProd></prod></det>
+    <pag><tPag>01</tPag><vPag>1.00</vPag></pag>
+  </infNFe>
+</NFe>

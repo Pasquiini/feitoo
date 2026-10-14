@@ -18,9 +18,9 @@ return [
     |
     */
 
-    'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf(
+    'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', env('APP_ENV') === 'production' ? 'feitoo.com.br' : sprintf(
         '%s%s',
-        'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1',
+        'localhost,localhost:4200,127.0.0.1,127.0.0.1:4200,127.0.0.1:8000,::1',
         Sanctum::currentApplicationUrlWithPort(),
         // Sanctum::currentRequestHost(),
     ))),
