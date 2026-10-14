@@ -9,9 +9,10 @@ class StripeEnvironment
     public function available(): bool
     {
         $mode = config('monetization.stripe.mode');
+        $secretKey = (string) config('monetization.stripe.secret_key');
 
         return in_array($mode, ['test', 'live'], true)
-            && str_starts_with((string) config('monetization.stripe.secret_key'), 'sk_'.$mode.'_')
+            && (str_starts_with($secretKey, 'sk_'.$mode.'_') || str_starts_with($secretKey, 'rk_'.$mode.'_'))
             && str_starts_with((string) config('monetization.stripe.webhook_secret'), 'whsec_');
     }
 

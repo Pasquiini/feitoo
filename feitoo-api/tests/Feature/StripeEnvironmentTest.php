@@ -41,16 +41,20 @@ class StripeEnvironmentTest extends TestCase
     public function test_mode_key_matrix_and_invalid_modes(): void
     {
         foreach (['test', 'live', '', 'invalid'] as $mode) {
-            foreach (['test', 'live'] as $key) {
-                config(['monetization.stripe.mode' => $mode, 'monetization.stripe.secret_key' => 'sk_'.$key.'_fake']);
-                $this->assertSame($mode === $key, app(StripeEnvironment::class)->available());
-                if ($mode !== $key) {
-                    try {
+            foreach (['sk', 'rk'] as $prefix) {
+                foreach (['test', 'live'] as $key) {
+                    config(['monetization.stripe.mode' => $mode, 'monetization.stripe.secret_key' => $prefix.'_'.$key.'_fake']);
+                    $this->assertSame($mode === $key, app(StripeEnvironment::class)->available(), $mode.' + '.$prefix.'_'.$key);
+                    if ($mode === $key) {
                         app(StripeEnvironment::class)->assertConfigured();
-                        $this->fail('Configuration accepted');
-                    } catch (BillingException $e) {
-                        $this->assertSame('stripe_configuration_invalid', $e->reason);
-                        $this->assertStringNotContainsString('sk_', $e->getMessage());
+                    } else {
+                        try {
+                            app(StripeEnvironment::class)->assertConfigured();
+                            $this->fail('Configuration accepted');
+                        } catch (BillingException $e) {
+                            $this->assertSame('stripe_configuration_invalid', $e->reason);
+                            $this->assertStringNotContainsString($prefix.'_', $e->getMessage());
+                        }
                     }
                 }
             }
