@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\StripeEnvironment;
 use App\Services\StripeWebhookService;
 use Illuminate\Http\Request;
 use Stripe\Exception\SignatureVerificationException;
@@ -20,7 +21,8 @@ class StripeWebhookController extends Controller
         } catch (SignatureVerificationException|UnexpectedValueException) {
             return response()->json(['message' => 'Assinatura Stripe inválida.'], 400);
         }
-        abort_unless($event->livemode === false && is_string($event->id) && strlen($event->id) <= 255, 400);
+        app(StripeEnvironment::class)->assertObject($event, 400);
+        abort_unless(is_string($event->id) && strlen($event->id) <= 255, 400);
         $service->handle($event);
 
         return response()->json(['received' => true]);

@@ -13,12 +13,12 @@ class StripeCheckoutGateway
 {
     public function available(): bool
     {
-        return str_starts_with((string) config('monetization.stripe.secret_key'), 'sk_test_')
-            && str_starts_with((string) config('monetization.stripe.webhook_secret'), 'whsec_');
+        return app(StripeEnvironment::class)->available();
     }
 
-    private function client(): StripeClient
+    protected function client(): StripeClient
     {
+        app(StripeEnvironment::class)->assertConfigured();
         if (! $this->available()) {
             throw new BillingException('checkout_unavailable', 'A compra avulsa ainda não está disponível. Tente novamente mais tarde.', 503);
         }
@@ -50,7 +50,18 @@ class StripeCheckoutGateway
 
     public function create(Purchase $purchase, Processing $processing): Session
     {
-        return $this->client()->checkout->sessions->create($this->parameters($purchase, $processing), ['idempotency_key' => 'purchase-'.$purchase->uuid]);
+        $session = $this->client()->checkout->sessions->create($this->parameters($purchase, $processing), ['idempotency_key' => 'purchase-'.$purchase->uuid]);
+        app(StripeEnvironment::class)->assertSession($session, true);
+
+        return $session;
+    }
+
+    public function session(string $id): Session
+    {
+        $session = $this->client()->checkout->sessions->retrieve($id);
+        app(StripeEnvironment::class)->assertSession($session);
+
+        return $session;
     }
 
     public function expire(string $session): Session
@@ -58,6 +69,10 @@ class StripeCheckoutGateway
         $client = $this->client();
         $current = $client->checkout->sessions->retrieve($session);
 
-        return $current->status === 'expired' ? $current : $client->checkout->sessions->expire($session);
+        app(StripeEnvironment::class)->assertSession($current);
+        $expired = $current->status === 'expired' ? $current : $client->checkout->sessions->expire($session);
+        app(StripeEnvironment::class)->assertSession($expired);
+
+        return $expired;
     }
 }

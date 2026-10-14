@@ -35,6 +35,7 @@ class SubscriptionService
 
     public function checkout(User $owner): string
     {
+        app(StripeEnvironment::class)->assertConfigured();
         abort_unless($this->stripe->available(), 503);
 
         $subscription = DB::transaction(function () use ($owner) {
@@ -66,11 +67,12 @@ class SubscriptionService
             $subscription = Subscription::whereKey($subscription->id)->lockForUpdate()->firstOrFail();
             abort_if($subscription->provider_subscription_id, 409, 'Gerencie sua assinatura existente.');
             if ($subscription->checkout_url && $subscription->checkout_expires_at?->isFuture()) {
+                app(StripeEnvironment::class)->assertSession($this->stripe->session($subscription->checkout_session_id), true);
+
                 return $subscription->checkout_url;
             }
             $session = $this->stripe->checkout($subscription);
-            abort_unless($session->livemode === false && str_starts_with($session->id, 'cs_test_')
-                && preg_match('~^https://checkout\.stripe\.com/~', (string) $session->url), 503);
+            app(StripeEnvironment::class)->assertSession($session, true);
             $subscription->update(['checkout_session_id' => $session->id, 'checkout_url' => $session->url,
                 'checkout_expires_at' => Carbon::createFromTimestamp($session->expires_at)]);
 
@@ -87,6 +89,8 @@ class SubscriptionService
 
     public function handle(Event $event): bool
     {
+        app(StripeEnvironment::class)->assertObject($event, 400);
+        app(StripeEnvironment::class)->assertObject($event->data->object, 400);
         $object = $event->data->object;
         $subscriptionEvent = str_starts_with($event->type, 'customer.subscription.');
         $invoiceEvent = in_array($event->type, ['invoice.paid', 'invoice.payment_failed'], true);
@@ -113,7 +117,8 @@ class SubscriptionService
                 return;
             }
             $remote = $this->stripe->retrieve($id);
-            if ($remote->livemode !== false || $remote->customer !== $user->stripe_customer_id) {
+            app(StripeEnvironment::class)->assertObject($remote);
+            if ($remote->customer !== $user->stripe_customer_id) {
                 return;
             }
             $localId = $remote->metadata->feitoo_subscription ?? null;

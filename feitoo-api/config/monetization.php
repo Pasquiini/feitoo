@@ -14,6 +14,7 @@ return [
         'ttl_minutes' => (int) env('PRO_RETENTION_MINUTES', 1440),
     ],
     'stripe' => [
+        'mode' => env('STRIPE_MODE', 'test'),
         'secret_key' => env('STRIPE_SECRET_KEY'),
         'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
         'checkout_minutes' => 35,

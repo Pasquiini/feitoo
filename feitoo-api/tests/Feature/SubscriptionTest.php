@@ -69,6 +69,7 @@ class SubscriptionTest extends TestCase
         $this->actingAs($user);
         $gateway = Mockery::mock(StripeSubscriptionGateway::class)->makePartial();
         $gateway->shouldReceive('available')->andReturn(true);
+        $gateway->shouldReceive('session')->andReturn(Session::constructFrom(['id' => 'cs_test_pro', 'livemode' => false, 'url' => 'https://checkout.stripe.com/c/pay/test']));
         $gateway->shouldReceive('customer')->once()->andReturn('cus_reused');
         $gateway->shouldReceive('checkout')->once()->withArgs(fn ($sub) => $sub->provider_price_id === 'price_pro')->andReturn(Session::constructFrom([
             'id' => 'cs_test_pro', 'livemode' => false, 'url' => 'https://checkout.stripe.com/c/pay/test', 'expires_at' => now()->addHour()->timestamp]));
@@ -97,7 +98,7 @@ class SubscriptionTest extends TestCase
         $gateway->shouldReceive('retrieve')->once()->andReturn(\Stripe\Subscription::constructFrom($remote));
         $this->app->instance(StripeSubscriptionGateway::class, $gateway);
         $event = Event::constructFrom(['id' => 'evt_pro', 'livemode' => false, 'type' => 'customer.subscription.updated',
-            'data' => ['object' => ['id' => 'sub_test', 'customer' => $user->stripe_customer_id, 'status' => 'past_due']]]);
+            'data' => ['object' => ['livemode' => false, 'id' => 'sub_test', 'customer' => $user->stripe_customer_id, 'status' => 'past_due']]]);
         app(StripeWebhookService::class)->handle($event);
         app(StripeWebhookService::class)->handle($event);
         $this->assertSame(SubscriptionStatus::Active, $sub->fresh()->status);
@@ -118,9 +119,9 @@ class SubscriptionTest extends TestCase
                 'cancel_at_period_end' => false, 'canceled_at' => null]));
             $this->app->instance(StripeSubscriptionGateway::class, $gateway);
             $this->app->forgetInstance(SubscriptionService::class);
-            $object = ['id' => str_starts_with($type, 'invoice.') ? 'in_test' : 'sub_test', 'customer' => $user->stripe_customer_id,
+            $object = ['livemode' => false, 'id' => str_starts_with($type, 'invoice.') ? 'in_test' : 'sub_test', 'customer' => $user->stripe_customer_id,
                 'parent' => ['subscription_details' => ['subscription' => 'sub_test']]];
-            app(StripeWebhookService::class)->handle(Event::constructFrom(['id' => 'evt_'.$status, 'type' => $type, 'data' => ['object' => $object]]));
+            app(StripeWebhookService::class)->handle(Event::constructFrom(['id' => 'evt_'.$status, 'livemode' => false, 'type' => $type, 'data' => ['object' => $object]]));
             $this->assertSame($status, $sub->fresh()->status->value);
         }
     }
@@ -152,7 +153,7 @@ class SubscriptionTest extends TestCase
             'cancel_at_period_end' => false, 'canceled_at' => null]));
         $this->app->instance(StripeSubscriptionGateway::class, $gateway);
         $body = ['id' => 'evt_checkout_pro', 'object' => 'event', 'livemode' => false, 'type' => 'checkout.session.completed',
-            'data' => ['object' => ['id' => 'cs_test_pro', 'object' => 'checkout.session', 'mode' => 'subscription',
+            'data' => ['object' => ['livemode' => false, 'id' => 'cs_test_pro', 'object' => 'checkout.session', 'mode' => 'subscription',
                 'subscription' => 'sub_test', 'customer' => $user->stripe_customer_id]]];
         $send = function (array $event, bool $valid = true) {
             $payload = json_encode($event);
@@ -175,6 +176,7 @@ class SubscriptionTest extends TestCase
         $user = User::factory()->create();
         $gateway = Mockery::mock(StripeSubscriptionGateway::class);
         $gateway->shouldReceive('available')->andReturn(true);
+        $gateway->shouldReceive('session')->andReturn(Session::constructFrom(['id' => 'cs_test_pro', 'livemode' => false, 'url' => 'https://checkout.stripe.com/c/pay/test']));
         $gateway->shouldReceive('customer')->once()->andReturn('cus_retry');
         $attempts = [];
         $gateway->shouldReceive('checkout')->twice()->andReturnUsing(function ($sub) use (&$attempts) {

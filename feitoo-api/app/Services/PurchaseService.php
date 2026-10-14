@@ -41,6 +41,7 @@ class PurchaseService
 
     public function checkout(Processing $processing, User $owner): array
     {
+        app(StripeEnvironment::class)->assertConfigured();
         if (! $this->stripe->available()) {
             throw new BillingException('checkout_unavailable', 'A compra avulsa ainda não está disponível. Tente novamente mais tarde.', 503);
         }
@@ -82,15 +83,16 @@ class PurchaseService
             if (! $purchase->provider_checkout_session_id) {
                 try {
                     $session = $this->stripe->create($purchase, $locked);
-                    if ($session->livemode !== false || ! str_starts_with((string) $session->id, 'cs_test_')
-                        || ! preg_match('~^https://checkout\.stripe\.com/~', (string) $session->url)) {
-                        throw new BillingException('checkout_unavailable', 'Checkout de teste indisponível.', 503);
-                    }
+                    app(StripeEnvironment::class)->assertSession($session, true);
                     $purchase->update(['provider_checkout_session_id' => $session->id, 'checkout_url' => $session->url]);
+                } catch (BillingException $exception) {
+                    throw $exception;
                 } catch (Throwable $exception) {
                     Log::warning('Checkout creation failed.', ['exception_type' => $exception::class]);
                     throw new BillingException('checkout_unavailable', 'Não foi possível abrir o Checkout. Tente novamente.', 503);
                 }
+            } else {
+                app(StripeEnvironment::class)->assertSession($this->stripe->session($purchase->provider_checkout_session_id), true);
             }
 
             return ['purchase' => $purchase, 'checkout_url' => $purchase->checkout_url];
@@ -110,9 +112,12 @@ class PurchaseService
             if (! $purchase->checkout_closed_at && $purchase->provider_checkout_session_id) {
                 try {
                     $session = $this->stripe->expire($purchase->provider_checkout_session_id);
-                    if ($session->status !== 'expired' || $session->livemode !== false) {
+                    app(StripeEnvironment::class)->assertSession($session);
+                    if ($session->status !== 'expired') {
                         throw new BillingException('checkout_unavailable', 'Não foi possível cancelar o Checkout.');
                     }
+                } catch (BillingException $exception) {
+                    throw $exception;
                 } catch (Throwable $exception) {
                     Log::warning('Checkout cancellation failed.', ['exception_type' => $exception::class]);
                     throw new BillingException('payment_pending', 'Não foi possível cancelar o Checkout. Consulte o pagamento ou tente novamente.');
@@ -122,7 +127,9 @@ class PurchaseService
                 // before cancellation, never allow a free start while payment is uncertain.
                 $session = $this->stripe->create($purchase, $locked);
                 $expired = $this->stripe->expire($session->id);
-                abort_unless($expired->status === 'expired' && $expired->livemode === false, 409);
+                app(StripeEnvironment::class)->assertSession($session);
+                app(StripeEnvironment::class)->assertSession($expired);
+                abort_unless($expired->status === 'expired', 409);
                 $purchase->provider_checkout_session_id = $session->id;
             }
             $purchase->status = PurchaseStatus::Expired;

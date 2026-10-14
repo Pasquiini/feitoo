@@ -12,6 +12,8 @@ class StripeWebhookService
 {
     public function handle(Event $event): void
     {
+        app(StripeEnvironment::class)->assertObject($event, 400);
+        app(StripeEnvironment::class)->assertObject($event->data->object, 400);
         if (app(SubscriptionService::class)->handle($event)) {
             return;
         }
@@ -25,9 +27,6 @@ class StripeWebhookService
                 return;
             }
             $object = $event->data->object;
-            if ($object->livemode !== false) {
-                return;
-            }
             $uuid = $object->metadata->purchase_uuid ?? null;
             $query = Purchase::query();
             if (is_string($uuid)) {

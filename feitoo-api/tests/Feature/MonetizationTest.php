@@ -137,6 +137,7 @@ class MonetizationTest extends TestCase
 
             return true;
         })->andReturn(Session::constructFrom(['id' => 'cs_test_created', 'url' => 'https://checkout.stripe.com/c/pay/test', 'livemode' => false]));
+        $mock->shouldReceive('session')->once()->andReturn(Session::constructFrom(['id' => 'cs_test_created', 'url' => 'https://checkout.stripe.com/c/pay/test', 'livemode' => false]));
         $this->app->instance(StripeCheckoutGateway::class, $mock);
         $this->postJson($this->url($p).'/purchase', ['price' => 1, 'files_limit' => 1000])->assertOk()->assertJsonPath('data.purchase.amount', 690);
         $this->postJson($this->url($p).'/purchase')->assertOk();
@@ -180,7 +181,8 @@ class MonetizationTest extends TestCase
         $p = $this->batch();
         $purchase = $this->purchase($p);
         foreach ([['amount_total' => 1], ['payment_status' => 'unpaid'], ['livemode' => true], ['id' => 'cs_test_other']] as $i => $data) {
-            $this->webhook($purchase, $data, 'evt_wrong_'.$i)->assertOk();
+            $response = $this->webhook($purchase, $data, 'evt_wrong_'.$i);
+            $response->assertStatus(isset($data['livemode']) ? 400 : 200);
             $this->assertSame(PurchaseStatus::Pending, $purchase->fresh()->status);
         }
     }

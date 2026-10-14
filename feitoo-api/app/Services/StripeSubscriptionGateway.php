@@ -17,8 +17,9 @@ class StripeSubscriptionGateway
             && str_starts_with((string) config('monetization.pro.price_id'), 'price_');
     }
 
-    private function client(): StripeClient
+    protected function client(): StripeClient
     {
+        app(StripeEnvironment::class)->assertConfigured();
         if (! $this->available()) {
             throw new BillingException('checkout_unavailable', 'A assinatura Pro ainda não está disponível.', 503);
         }
@@ -31,7 +32,7 @@ class StripeSubscriptionGateway
     public function customer(User $user): string
     {
         $customer = $this->client()->customers->create([], ['idempotency_key' => 'feitoo-customer-'.$user->id]);
-        abort_unless($customer->livemode === false, 503);
+        app(StripeEnvironment::class)->assertObject($customer);
 
         return $customer->id;
     }
@@ -52,26 +53,49 @@ class StripeSubscriptionGateway
     {
         $client = $this->client();
         $price = $client->prices->retrieve($subscription->provider_price_id);
-        abort_unless($price->livemode === false && $price->active && $price->currency === 'brl'
+        app(StripeEnvironment::class)->assertObject($price);
+        $this->validateCustomer($subscription->provider_customer_id);
+        abort_unless($price->active && $price->currency === 'brl'
             && $price->unit_amount === (int) config('monetization.pro.amount')
             && $price->recurring?->interval === 'month' && $price->recurring?->interval_count === 1, 503);
 
-        return $client->checkout->sessions->create($this->parameters($subscription), ['idempotency_key' => 'feitoo-pro-'.$subscription->id]);
+        $session = $client->checkout->sessions->create($this->parameters($subscription), ['idempotency_key' => 'feitoo-pro-'.$subscription->id]);
+        app(StripeEnvironment::class)->assertSession($session, true);
+
+        return $session;
     }
 
     public function retrieve(string $id): \Stripe\Subscription
     {
-        return $this->client()->subscriptions->retrieve($id);
+        $subscription = $this->client()->subscriptions->retrieve($id);
+        app(StripeEnvironment::class)->assertObject($subscription);
+
+        return $subscription;
     }
 
     public function session(string $id): Session
     {
-        return $this->client()->checkout->sessions->retrieve($id);
+        $session = $this->client()->checkout->sessions->retrieve($id);
+        app(StripeEnvironment::class)->assertSession($session);
+
+        return $session;
+    }
+
+    public function validateCustomer(string $id): void
+    {
+        $customer = $this->client()->customers->retrieve($id);
+        app(StripeEnvironment::class)->assertObject($customer);
+        abort_if($customer->deleted ?? false, 503, 'Customer Stripe indisponivel.');
     }
 
     public function portal(string $customer): string
     {
-        return $this->client()->billingPortal->sessions->create(['customer' => $customer,
-            'return_url' => rtrim(config('feitoo.auth.frontend_url'), '/').'/conta'])->url;
+        $this->validateCustomer($customer);
+        $session = $this->client()->billingPortal->sessions->create(['customer' => $customer,
+            'return_url' => rtrim(config('feitoo.auth.frontend_url'), '/').'/conta']);
+        app(StripeEnvironment::class)->assertObject($session);
+        abort_unless($session->customer === $customer && preg_match('~^https://billing\.stripe\.com/~', (string) $session->url), 503);
+
+        return $session->url;
     }
 }

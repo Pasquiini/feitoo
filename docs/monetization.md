@@ -74,7 +74,7 @@ O saldo é atualizado também após o horário de reset enquanto a página perma
 
 ## Configuração manual em TEST MODE
 
-Não houve alteração do `.env` real nem inclusão de chaves no frontend. Configure localmente `STRIPE_SECRET_KEY=sk_test_...` e `STRIPE_WEBHOOK_SECRET=whsec_...`. Não precisa de public key no fluxo hospedado. Depois limpe cache com `php artisan config:clear`. Mantenha FRONTEND_URL correto, worker e scheduler ativos.
+Não houve alteração do `.env` real nem inclusão de chaves no frontend. Configure localmente `STRIPE_MODE=test`, `STRIPE_SECRET_KEY=sk_test_...` e `STRIPE_WEBHOOK_SECRET=whsec_...`. Não precisa de public key no fluxo hospedado. Depois limpe cache com `php artisan config:clear`. Mantenha FRONTEND_URL correto, worker e scheduler ativos.
 
 Instale a CLI oficial; confira sua versão e ajuda. Comandos documentados na [Stripe CLI](https://github.com/stripe/stripe-cli/wiki/Listen-command):
 
@@ -119,3 +119,33 @@ O smoke test de navegador usa respostas sintéticas, jamais dados ou pagamentos 
 - Frontend: modelo/service de Processing; página XML para Excel TS/HTML/SCSS/spec; página Conta TS/HTML/SCSS/spec; `core/analytics.service.ts`, `core/public-launch.spec.ts`; `scripts/check-tool-browser.mjs`.
 
 Arquivos anteriores das etapas 10 e 11 permanecem no workspace. O parser fiscal e a geração do workbook não foram alterados nesta etapa.
+
+
+## Ativacao LIVE na VPS
+
+1. Publicar esta versao do backend; nao executar migrations para esta mudanca.
+2. No Dashboard Stripe em LIVE, criar o produto Pro e um Price ativo BRL, mensal, interval_count=1, no valor de PRO_MONTHLY_CENTS (padrao 2990). Copiar o price_ LIVE; IDs de Price e Customer nao indicam o modo no prefixo.
+3. Ativar/configurar o Customer Portal em LIVE com as opcoes comerciais desejadas.
+4. Criar o endpoint LIVE https://api.feitoo.com.br/api/stripe/webhook com estes nove eventos:
+   checkout.session.completed, checkout.session.expired, payment_intent.payment_failed, charge.refunded,
+   customer.subscription.created, customer.subscription.updated, customer.subscription.deleted, invoice.paid, invoice.payment_failed.
+   Usar o whsec_ deste endpoint LIVE, nao o secret do stripe listen nem o endpoint TEST.
+5. Configurar o .env exclusivamente do backend:
+
+```dotenv
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://api.feitoo.com.br
+FRONTEND_URL=https://feitoo.com.br
+STRIPE_MODE=live
+STRIPE_SECRET_KEY=<chave sk_live_ ja configurada>
+STRIPE_WEBHOOK_SECRET=<whsec_ do endpoint LIVE>
+STRIPE_PRO_PRICE_ID=<price_ LIVE>
+```
+
+6. No diretorio feitoo-api executar `php artisan config:cache` e `php artisan queue:restart`. Recarregar outros processos persistentes se utilizados (por exemplo Octane). Manter worker e scheduler existentes ativos.
+7. Auditar registros Stripe TEST eventualmente existentes na base de producao antes de liberar vendas. Eles nao sao convertidos automaticamente para LIVE: Customers, Sessions, Prices e Subscriptions precisam pertencer ao modo configurado. Tratar dados de ensaio em procedimento separado, com backup e revisao; esta mudanca nao apaga nem migra registros e nao altera direitos comerciais locais.
+8. Fazer uma compra avulsa real e assinatura Pro real controladas, verificar o livemode=true na Stripe, entrega signed dos webhooks (HTTP 200), valor/moeda corretos, concessao de acesso apenas por webhook e abertura do Portal. Reenviar um evento pelo Dashboard e confirmar ausencia de duplicacao. Cancelar/estornar conforme o procedimento comercial. Nao usar cartoes de teste em LIVE.
+9. Monitorar falhas de entrega e logs sanitizados. Nunca copiar secrets para frontend, tickets ou logs. Para voltar a TEST, trocar conjuntamente modo, chave, webhook e Price; registros LIVE nao podem ser reutilizados em TEST.
+
+Os gateways verificam Customers existentes antes de Checkout Pro e Portal; o Portal Session tambem e validado por livemode, Customer e URL HTTPS Stripe. Precos avulsos sao inline e criados pelo client do modo configurado, sem reutilizar IDs de Price. Webhooks incompat?veis retornam HTTP 400 antes da idempotencia; configuracao/objetos remotos incompat?veis retornam HTTP 503 com mensagem sem secrets. A verificacao de assinatura, o limite de payload, os locks e a deduplicacao transacional foram preservados. Nenhum payload completo e adicionado aos logs.
