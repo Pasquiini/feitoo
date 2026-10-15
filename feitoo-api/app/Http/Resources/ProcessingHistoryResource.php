@@ -21,8 +21,8 @@ class ProcessingHistoryResource extends JsonResource
             'expires_at' => $this->expires_at?->toIso8601String(),
             'files_count' => $this->files_count, 'successful_files_count' => $this->successful_files_count,
             'failed_files_count' => $this->failed_files_count,
-            'total_value' => $this->tool === ProcessingTool::ProductsFromXml
-                ? ($this->metadata['products_summary']['total_value'] ?? null) : $this->history_total_value,
+            'total_value' => $this->tool === ProcessingTool::XmlAnalyzer ? ($this->metadata['analyzer_summary']['total_value'] ?? null) : ($this->tool === ProcessingTool::ProductsFromXml
+                ? ($this->metadata['products_summary']['total_value'] ?? null) : $this->history_total_value),
             'products_summary' => $this->tool === ProcessingTool::ProductsFromXml
                 ? ($this->metadata['products_summary'] ?? null) : null,
             'files_deleted' => $this->files_count > 0 && ! $this->files_exist,

@@ -2,13 +2,16 @@
 
 namespace App\Services;
 
+use App\Enums\ProcessingFileError;
 use App\Enums\ProcessingFileKind;
 use App\Enums\ProcessingFileStatus;
 use App\Enums\ProcessingStatus;
+use App\Enums\ProcessingTool;
 use App\Exceptions\BillingException;
 use App\Models\Processing;
 use App\Models\ProcessingFileResult;
 use App\Models\User;
+use App\Rules\SafeXml;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -52,7 +55,13 @@ class ProcessingService
                     // Track the intended path before writing, including a partially failed write.
                     $written[] = $path;
                     $checksum = hash_file('sha256', $upload->getRealPath());
-                    if ($checksum === false || $upload->storeAs($directory, $name, ['disk' => $disk, 'visibility' => 'private']) === false) {
+                    $rejected = false;
+                    if ($locked->tool === ProcessingTool::XmlAnalyzer) {
+                        (new SafeXml)->validate('files', $upload, function () use (&$rejected): void {
+                            $rejected = true;
+                        });
+                    }
+                    if ($checksum === false || (! $rejected && $upload->storeAs($directory, $name, ['disk' => $disk, 'visibility' => 'private']) === false)) {
                         throw new RuntimeException('Processing storage write failed.');
                     }
 
@@ -68,6 +77,9 @@ class ProcessingService
                         'extension' => 'xml',
                         'size' => $upload->getSize(),
                         'checksum' => $checksum,
+                        ...($rejected ? ['status' => ProcessingFileStatus::Failed, 'processed_at' => now(),
+                            'error_code' => ProcessingFileError::InvalidXml,
+                            'error_message' => 'Conteúdo XML inválido, formato incompatível ou recursos proibidos. Arquivo não armazenado.'] : []),
                         'expires_at' => $locked->expires_at,
                     ]);
                     $locked->files_count++;
@@ -113,16 +125,31 @@ class ProcessingService
                     throw new RuntimeException('Processing storage removal failed.');
                 }
             }
+            if ($locked->tool === ProcessingTool::XmlToPdf && ! Storage::disk('local')->deleteDirectory('danfe-temporary/'.$locked->uuid)) {
+                throw new RuntimeException('DANFE temporary storage removal failed.');
+            }
+            if ($locked->tool === ProcessingTool::XmlOrganizer && ! Storage::disk('local')->deleteDirectory('organizer-temporary/'.$locked->uuid)) {
+                throw new RuntimeException('Organizer temporary storage removal failed.');
+            }
+            if ($locked->tool === ProcessingTool::XmlAnalyzer && ! Storage::disk('local')->deleteDirectory('analyzer-temporary/'.$locked->uuid)) {
+                throw new RuntimeException('Analyzer temporary storage removal failed.');
+            }
 
             ProcessingFileResult::query()->whereIn('processing_file_id', $locked->files()->select('id'))->delete();
             $metadata = $locked->metadata ?? [];
             unset($metadata['products_summary'], $metadata['products_preview'], $metadata['products_items_preview']);
+            unset($metadata['organizer_files']);
+            unset($metadata['analyzer_summary'], $metadata['analyzer_audit'], $metadata['analyzer_bytes'], $metadata['analyzer_items']);
             $locked->metadata = $metadata;
             $locked->files()->whereNull('removed_at')->update([
                 'removed_at' => now(), 'original_name' => null, 'status' => ProcessingFileStatus::Removed->value,
                 'error_code' => null, 'error_message' => null,
             ]);
             $locked->status = ProcessingStatus::Expired;
+            if (in_array($locked->tool, [ProcessingTool::XmlToPdf, ProcessingTool::XmlOrganizer, ProcessingTool::XmlAnalyzer], true) && in_array($locked->getOriginal('status'), [ProcessingStatus::Queued, ProcessingStatus::Processing], true)) {
+                User::query()->whereKey($locked->user_id)->lockForUpdate()->first();
+                $locked->usage_files_count = 0;
+            }
             if (! $locked->expires_at || $locked->expires_at->isFuture()) {
                 $locked->expires_at = now();
             }

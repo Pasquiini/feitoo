@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\ProcessingTool;
+use App\Rules\SafeOrganizerXml;
 use App\Rules\SafeXml;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\UploadedFile;
@@ -29,7 +31,8 @@ class UploadProcessingFilesRequest extends FormRequest
     {
         return [
             'files' => ['required', 'array', 'min:1', 'max:'.config('feitoo.uploads.max_files')],
-            'files.*' => ['bail', 'required', 'file', 'extensions:xml', 'max:'.config('feitoo.uploads.max_file_size_kb'), new SafeXml],
+            'files.*' => ['bail', 'required', 'file', 'extensions:xml', 'max:'.config('feitoo.uploads.max_file_size_kb'),
+                ...($this->route('processing')?->tool === ProcessingTool::XmlAnalyzer ? [] : [$this->route('processing')?->tool === ProcessingTool::XmlOrganizer ? new SafeOrganizerXml : new SafeXml])],
         ];
     }
 }

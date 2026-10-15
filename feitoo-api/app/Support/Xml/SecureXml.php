@@ -9,13 +9,13 @@ use XMLReader;
 
 final class SecureXml
 {
-    public function validate(string $contents): void
+    public function validate(string $contents, bool $allowMalformed = false): void
     {
         if ($contents === '' || strlen($contents) > config('feitoo.uploads.max_file_size_kb') * 1024
             || preg_match('/<!\s*(?:DOCTYPE|ENTITY)\b/i', str_replace("\0", '', $contents))) {
             throw new InvalidXml;
         }
-        $this->guard(function () use ($contents): void {
+        $this->guard(function () use ($contents, $allowMalformed): void {
             $reader = new XMLReader;
             try {
                 if (! $reader->XML($contents, null, LIBXML_NONET)) {
@@ -36,7 +36,7 @@ final class SecureXml
                         throw new InvalidXml;
                     }
                 }
-                if (! $rootSeen || libxml_get_errors() !== []) {
+                if (! $allowMalformed && (! $rootSeen || libxml_get_errors() !== [])) {
                     throw new InvalidXml;
                 }
             } finally {

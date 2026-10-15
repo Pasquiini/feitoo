@@ -59,6 +59,7 @@ class Processing extends Model
     public function output(): HasMany
     {
         return $this->files()->where('kind', ProcessingFileKind::Output->value)
+            ->when($this->tool === ProcessingTool::XmlToPdf, fn ($query) => $query->where('extension', 'zip'))
             ->where('status', ProcessingFileStatus::Completed->value)->whereNull('removed_at');
     }
 

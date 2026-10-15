@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\ProcessingStatus;
+use App\Enums\ProcessingTool;
 use App\Enums\PurchaseStatus;
 use App\Exceptions\BillingException;
 use App\Models\Processing;
@@ -41,6 +42,7 @@ class PurchaseService
 
     public function checkout(Processing $processing, User $owner): array
     {
+        abort_if(in_array($processing->tool, [ProcessingTool::XmlToPdf, ProcessingTool::XmlOrganizer, ProcessingTool::XmlAnalyzer], true), 422, 'Use os limites Free ou Pro para esta ferramenta.');
         app(StripeEnvironment::class)->assertConfigured();
         if (! $this->stripe->available()) {
             throw new BillingException('checkout_unavailable', 'A compra avulsa ainda não está disponível. Tente novamente mais tarde.', 503);

@@ -114,7 +114,10 @@ class FiscalProcessingService
             if ($processing->processed_files_count !== $processing->files_count) {
                 throw new RuntimeException('Fiscal processing is incomplete.');
             }
-            if ($processing->successful_files_count === 0) {
+            $recoverableOrganizer = $processing->tool === ProcessingTool::XmlOrganizer
+                && count(array_filter($processing->metadata['organizer_files'] ?? [], fn ($row) => $row['archive_path'] !== null)) > 0;
+            if ($processing->successful_files_count === 0 && ! $recoverableOrganizer) {
+                $this->settleSuccessfulUsage($processing, 0);
                 $processing->update(['status' => ProcessingStatus::Failed, 'completed_at' => now(),
                     'metadata' => ['result_error' => 'no_valid_documents']]);
 
@@ -122,18 +125,28 @@ class FiscalProcessingService
             }
             $items = ProcessingFileResult::query()->whereIn('processing_file_id', $this->inputs($processing)->whereNull('removed_at')->select('id'))->sum('items_count');
             if ($items > config('feitoo.uploads.max_processing_items')) {
+                $this->settleSuccessfulUsage($processing, 0);
                 $processing->update(['status' => ProcessingStatus::Failed, 'completed_at' => now(),
                     'metadata' => ['result_error' => 'technical_capacity_exceeded']]);
 
                 return;
             }
-            app(XmlToExcelResultService::class)->generate($processing);
+            if ($processing->tool === ProcessingTool::XmlToPdf) {
+                app(DanfeResultService::class)->generate($processing);
+            } elseif ($processing->tool === ProcessingTool::XmlOrganizer) {
+                app(XmlOrganizerService::class)->generate($processing);
+            } elseif ($processing->tool === ProcessingTool::XmlAnalyzer) {
+                app(AnalyzerResultService::class)->generate($processing);
+            } else {
+                app(XmlToExcelResultService::class)->generate($processing);
+            }
             if ($this->expired($processing)) {
                 app(ProcessingService::class)->removeFiles($processing);
 
                 return;
             }
             $processing->update(['status' => ProcessingStatus::Completed, 'completed_at' => now()]);
+            $this->settleSuccessfulUsage($processing, $processing->successful_files_count);
         });
     }
 
@@ -155,6 +168,12 @@ class FiscalProcessingService
                 return;
             }
             $file->update(['status' => ProcessingFileStatus::Processing]);
+            if ($processing->tool === ProcessingTool::XmlOrganizer) {
+                app(XmlOrganizerService::class)->processFile($processing, $file);
+                $this->counts($processing);
+
+                return;
+            }
             $error = null;
             $document = null;
             try {
@@ -165,7 +184,7 @@ class FiscalProcessingService
             }
             if ($error === null) {
                 try {
-                    $document = $this->parser->parse($contents, productAnalysis: $processing->tool === ProcessingTool::ProductsFromXml);
+                    $document = $this->parser->parse($contents, productAnalysis: in_array($processing->tool, [ProcessingTool::ProductsFromXml, ProcessingTool::XmlAnalyzer], true));
                 } catch (InvalidFiscalXml) {
                     $error = ProcessingFileError::InvalidXml;
                 } catch (UnsupportedFiscalDocument) {
@@ -178,8 +197,34 @@ class FiscalProcessingService
                 }
             }
             if ($document) {
+                if ($processing->tool === ProcessingTool::XmlToPdf) {
+                    try {
+                        app(DanfeGenerator::class)->validate($contents, $document);
+                        $duplicate = ProcessingFileResult::query()->where('access_key', $document->accessKey)
+                            ->whereIn('processing_file_id', $this->inputs($processing)->where('status', ProcessingFileStatus::Completed->value)->select('id'))->exists();
+                        if ($duplicate) {
+                            $error = ProcessingFileError::DuplicateDocument;
+                        } else {
+                            $pdf = app(DanfeGenerator::class)->render($contents);
+                            app(DanfeResultService::class)->savePdf($file, $document->accessKey, $pdf);
+                        }
+                    } catch (DanfeProtocolException) {
+                        $error = ProcessingFileError::InvalidProtocol;
+                    } catch (InvalidFiscalXml) {
+                        $error = ProcessingFileError::InvalidXml;
+                    } catch (Throwable $exception) {
+                        $error = ProcessingFileError::PdfError;
+                        $this->logFileFailure($processing, $file, $exception);
+                    }
+                }
                 // DB failures are global and must roll back, not be mislabeled as parse errors.
-                $this->saveResult($file, $document);
+                if ($error === null && $processing->tool === ProcessingTool::XmlAnalyzer
+                    && ! app(AnalyzerResultService::class)->snapshot($processing, $file, $document)) {
+                    $error = ProcessingFileError::AnalysisCapacity;
+                }
+                if ($error === null) {
+                    $this->saveResult($file, $document);
+                }
             }
             $file->update([
                 'status' => $error ? ProcessingFileStatus::Failed : ProcessingFileStatus::Completed,
@@ -258,6 +303,7 @@ class FiscalProcessingService
                 return;
             }
             $this->counts($processing);
+            $this->settleSuccessfulUsage($processing, 0);
             $processing->update(['status' => ProcessingStatus::Failed, 'completed_at' => now()]);
         });
     }
@@ -265,5 +311,13 @@ class FiscalProcessingService
     private function logFileFailure(Processing $processing, ProcessingFile $file, Throwable $exception): void
     {
         Log::warning('Fiscal file failed.', ['processing_uuid' => $processing->uuid, 'file_uuid' => $file->uuid, 'exception_type' => $exception::class]);
+    }
+
+    private function settleSuccessfulUsage(Processing $processing, int $success): void
+    {
+        if (in_array($processing->tool, [ProcessingTool::XmlToPdf, ProcessingTool::XmlOrganizer, ProcessingTool::XmlAnalyzer], true)) {
+            User::query()->whereKey($processing->user_id)->lockForUpdate()->first();
+            $processing->update(['usage_files_count' => $success]);
+        }
     }
 }

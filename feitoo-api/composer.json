@@ -11,6 +11,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.31",
         "laravel/tinker": "^2.10.1",
+        "nfephp-org/sped-da": "dev-master",
         "phpoffice/phpspreadsheet": "^5.10",
         "stripe/stripe-php": "^22.0"
     },
