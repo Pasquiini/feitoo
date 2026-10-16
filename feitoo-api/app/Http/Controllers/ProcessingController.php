@@ -10,8 +10,8 @@ use App\Http\Resources\ProcessingFileResource;
 use App\Http\Resources\ProcessingResource;
 use App\Models\Processing;
 use App\Services\EntitlementService;
-use App\Services\FiscalProcessingService;
 use App\Services\ProcessingService;
+use App\Services\ProcessingStartService;
 use App\Services\XmlOrganizerService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -42,7 +42,7 @@ class ProcessingController extends Controller
         return new ProcessingResource($processing);
     }
 
-    public function start(Request $request, Processing $processing, FiscalProcessingService $service): JsonResponse
+    public function start(Request $request, Processing $processing, ProcessingStartService $service): JsonResponse
     {
         $validated = $request->validate(['free_files_count' => ['sometimes', 'integer', 'min:1']]);
 
@@ -95,7 +95,7 @@ class ProcessingController extends Controller
             $locked = Processing::query()->lockForUpdate()->findOrFail($processing->id);
             abort_unless((int) $locked->user_id === (int) $request->user()->id, 404);
             abort_if(! $locked->expires_at?->isFuture(), 410);
-            abort_unless($locked->tool === ProcessingTool::XmlToPdf && $locked->status === ProcessingStatus::Completed, 409);
+            abort_unless(in_array($locked->tool, [ProcessingTool::XmlToPdf, ProcessingTool::DocxToPdf], true) && $locked->status === ProcessingStatus::Completed, 409);
             abort_unless($locked->files()->where('uuid', $input)->where('kind', 'input')->where('status', 'completed')->whereNull('removed_at')->exists(), 404);
             $file = $locked->files()->where('kind', 'output')->where('stored_name', $input.'.pdf')->whereNull('removed_at')->firstOrFail();
             abort_unless($file->expires_at?->isFuture(), 410);

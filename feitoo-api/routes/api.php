@@ -15,6 +15,19 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
 Route::get('/tools/{tool}/config', function (string $tool) {
+    if ($tool === ProcessingTool::DocxToPdf->value) {
+        return response()->json(['data' => [
+            'max_files' => min(config('documents.max_files'), config('feitoo.uploads.max_files')),
+            'max_processing_files' => config('documents.max_files'),
+            'max_request_size_kb' => config('feitoo.uploads.max_request_size_kb'),
+            'max_total_size_kb' => config('documents.max_total_size_kb'),
+            'max_file_size_kb' => config('documents.max_file_size_kb'),
+            'ttl_minutes' => config('feitoo.processing.ttl_minutes'),
+            'free' => config('documents.limits.free'), 'pro' => config('documents.limits.pro'),
+            'packages' => [], 'checkout_available' => false,
+        ]]);
+    }
+
     return response()->json(['data' => [
         'max_files' => config('feitoo.uploads.max_files'),
         'max_request_size_kb' => config('feitoo.uploads.max_request_size_kb'),
@@ -24,8 +37,8 @@ Route::get('/tools/{tool}/config', function (string $tool) {
         'max_file_size_kb' => config('feitoo.uploads.max_file_size_kb'),
         'ttl_minutes' => config('feitoo.processing.ttl_minutes'),
         'free' => ['per_processing' => config('monetization.free.per_processing'), 'daily' => config('monetization.free.daily')],
-        'packages' => in_array($tool, [ProcessingTool::XmlToPdf->value, ProcessingTool::XmlOrganizer->value, ProcessingTool::XmlAnalyzer->value], true) ? [] : app(PurchaseService::class)->packages(),
-        'checkout_available' => ! in_array($tool, [ProcessingTool::XmlToPdf->value, ProcessingTool::XmlOrganizer->value, ProcessingTool::XmlAnalyzer->value], true) && app(StripeCheckoutGateway::class)->available(),
+        'packages' => in_array($tool, [ProcessingTool::DocxToPdf->value, ProcessingTool::XmlToPdf->value, ProcessingTool::XmlOrganizer->value, ProcessingTool::XmlAnalyzer->value], true) ? [] : app(PurchaseService::class)->packages(),
+        'checkout_available' => ! in_array($tool, [ProcessingTool::DocxToPdf->value, ProcessingTool::XmlToPdf->value, ProcessingTool::XmlOrganizer->value, ProcessingTool::XmlAnalyzer->value], true) && app(StripeCheckoutGateway::class)->available(),
     ]]);
 })->whereIn('tool', array_column(ProcessingTool::cases(), 'value'))->middleware('throttle:60,1');
 

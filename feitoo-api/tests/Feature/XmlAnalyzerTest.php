@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\Models\Processing;
+use App\Models\Subscription;
 use App\Models\User;
+use App\Services\AnalyzerExcelGenerator;
+use App\Services\AnalyzerResultService;
 use App\Services\FiscalProcessingService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -253,7 +256,9 @@ class XmlAnalyzerTest extends TestCase
         $this->assertSame(1, $batch->successful_files_count);
         $this->assertSame(1, $batch->usage_files_count);
         $this->assertSame('analysis_capacity', $batch->files()->where('kind', 'input')->orderByDesc('id')->first()->error_code->value);
-        for ($i = 0; $i < 7; $i++) { $this->analysisView($batch, ['product_query' => 'query-'.$i]); }
+        for ($i = 0; $i < 7; $i++) {
+            $this->analysisView($batch, ['product_query' => 'query-'.$i]);
+        }
         $files = Storage::disk('processing')->files('processings/'.$batch->uuid.'/analysis/views');
         $this->assertCount(4, array_filter($files, fn ($p) => str_ends_with($p, '.json')));
         config(['monetization.free.per_processing' => 1]);
@@ -264,16 +269,20 @@ class XmlAnalyzerTest extends TestCase
         $this->assertSame(0, Processing::where('uuid', $id)->first()->usage_files_count);
         config(['monetization.free.per_processing' => 20]);
         $this->postJson('/api/processings/'.$id.'/start')->assertStatus(202);
-        $excel = \Mockery::mock(\App\Services\AnalyzerExcelGenerator::class);
+        $excel = \Mockery::mock(AnalyzerExcelGenerator::class);
         $excel->shouldReceive('generate')->once()->andThrow(new \RuntimeException('Workbook failure'));
-        $this->app->instance(\App\Services\AnalyzerExcelGenerator::class, $excel);
-        $this->app->forgetInstance(\App\Services\AnalyzerResultService::class);
-        try { app(FiscalProcessingService::class)->process($id); $this->fail('Expected workbook failure'); }
-        catch (\RuntimeException $e) { $this->assertSame('Workbook failure', $e->getMessage()); }
+        $this->app->instance(AnalyzerExcelGenerator::class, $excel);
+        $this->app->forgetInstance(AnalyzerResultService::class);
+        try {
+            app(FiscalProcessingService::class)->process($id);
+            $this->fail('Expected workbook failure');
+        } catch (\RuntimeException $e) {
+            $this->assertSame('Workbook failure', $e->getMessage());
+        }
         $this->getJson('/api/processings/'.$id.'/analysis')->assertConflict();
         $this->assertSame([], Storage::disk('local')->allFiles('analyzer-temporary/'.$id));
-        $this->app->instance(\App\Services\AnalyzerExcelGenerator::class, new \App\Services\AnalyzerExcelGenerator);
-        $this->app->forgetInstance(\App\Services\AnalyzerResultService::class);
+        $this->app->instance(AnalyzerExcelGenerator::class, new AnalyzerExcelGenerator);
+        $this->app->forgetInstance(AnalyzerResultService::class);
         app(FiscalProcessingService::class)->process($id);
         $this->assertSame('completed', Processing::where('uuid', $id)->first()->status->value);
         $this->assertSame(2, Processing::where('uuid', $id)->first()->usage_files_count);
@@ -282,7 +291,7 @@ class XmlAnalyzerTest extends TestCase
 
     public function test_pro_is_reused_and_input_limits_authentication_and_pending_deletion_are_preserved(): void
     {
-        \App\Models\Subscription::create(['user_id' => $this->owner->id, 'provider_customer_id' => 'cus_analysis', 'provider_price_id' => 'price_pro', 'provider_subscription_id' => 'sub_analysis', 'status' => 'active', 'current_period_end' => now()->addMonth()]);
+        Subscription::create(['user_id' => $this->owner->id, 'provider_customer_id' => 'cus_analysis', 'provider_price_id' => 'price_pro', 'provider_subscription_id' => 'sub_analysis', 'status' => 'active', 'current_period_end' => now()->addMonth()]);
         config(['monetization.free.per_processing' => 1, 'monetization.pro.per_processing' => 2, 'monetization.pro.daily' => 2]);
         $batch = $this->batch([$this->xml(), '<broken>']);
         $this->assertSame('pro', $batch->entitlement_source);
@@ -292,7 +301,8 @@ class XmlAnalyzerTest extends TestCase
         config(['feitoo.uploads.max_file_size_kb' => 1]);
         $this->post('/api/processings/'.$id.'/files', ['files' => [UploadedFile::fake()->createWithContent('large.xml', $this->xml())]], ['Accept' => 'application/json'])->assertStatus(422);
         $this->post('/api/processings/'.$id.'/files', ['files' => [UploadedFile::fake()->createWithContent('file.zip', 'PKfake')]], ['Accept' => 'application/json'])->assertStatus(422);
-        Auth::forgetGuards(); $this->app['session']->flush();
+        Auth::forgetGuards();
+        $this->app['session']->flush();
         $this->getJson('/api/processings/'.$batch->uuid.'/analysis')->assertUnauthorized();
         $this->getJson('/api/processings/'.$batch->uuid.'/analysis/export')->assertUnauthorized();
     }
@@ -305,7 +315,9 @@ class XmlAnalyzerTest extends TestCase
             preg_match('/<det nItem="1">.*?<\/det>/s', $xml, $match);
             $extra = '';
             $template = preg_replace('/<imposto>.*?<\/imposto>/s', '', $match[0]);
-            for ($item = 3; $item <= 990; $item++) { $extra .= str_replace('nItem="1"', 'nItem="'.$item.'"', $template); }
+            for ($item = 3; $item <= 990; $item++) {
+                $extra .= str_replace('nItem="1"', 'nItem="'.$item.'"', $template);
+            }
             $xmls[] = str_replace('<total>', $extra.'<total>', $xml);
         }
         $batch = $this->batch($xmls);

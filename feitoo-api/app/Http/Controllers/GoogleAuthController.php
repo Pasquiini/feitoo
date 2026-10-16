@@ -16,7 +16,7 @@ class GoogleAuthController extends Controller
 {
     public function start(Request $request): JsonResponse
     {
-        $input = $request->validate(['intent' => ['required', 'in:login,link'], 'return_to' => ['sometimes', 'in:/,/conta,/xml-para-excel,/produtos-dos-xmls,/xml-para-pdf,/organizar-xml,/analisar-xml']]);
+        $input = $request->validate(['intent' => ['required', 'in:login,link'], 'return_to' => ['sometimes', 'in:/,/conta,/xml-para-excel,/produtos-dos-xmls,/xml-para-pdf,/organizar-xml,/analisar-xml,/docx-para-pdf']]);
         abort_unless(config('services.google.client_id') && config('services.google.client_secret'), 503, 'Google indisponível.');
         $user = Auth::guard('web')->user();
         abort_if($input['intent'] === 'link' && ! $user, 401);
@@ -57,7 +57,7 @@ class GoogleAuthController extends Controller
                 $request->session()->put('completed_google_signup', true);
             }
 
-            $returnTo = in_array($context['return_to'] ?? '/', ['/', '/conta', '/xml-para-excel', '/produtos-dos-xmls', '/xml-para-pdf', '/organizar-xml', '/analisar-xml'], true) ? $context['return_to'] ?? '/' : '/';
+            $returnTo = in_array($context['return_to'] ?? '/', ['/', '/conta', '/xml-para-excel', '/produtos-dos-xmls', '/xml-para-pdf', '/organizar-xml', '/analisar-xml', '/docx-para-pdf'], true) ? $context['return_to'] ?? '/' : '/';
 
             return redirect()->away(rtrim(config('feitoo.auth.frontend_url'), '/').$returnTo);
         } catch (Throwable $exception) {

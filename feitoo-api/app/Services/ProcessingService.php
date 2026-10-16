@@ -12,6 +12,8 @@ use App\Models\Processing;
 use App\Models\ProcessingFileResult;
 use App\Models\User;
 use App\Rules\SafeXml;
+use App\Support\Documents\DocumentException;
+use App\Support\Documents\DocxValidator;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -39,23 +41,34 @@ class ProcessingService
                 if ($locked->purchase()->exists()) {
                     throw new BillingException('purchase_volume_locked', 'O lote vinculado a uma compra não aceita novos arquivos.');
                 }
-                if ($locked->files_count + count($uploads) > config('feitoo.uploads.max_processing_files')) {
+                $documents = $locked->tool === ProcessingTool::DocxToPdf;
+                if ($locked->files_count + count($uploads) > config($documents ? 'documents.max_files' : 'feitoo.uploads.max_processing_files')) {
                     throw ValidationException::withMessages(['files' => 'Quantidade máxima de arquivos por processamento excedida.']);
                 }
-                if ($locked->total_size + array_sum(array_map(fn ($file) => $file->getSize(), $uploads)) > config('feitoo.uploads.max_total_size_kb') * 1024) {
+                if ($locked->total_size + array_sum(array_map(fn ($file) => $file->getSize(), $uploads)) > config($documents ? 'documents.max_total_size_kb' : 'feitoo.uploads.max_total_size_kb') * 1024) {
                     throw ValidationException::withMessages(['files' => 'O lote excede o tamanho total aceito.']);
                 }
 
                 $locked->update(['status' => ProcessingStatus::Uploading]);
                 foreach ($uploads as $upload) {
                     $uuid = (string) Str::uuid();
-                    $name = $uuid.'.xml';
+                    $extension = $documents ? 'docx' : 'xml';
+                    $name = $uuid.'.'.$extension;
                     $directory = 'processings/'.$locked->uuid.'/'.ProcessingFileKind::Input->value;
                     $path = $directory.'/'.$name;
                     // Track the intended path before writing, including a partially failed write.
                     $written[] = $path;
                     $checksum = hash_file('sha256', $upload->getRealPath());
                     $rejected = false;
+                    $documentError = null;
+                    if ($documents) {
+                        try {
+                            app(DocxValidator::class)->validate($upload->getRealPath(), $upload->getClientOriginalExtension(), $upload->getMimeType());
+                        } catch (DocumentException $exception) {
+                            $documentError = $exception->error;
+                            $rejected = true;
+                        }
+                    }
                     if ($locked->tool === ProcessingTool::XmlAnalyzer) {
                         (new SafeXml)->validate('files', $upload, function () use (&$rejected): void {
                             $rejected = true;
@@ -65,7 +78,7 @@ class ProcessingService
                         throw new RuntimeException('Processing storage write failed.');
                     }
 
-                    $originalName = mb_substr(preg_replace('/[\x00-\x1F\x7F]/u', '', $upload->getClientOriginalName()) ?? '', 0, 255);
+                    $originalName = mb_substr(preg_replace('/[\x00-\x1F\x7F]/u', '', basename(str_replace('\\', '/', $upload->getClientOriginalName()))) ?? '', 0, 200);
                     $locked->files()->create([
                         'uuid' => $uuid,
                         'kind' => ProcessingFileKind::Input,
@@ -74,12 +87,12 @@ class ProcessingService
                         'storage_disk' => $disk,
                         'storage_path' => $path,
                         'mime_type' => $upload->getMimeType(),
-                        'extension' => 'xml',
+                        'extension' => $extension,
                         'size' => $upload->getSize(),
                         'checksum' => $checksum,
                         ...($rejected ? ['status' => ProcessingFileStatus::Failed, 'processed_at' => now(),
-                            'error_code' => ProcessingFileError::InvalidXml,
-                            'error_message' => 'Conteúdo XML inválido, formato incompatível ou recursos proibidos. Arquivo não armazenado.'] : []),
+                            'error_code' => $documentError ?? ProcessingFileError::InvalidXml,
+                            'error_message' => $documentError?->message() ?? 'Conteúdo XML inválido, formato incompatível ou recursos proibidos. Arquivo não armazenado.'] : []),
                         'expires_at' => $locked->expires_at,
                     ]);
                     $locked->files_count++;
@@ -119,6 +132,12 @@ class ProcessingService
             }
 
             // Remove the whole generated prefix: includes any orphan from interrupted uploads.
+            if (! Storage::disk('local')->deleteDirectory('pdf-temporary/'.$locked->uuid)) {
+                throw new RuntimeException('PDF temporary storage removal failed.');
+            }
+            if ($locked->tool === ProcessingTool::DocxToPdf && ! Storage::disk('local')->deleteDirectory('document-temporary/'.$locked->uuid)) {
+                throw new RuntimeException('Document temporary storage removal failed.');
+            }
             $disks = $locked->files()->pluck('storage_disk')->push(config('feitoo.processing.disk'))->unique();
             foreach ($disks as $disk) {
                 if (! Storage::disk($disk)->deleteDirectory('processings/'.$locked->uuid)) {
@@ -146,7 +165,7 @@ class ProcessingService
                 'error_code' => null, 'error_message' => null,
             ]);
             $locked->status = ProcessingStatus::Expired;
-            if (in_array($locked->tool, [ProcessingTool::XmlToPdf, ProcessingTool::XmlOrganizer, ProcessingTool::XmlAnalyzer], true) && in_array($locked->getOriginal('status'), [ProcessingStatus::Queued, ProcessingStatus::Processing], true)) {
+            if (in_array($locked->tool, [ProcessingTool::DocxToPdf, ProcessingTool::XmlToPdf, ProcessingTool::XmlOrganizer, ProcessingTool::XmlAnalyzer], true) && in_array($locked->getOriginal('status'), [ProcessingStatus::Queued, ProcessingStatus::Processing], true)) {
                 User::query()->whereKey($locked->user_id)->lockForUpdate()->first();
                 $locked->usage_files_count = 0;
             }

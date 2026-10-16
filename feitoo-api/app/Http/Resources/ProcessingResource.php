@@ -35,7 +35,7 @@ class ProcessingResource extends JsonResource
                 'summary' => $output ? app(XmlOrganizerService::class)->summary($this->resource) : null,
             ]),
             'analyzer' => $this->when($this->tool === ProcessingTool::XmlAnalyzer && $output !== null, fn () => ['summary' => $this->metadata['analyzer_summary'] ?? null, 'audit' => $this->metadata['analyzer_audit'] ?? null]),
-            'preview' => $output !== null && $this->successful_files_count > 0 && ! in_array($this->tool, [ProcessingTool::XmlToPdf, ProcessingTool::XmlOrganizer, ProcessingTool::XmlAnalyzer], true)
+            'preview' => $output !== null && $this->successful_files_count > 0 && ! in_array($this->tool, [ProcessingTool::DocxToPdf, ProcessingTool::XmlToPdf, ProcessingTool::XmlOrganizer, ProcessingTool::XmlAnalyzer], true)
                 ? ($this->tool === ProcessingTool::ProductsFromXml
                     ? app(ProductsFromXmlResultService::class)->preview($this->resource)
                     : app(ProcessingPreviewService::class)->make($this->resource)) : null,
@@ -43,11 +43,11 @@ class ProcessingResource extends JsonResource
                 'available' => $output !== null,
                 'file_name' => $output?->original_name,
                 'size' => $output?->size,
-                'error_message' => ($this->metadata['result_error'] ?? null) === 'no_valid_documents'
+                'error_message' => $this->tool === ProcessingTool::DocxToPdf && $this->status === ProcessingStatus::Failed ? 'Não foi possível converter os documentos. Consulte o erro de cada arquivo.' : (($this->metadata['result_error'] ?? null) === 'no_valid_documents'
                     ? ($this->tool === ProcessingTool::ProductsFromXml ? 'Não encontramos NF-es válidas nesses arquivos.' : 'Não houve documentos válidos para exportação.')
                     : (($this->metadata['result_error'] ?? null) === 'technical_capacity_exceeded'
                         ? 'O lote ultrapassou a capacidade de itens do Excel. Divida os documentos em lotes menores.'
-                        : ($this->status === ProcessingStatus::Failed ? ($this->tool === ProcessingTool::XmlOrganizer ? 'Não foi possível gerar o ZIP organizado.' : ($this->tool === ProcessingTool::XmlToPdf ? 'Não foi possível gerar os DANFEs.' : 'Não foi possível gerar o Excel.')) : null)),
+                        : ($this->status === ProcessingStatus::Failed ? ($this->tool === ProcessingTool::XmlOrganizer ? 'Não foi possível gerar o ZIP organizado.' : ($this->tool === ProcessingTool::XmlToPdf ? 'Não foi possível gerar os DANFEs.' : 'Não foi possível gerar o Excel.')) : null))),
             ],
         ];
     }

@@ -28,9 +28,13 @@ class AnalyzerResultService
         $normalized = $this->aggregator->document($document);
         $overlong = false;
         array_walk_recursive($normalized, function ($value) use (&$overlong): void {
-            if (is_string($value) && mb_strlen($value, 'UTF-8') > 2048) { $overlong = true; }
+            if (is_string($value) && mb_strlen($value, 'UTF-8') > 2048) {
+                $overlong = true;
+            }
         });
-        if ($overlong) { return false; }
+        if ($overlong) {
+            return false;
+        }
         $data = json_encode($normalized, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
         if (($meta['analyzer_bytes'] ?? 0) + strlen($data) > self::SNAPSHOT_BUDGET
             || ($meta['analyzer_items'] ?? 0) + count($document->items) > config('feitoo.uploads.max_processing_items')) {

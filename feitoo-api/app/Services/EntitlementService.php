@@ -21,10 +21,11 @@ class EntitlementService
             ->where('usage_date', $local->toDateString())->where('tool', $tool->value);
         // A locking read also avoids an earlier repeatable-read snapshot while waiting for the User lock.
         $used = (int) ($locked ? $query->lockForUpdate()->get(['usage_files_count'])->sum('usage_files_count') : $query->sum('usage_files_count'));
-        $daily = max(0, (int) config('monetization.'.$plan.'.daily'));
+        $source = $tool === ProcessingTool::DocxToPdf ? 'documents.limits.' : 'monetization.';
+        $daily = max(0, (int) config($source.$plan.'.daily'));
 
         return ['plan' => $plan, 'limits' => [
-            'per_processing' => max(0, min((int) config('monetization.'.$plan.'.per_processing'), (int) config('feitoo.uploads.max_processing_files'))),
+            'per_processing' => max(0, min((int) config($source.$plan.'.per_processing'), (int) config($tool === ProcessingTool::DocxToPdf ? 'documents.max_files' : 'feitoo.uploads.max_processing_files'))),
             'daily' => $daily, 'used_today' => $used, 'remaining_today' => max(0, $daily - $used),
             'resets_at' => $local->copy()->addDay()->startOfDay()->toIso8601String(),
         ]];

@@ -29,6 +29,15 @@ class UploadProcessingFilesRequest extends FormRequest
 
     public function rules(): array
     {
+        if ($this->route('processing')?->tool === ProcessingTool::DocxToPdf) {
+            // Content is checked per file in ProcessingService so invalid DOCX does not
+            // discard the valid neighbours. Unsafe documents are never stored or converted.
+            return [
+                'files' => ['required', 'array', 'min:1', 'max:'.min(config('documents.max_files'), config('feitoo.uploads.max_files'))],
+                'files.*' => ['bail', 'required', 'file', 'extensions:docx', 'max:'.config('documents.max_file_size_kb')],
+            ];
+        }
+
         return [
             'files' => ['required', 'array', 'min:1', 'max:'.config('feitoo.uploads.max_files')],
             'files.*' => ['bail', 'required', 'file', 'extensions:xml', 'max:'.config('feitoo.uploads.max_file_size_kb'),
