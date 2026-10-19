@@ -37,7 +37,7 @@ final class LibreOfficeDocxToPdfConverter implements DocxToPdfConverter
                 '--cpu='.(config('documents.timeout') + 2), '--fsize='.config('documents.max_pdf_bytes'), '--',
                 config('documents.bubblewrap_binary'), '--unshare-all', '--die-with-parent', '--new-session',
                 '--cap-drop', 'ALL', '--ro-bind', '/usr', '/usr', '--tmpfs', '/usr/local', '--symlink', 'usr/bin', '/bin'];
-            foreach (['/lib', '/lib64', '/etc/fonts', '/etc/ld.so.cache'] as $mount) {
+            foreach (['/lib', '/lib64', '/etc/fonts', '/etc/libreoffice', '/etc/ld.so.cache'] as $mount) {
                 if (file_exists($mount)) {
                     array_push($prefix, '--ro-bind', $mount, $mount);
                 }
