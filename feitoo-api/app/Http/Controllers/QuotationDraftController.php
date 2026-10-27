@@ -18,6 +18,21 @@ class QuotationDraftController extends Controller
 {
     public function index(Request $request)
     {
+        // Preserve the existing latest-draft contract for clients without pagination.
+        if ($request->has('page')) {
+            $request->validate(['page' => ['required', 'integer', 'min:1', 'max:1000000']]);
+            $drafts = QuotationDraft::where('user_id', $request->user()->id)->where('expires_at', '>', now())
+                ->latest('updated_at')->latest('id')->paginate(10);
+
+            return response()->json(['data' => $drafts->getCollection()->map(fn (QuotationDraft $draft) => [
+                'uuid' => $draft->uuid, 'revision' => $draft->revision,
+                'number' => $draft->payload['number'] ?? '',
+                'customer_name' => $draft->payload['customer']['name'] ?? '',
+                'template_id' => $draft->payload['template_id'] ?? 'modern',
+                'updated_at' => $draft->updated_at->toIso8601String(),
+                'expires_at' => $draft->expires_at->toIso8601String(),
+            ])->values(), 'meta' => ['current_page' => $drafts->currentPage(), 'last_page' => $drafts->lastPage(), 'total' => $drafts->total()]]);
+        }
         $draft = QuotationDraft::where('user_id', $request->user()->id)->where('expires_at', '>', now())->latest('updated_at')->latest('id')->first();
 
         return response()->json(['data' => $draft ? $this->resource($draft) : null]);

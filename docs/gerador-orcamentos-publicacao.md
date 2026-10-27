@@ -1,5 +1,7 @@
 # Gerador de Orçamentos — procedimento futuro de publicação e rollback
 
+> Atualização de 27/10/2026: para a release pública do editor, Home e SEO, utilizar [o roteiro atual de lançamento](gerador-orcamentos-lancamento-publico.md). Este documento preserva o planejamento histórico da Fase 6; as instruções antigas para manter o gerador fora do catálogo/sitemap não descrevem mais o frontend desta release. A homologação de infraestrutura na VPS foi informada pelo responsável e não foi repetida remotamente nesta sessão. Stripe Live continua bloqueado.
+
 **Preparado em 26/10/2026. Não executado. Não autoriza deploy.** Este roteiro depende do aceite das pendências de [homologação da Fase 6](gerador-orcamentos-fase-6.md). Os caminhos, usuários e nomes de serviço abaixo são parâmetros a preencher com a topologia aprovada, não dados de uma VPS inspecionada.
 
 ## 1. Pontos de parada obrigatórios

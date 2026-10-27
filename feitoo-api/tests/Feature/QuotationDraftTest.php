@@ -91,6 +91,43 @@ class QuotationDraftTest extends TestCase
         $this->assertDatabaseCount('processings', 0);
     }
 
+    public function test_paginated_drafts_exclude_other_accounts_expired_payloads_and_private_assets(): void
+    {
+        $expired = $this->create();
+        QuotationDraft::where('uuid', $expired['uuid'])->update(['expires_at' => now()->subSecond()]);
+        $latest = null;
+        for ($i = 1; $i <= 11; $i++) {
+            $payload = $this->payload();
+            $payload['number'] = 'ORC-'.$i;
+            $payload['customer']['name'] = 'Cliente da conta atual';
+            $payload['notes'] = 'Conteúdo privado fora da listagem';
+            $latest = $this->create($payload);
+        }
+        Auth::forgetGuards();
+        $this->actingAs(User::factory()->create(), 'web');
+        $other = $this->create();
+        Auth::forgetGuards();
+        $this->actingAs($this->owner, 'web');
+        $first = $this->getJson('/api/quotations/drafts?page=1')->assertOk()
+            ->assertHeader('Cache-Control', 'no-store, private')->assertJsonCount(10, 'data')
+            ->assertJsonPath('meta.total', 11)->assertJsonPath('meta.last_page', 2)
+            ->assertJsonPath('data.0.uuid', $latest['uuid'])->assertJsonPath('data.0.number', 'ORC-11')
+            ->assertJsonMissingPath('data.0.payload')->assertJsonMissingPath('data.0.logo_path')
+            ->assertJsonMissingPath('data.0.user_id');
+        $this->assertStringNotContainsString($other['uuid'], $first->getContent());
+        $this->assertStringNotContainsString($expired['uuid'], $first->getContent());
+        $this->assertStringNotContainsString('Conteúdo privado fora da listagem', $first->getContent());
+        $this->getJson('/api/quotations/drafts?page=2')->assertJsonCount(1, 'data')->assertJsonPath('meta.current_page', 2);
+        $this->getJson('/api/quotations/drafts')->assertJsonPath('data.uuid', $latest['uuid']);
+        $this->getJson('/api/quotations/drafts?page=0')->assertUnprocessable();
+        $this->getJson('/api/quotations/drafts?page[]=1')->assertUnprocessable();
+        $this->withHeader('X-Quotation-Owner', '999999')->getJson('/api/quotations/drafts?page=1')->assertUnauthorized();
+        $this->flushHeaders();
+        Auth::guard('web')->logout();
+        Auth::forgetGuards();
+        $this->getJson('/api/quotations/drafts?page=1')->assertUnauthorized();
+    }
+
     public function test_import_retries_are_idempotent_and_changed_body_conflicts(): void
     {
         $key = (string) Str::uuid();
