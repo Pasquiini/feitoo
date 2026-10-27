@@ -78,47 +78,76 @@ class QuotationExecutionRunner
                 }
                 $disk->put($directory.'/logo.png', $logo);
             }
-            // Do not inherit database, OAuth, billing or other application secrets into the renderer.
-            $env = array_fill_keys(array_keys(getenv()), false);
-            foreach (['SystemRoot', 'WINDIR', 'PATH', 'TEMP', 'TMP'] as $name) {
-                if (getenv($name) !== false) {
-                    $env[$name] = getenv($name);
-                }
-            }
-            $env = array_replace($env, ['APP_ENV' => 'testing', 'APP_DEBUG' => 'false', 'APP_KEY' => 'base64:'.base64_encode($executionKey),
-                'APP_CIPHER' => $cipher, 'LOG_CHANNEL' => 'null', 'CACHE_STORE' => 'array', 'SESSION_DRIVER' => 'array',
-                'DB_CONNECTION' => 'sqlite', 'DB_DATABASE' => ':memory:', 'QUOTATION_WORKSPACE' => $workspace,
-                'APP_CONFIG_CACHE' => $workspace.'/bootstrap/config.php', 'APP_SERVICES_CACHE' => $workspace.'/bootstrap/services.php',
-                'APP_PACKAGES_CACHE' => $workspace.'/bootstrap/packages.php', 'APP_ROUTES_CACHE' => $workspace.'/bootstrap/routes.php']);
-            $process = new Process($this->command($workspace), base_path(), $env);
-            $process->setTimeout(config('quotations.render_seconds') + 5);
-            $process->disableOutput();
-            try {
-                $process->run();
-            } catch (ProcessTimedOutException) {
-                throw new QuotationPdfException('execution_timeout');
-            }
-            if (! $process->isSuccessful()) {
-                $failure = $disk->exists($directory.'/failure.json') ? json_decode($disk->get($directory.'/failure.json'), true) : [];
-                $reason = in_array($failure['code'] ?? '', ['unsupported_character', 'page_limit_exceeded', 'snapshot_invalid'], true) ? $failure['code'] : 'render_failed';
-                throw new QuotationPdfException($reason);
-            }
-            $path = $disk->path($directory.'/result.pdf');
-            if (! is_file($path) || filesize($path) > QuotationLimits::MAX_PDF_BYTES || filesize($path) < 100) {
-                throw new QuotationPdfException('render_failed');
-            }
-            $bytes = $disk->get($directory.'/result.pdf');
-            $meta = json_decode($disk->get($directory.'/result.json'), true, flags: JSON_THROW_ON_ERROR);
-            if (! str_starts_with($bytes, '%PDF-') || ! preg_match('/startxref\s+\d+\s+%%EOF\s*\z/', substr($bytes, -2048))
-                || ! hash_equals($meta['sha256'], hash('sha256', $bytes)) || $meta['pages'] < 1 || $meta['pages'] > QuotationLimits::MAX_PAGES) {
-                throw new QuotationPdfException('render_failed');
-            }
+            $this->execute($workspace, $executionKey, $cipher);
 
-            return new QuotationPdf($bytes, $meta['pages'], $meta['sha256']);
+            return $this->readResult($workspace);
         } catch (Throwable $error) {
             throw $error instanceof QuotationPdfException ? $error : new QuotationPdfException('execution_failed');
         } finally {
             $disk->deleteDirectory($directory);
+        }
+    }
+
+    /** Shared by the commercial worker and the synthetic production diagnostic; no models or storage disks. */
+    public function execute(string $workspace, string $executionKey, string $cipher, bool $sandboxCheck = false): void
+    {
+        $process = new Process($this->command($workspace), $workspace, $this->environment($workspace, $executionKey, $cipher, $sandboxCheck));
+        $process->setTimeout(config('quotations.render_seconds') + 5);
+        $process->disableOutput();
+        try {
+            $process->run();
+        } catch (ProcessTimedOutException) {
+            throw new QuotationPdfException('execution_timeout');
+        } finally {
+            if ($process->isRunning()) {
+                $process->stop(0);
+            }
+        }
+        if (! $process->isSuccessful()) {
+            $failure = is_file($workspace.'/failure.json') ? json_decode(file_get_contents($workspace.'/failure.json', length: 1024), true) : [];
+            $reason = in_array($failure['code'] ?? '', ['unsupported_character', 'page_limit_exceeded', 'snapshot_invalid'], true) ? $failure['code'] : 'render_failed';
+            throw new QuotationPdfException($reason);
+        }
+    }
+
+    public function environment(string $workspace, string $executionKey, string $cipher, bool $sandboxCheck = false): array
+    {
+        // Symfony also inherits $_SERVER/$_ENV, including credentials not returned by getenv().
+        $env = array_fill_keys(array_unique([...array_keys(getenv()), ...array_keys($_SERVER), ...array_keys($_ENV)]), false);
+        foreach (['SystemRoot', 'WINDIR', 'PATH', 'TEMP', 'TMP'] as $name) {
+            if (getenv($name) !== false) {
+                $env[$name] = getenv($name);
+            }
+        }
+
+        return array_replace($env, ['APP_ENV' => 'production', 'APP_DEBUG' => 'false',
+            'APP_KEY' => 'base64:'.base64_encode($executionKey), 'APP_CIPHER' => $cipher,
+            'QUOTATION_WORKSPACE' => $workspace, 'QUOTATION_SANDBOX_CHECK' => $sandboxCheck ? '1' : '0']);
+    }
+
+    public function readResult(string $workspace): QuotationPdf
+    {
+        try {
+            $path = $workspace.'/result.pdf';
+            clearstatcache(true, $path);
+            if (is_link($path) || ! is_file($path) || filesize($path) > QuotationLimits::MAX_PDF_BYTES || filesize($path) < 100
+                || is_link($workspace.'/result.json') || ! is_file($workspace.'/result.json') || filesize($workspace.'/result.json') > 1024) {
+                throw new QuotationPdfException('render_failed');
+            }
+            $bytes = file_get_contents($path);
+            $meta = json_decode(file_get_contents($workspace.'/result.json'), true, flags: JSON_THROW_ON_ERROR);
+            $pages = preg_match_all('~(?:\A|\r?\n)\d+\s+\d+\s+obj\s*<<\s*/Type\s*/Page\b~', $bytes);
+            if (! str_starts_with($bytes, '%PDF-') || ! preg_match('/startxref\s+(\d+)\s+%%EOF\s*\z/', substr($bytes, -2048), $xref)
+                || (int) $xref[1] >= strlen($bytes) || substr($bytes, (int) $xref[1], 4) !== 'xref'
+                || ! is_string($meta['sha256'] ?? null) || ! preg_match('/\A[0-9a-f]{64}\z/', $meta['sha256'])
+                || ! hash_equals($meta['sha256'], hash('sha256', $bytes)) || ! is_int($meta['pages'] ?? null)
+                || $meta['pages'] < 1 || $meta['pages'] > QuotationLimits::MAX_PAGES || $pages !== $meta['pages']) {
+                throw new QuotationPdfException('render_failed');
+            }
+
+            return new QuotationPdf($bytes, $meta['pages'], $meta['sha256']);
+        } catch (Throwable) {
+            throw new QuotationPdfException('render_failed');
         }
     }
 
@@ -138,8 +167,12 @@ class QuotationExecutionRunner
         $prefix = [config('quotations.prlimit_binary'), '--as=335544320', '--cpu='.(config('quotations.render_seconds') + 2), '--fsize=12582912', '--',
             config('quotations.bubblewrap_binary'), '--unshare-all', '--die-with-parent', '--new-session', '--cap-drop', 'ALL',
             '--ro-bind', '/usr', '/usr'];
-        foreach (['/lib', '/lib64', '/etc/ld.so.cache', '/etc/php'] as $path) {
-            if (file_exists($path)) {
+        foreach (['/lib', '/lib64', '/bin', '/etc/ld.so.cache', '/etc/php'] as $path) {
+            // Ubuntu's merged /usr uses relative symlinks. Preserve them instead of
+            // binding their resolved directories over destinations that may already be links.
+            if (is_link($path)) {
+                array_push($prefix, '--symlink', readlink($path), $path);
+            } elseif (file_exists($path)) {
                 array_push($prefix, '--ro-bind', $path, $path);
             }
         }
