@@ -1,0 +1,141 @@
+{
+    "server": "10.4.32-MariaDB",
+    "driver": "mysql",
+    "independent_connection_pairs": 13,
+    "cases": {
+        "last_credit": [
+            {
+                "connection": 12,
+                "accepted": "5732d672-b8b2-45bd-9c26-5f45006a4df0"
+            },
+            {
+                "connection": 13,
+                "rejected": "generation_in_progress"
+            }
+        ],
+        "refund_vs_finalize": [
+            {
+                "connection": 16,
+                "webhook": true
+            },
+            {
+                "connection": 17,
+                "completed": true
+            }
+        ],
+        "refund_vs_reservation": [
+            {
+                "connection": 20,
+                "accepted": "10192c6a-cedf-464b-8690-15a82e9fb3fa"
+            },
+            {
+                "connection": 21,
+                "webhook": true
+            }
+        ],
+        "same_checkout_key": [
+            {
+                "connection": 24,
+                "order": "dc371d34-9c31-4f71-9495-a1c46f3debaf",
+                "session": "cs_test_dc371d34-9c31-4f71-9495-a1c46f3debaf"
+            },
+            {
+                "connection": 25,
+                "order": "dc371d34-9c31-4f71-9495-a1c46f3debaf",
+                "session": "cs_test_dc371d34-9c31-4f71-9495-a1c46f3debaf"
+            }
+        ],
+        "same_webhook": [
+            {
+                "connection": 28,
+                "webhook": true
+            },
+            {
+                "connection": 29,
+                "webhook": true
+            }
+        ],
+        "distinct_events_same_session": [
+            {
+                "connection": 32,
+                "webhook": true
+            },
+            {
+                "connection": 33,
+                "webhook": true
+            }
+        ],
+        "subscription_renew": [
+            {
+                "connection": 36,
+                "accepted": "056cff25-532c-44a0-a27a-eaffd80e9f99"
+            },
+            {
+                "connection": 37,
+                "subscription": true
+            }
+        ],
+        "subscription_cancel": [
+            {
+                "connection": 40,
+                "rejected": "pro_period_invalid"
+            },
+            {
+                "connection": 41,
+                "subscription": true
+            }
+        ],
+        "free_vs_credit": [
+            {
+                "connection": 44,
+                "rejected": "generation_in_progress"
+            },
+            {
+                "connection": 45,
+                "accepted": "98e402f7-3195-41ba-ba71-acadc85ce741"
+            }
+        ],
+        "pro_vs_credit": [
+            {
+                "connection": 48,
+                "accepted": "9c72f740-7e50-4462-9ee4-efd762b1f889"
+            },
+            {
+                "connection": 49,
+                "rejected": "pro_first"
+            }
+        ],
+        "free_vs_pro": [
+            {
+                "connection": 52,
+                "rejected": "generation_in_progress"
+            },
+            {
+                "connection": 53,
+                "accepted": "32e87c92-c435-4111-9ba6-d29a9141ab7c"
+            }
+        ],
+        "paid_replay": [
+            {
+                "connection": 56,
+                "accepted": "7d079c7d-7cd0-40ee-a428-c8d9d3c8e9bb"
+            },
+            {
+                "connection": 57,
+                "accepted": "7d079c7d-7cd0-40ee-a428-c8d9d3c8e9bb"
+            }
+        ],
+        "paid_duplicate_claim": [
+            {
+                "connection": 60,
+                "token": "b1adf920-8171-406c-8821-912aa5e2ba06"
+            },
+            {
+                "connection": 61,
+                "token": null
+            }
+        ]
+    },
+    "stripe": "contract fake; no remote requests",
+    "mysql8": false
+}

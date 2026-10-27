@@ -1,0 +1,367 @@
+{
+  "checks": [
+    "IndexedDB autosave",
+    "partial refresh",
+    "logo refresh",
+    "model preservation",
+    "Google start failure",
+    "OAuth cancellation return",
+    "email failure and success",
+    "idempotent refresh",
+    "remote restoration",
+    "two tabs",
+    "remote revision conflict",
+    "explicit preserved copy",
+    "network retry",
+    "expired session",
+    "logout cleanup",
+    "account isolation",
+    "discard",
+    "opaque session marker",
+    "no localStorage",
+    "no processing or billing",
+    "registration return",
+    "local expiration",
+    "quota exceeded",
+    "IndexedDB unavailable"
+  ],
+  "requests": [
+    {
+      "path": "/api/me",
+      "method": "GET"
+    },
+    {
+      "path": "/api/me",
+      "method": "GET"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/google/start",
+      "method": "POST"
+    },
+    {
+      "path": "/api/me",
+      "method": "GET"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/login",
+      "method": "POST"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/login",
+      "method": "POST"
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts",
+      "method": "POST"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts/721fc78b-9158-4b9d-8318-f18f697112ad",
+      "method": "PATCH"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts/721fc78b-9158-4b9d-8318-f18f697112ad/logo",
+      "method": "POST"
+    },
+    {
+      "path": "/api/me",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts/721fc78b-9158-4b9d-8318-f18f697112ad",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts/721fc78b-9158-4b9d-8318-f18f697112ad/logo",
+      "method": "GET"
+    },
+    {
+      "path": "/api/me",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts/721fc78b-9158-4b9d-8318-f18f697112ad",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts/721fc78b-9158-4b9d-8318-f18f697112ad/logo",
+      "method": "GET"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts/721fc78b-9158-4b9d-8318-f18f697112ad",
+      "method": "PATCH"
+    },
+    {
+      "path": "/api/quotations/drafts/721fc78b-9158-4b9d-8318-f18f697112ad",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts/721fc78b-9158-4b9d-8318-f18f697112ad/logo",
+      "method": "GET"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts/721fc78b-9158-4b9d-8318-f18f697112ad",
+      "method": "PATCH"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts",
+      "method": "POST"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts/835fb044-0bf8-47c9-978f-5757c95b53b1",
+      "method": "PATCH"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts/835fb044-0bf8-47c9-978f-5757c95b53b1/logo",
+      "method": "POST"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts/835fb044-0bf8-47c9-978f-5757c95b53b1",
+      "method": "PATCH"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts/835fb044-0bf8-47c9-978f-5757c95b53b1",
+      "method": "PATCH"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts/835fb044-0bf8-47c9-978f-5757c95b53b1",
+      "method": "PATCH"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/login",
+      "method": "POST"
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts/835fb044-0bf8-47c9-978f-5757c95b53b1",
+      "method": "PATCH"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/logout",
+      "method": "POST"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/login",
+      "method": "POST"
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET"
+    },
+    {
+      "path": "/api/me",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts",
+      "method": "GET"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts",
+      "method": "POST"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts/3784575a-62aa-43e7-b1c6-cba3b78558dc",
+      "method": "PATCH"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts/3784575a-62aa-43e7-b1c6-cba3b78558dc",
+      "method": "DELETE"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/logout",
+      "method": "POST"
+    },
+    {
+      "path": "/api/me",
+      "method": "GET"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/register",
+      "method": "POST"
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts",
+      "method": "POST"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts/fe06b022-86b9-4f67-98da-392ad06670be",
+      "method": "PATCH"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/quotations/drafts/fe06b022-86b9-4f67-98da-392ad06670be",
+      "method": "DELETE"
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/logout",
+      "method": "POST"
+    },
+    {
+      "path": "/api/me",
+      "method": "GET"
+    },
+    {
+      "path": "/api/me",
+      "method": "GET"
+    },
+    {
+      "path": "/api/me",
+      "method": "GET"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,217 @@
+{
+  "layouts": [
+    {
+      "width": 320,
+      "view": "edit",
+      "state": "filled",
+      "overflow": false,
+      "editor": 288,
+      "preview": 0,
+      "overlap": false,
+      "unlabeled": 0,
+      "smallTargets": [],
+      "disabledPdf": false
+    },
+    {
+      "width": 320,
+      "view": "preview",
+      "state": "filled",
+      "overflow": false,
+      "editor": 0,
+      "preview": 288,
+      "overlap": false,
+      "unlabeled": 0,
+      "smallTargets": [],
+      "disabledPdf": false
+    },
+    {
+      "width": 375,
+      "view": "edit",
+      "state": "filled",
+      "overflow": false,
+      "editor": 335,
+      "preview": 0,
+      "overlap": false,
+      "unlabeled": 0,
+      "smallTargets": [],
+      "disabledPdf": false
+    },
+    {
+      "width": 375,
+      "view": "preview",
+      "state": "filled",
+      "overflow": false,
+      "editor": 0,
+      "preview": 335,
+      "overlap": false,
+      "unlabeled": 0,
+      "smallTargets": [],
+      "disabledPdf": false
+    },
+    {
+      "width": 390,
+      "view": "edit",
+      "state": "filled",
+      "overflow": false,
+      "editor": 350,
+      "preview": 0,
+      "overlap": false,
+      "unlabeled": 0,
+      "smallTargets": [],
+      "disabledPdf": false
+    },
+    {
+      "width": 390,
+      "view": "preview",
+      "state": "filled",
+      "overflow": false,
+      "editor": 0,
+      "preview": 350,
+      "overlap": false,
+      "unlabeled": 0,
+      "smallTargets": [],
+      "disabledPdf": false
+    },
+    {
+      "width": 768,
+      "view": "edit",
+      "state": "filled",
+      "overflow": false,
+      "editor": 713,
+      "preview": 0,
+      "overlap": false,
+      "unlabeled": 0,
+      "smallTargets": [],
+      "disabledPdf": false
+    },
+    {
+      "width": 768,
+      "view": "preview",
+      "state": "filled",
+      "overflow": false,
+      "editor": 0,
+      "preview": 713,
+      "overlap": false,
+      "unlabeled": 0,
+      "smallTargets": [],
+      "disabledPdf": false
+    },
+    {
+      "width": 1024,
+      "view": "edit",
+      "state": "filled",
+      "overflow": false,
+      "editor": 474.5,
+      "preview": 474.5,
+      "overlap": false,
+      "unlabeled": 0,
+      "smallTargets": [],
+      "disabledPdf": false
+    },
+    {
+      "width": 1024,
+      "view": "preview",
+      "state": "filled",
+      "overflow": false,
+      "editor": 474.5,
+      "preview": 474.5,
+      "overlap": false,
+      "unlabeled": 0,
+      "smallTargets": [],
+      "disabledPdf": false
+    },
+    {
+      "width": 1440,
+      "view": "edit",
+      "state": "filled",
+      "overflow": false,
+      "editor": 530,
+      "preview": 530,
+      "overlap": false,
+      "unlabeled": 0,
+      "smallTargets": [],
+      "disabledPdf": false
+    },
+    {
+      "width": 1440,
+      "view": "preview",
+      "state": "filled",
+      "overflow": false,
+      "editor": 530,
+      "preview": 530,
+      "overlap": false,
+      "unlabeled": 0,
+      "smallTargets": [],
+      "disabledPdf": false
+    },
+    {
+      "width": 390,
+      "view": "preview",
+      "state": "before-zoom",
+      "overflow": false,
+      "editor": 0,
+      "preview": 350,
+      "overlap": false,
+      "unlabeled": 0,
+      "smallTargets": [],
+      "disabledPdf": false
+    },
+    {
+      "width": 390,
+      "view": "preview",
+      "state": "comfortable",
+      "overflow": false,
+      "editor": 0,
+      "preview": 350,
+      "overlap": false,
+      "unlabeled": 0,
+      "smallTargets": [],
+      "disabledPdf": false
+    },
+    {
+      "width": 320,
+      "view": "edit",
+      "state": "hundred-items",
+      "overflow": false,
+      "editor": 288,
+      "preview": 0,
+      "overlap": false,
+      "unlabeled": 0,
+      "smallTargets": [],
+      "disabledPdf": false
+    },
+    {
+      "width": 320,
+      "view": "preview",
+      "state": "hundred-items",
+      "overflow": false,
+      "editor": 0,
+      "preview": 288,
+      "overlap": false,
+      "unlabeled": 0,
+      "smallTargets": [],
+      "disabledPdf": false
+    },
+    {
+      "width": 1440,
+      "view": "preview",
+      "state": "hundred-items",
+      "overflow": false,
+      "editor": 530,
+      "preview": 530,
+      "overlap": false,
+      "unlabeled": 0,
+      "smallTargets": [],
+      "disabledPdf": false
+    }
+  ],
+  "apiRequests": [
+    {
+      "path": "/api/me",
+      "method": "GET"
+    }
+  ],
+  "logoUrlLeaks": 0,
+  "personalStorageWrites": 0,
+  "runtimeErrors": []
+}

@@ -1,0 +1,648 @@
+{
+  "realLaravel": true,
+  "database": "isolated SQLite file",
+  "realDatabaseQueue": true,
+  "realSubprocessPdf": true,
+  "keyboardActivation": true,
+  "labelledGenerationAndLiveStatus": true,
+  "generationConfirmation": true,
+  "multipleDraftsAndRecovery": true,
+  "sharedAccountHistory": true,
+  "pdfBytes": 22827,
+  "repeatedDownloadIdentical": true,
+  "downloadWindowSeconds": 7200,
+  "layouts": 4,
+  "uxLayouts": [
+    {
+      "name": "account",
+      "width": 320,
+      "overflow": false,
+      "unlabeled": 0,
+      "smallTargets": 0
+    },
+    {
+      "name": "account",
+      "width": 390,
+      "overflow": false,
+      "unlabeled": 0,
+      "smallTargets": 0
+    },
+    {
+      "name": "account",
+      "width": 768,
+      "overflow": false,
+      "unlabeled": 0,
+      "smallTargets": 0
+    },
+    {
+      "name": "account",
+      "width": 1440,
+      "overflow": false,
+      "unlabeled": 0,
+      "smallTargets": 0
+    },
+    {
+      "name": "credits",
+      "width": 390,
+      "overflow": false,
+      "unlabeled": 0,
+      "smallTargets": 0
+    },
+    {
+      "name": "credits",
+      "width": 1440,
+      "overflow": false,
+      "unlabeled": 0,
+      "smallTargets": 0
+    },
+    {
+      "name": "editor",
+      "width": 390,
+      "overflow": false,
+      "unlabeled": 0,
+      "smallTargets": 0
+    },
+    {
+      "name": "editor",
+      "width": 1440,
+      "overflow": false,
+      "unlabeled": 0,
+      "smallTargets": 0
+    },
+    {
+      "name": "step-1",
+      "width": 390,
+      "overflow": false,
+      "unlabeled": 0,
+      "smallTargets": 0
+    },
+    {
+      "name": "step-1",
+      "width": 1440,
+      "overflow": false,
+      "unlabeled": 0,
+      "smallTargets": 0
+    },
+    {
+      "name": "step-2",
+      "width": 390,
+      "overflow": false,
+      "unlabeled": 0,
+      "smallTargets": 0
+    },
+    {
+      "name": "step-2",
+      "width": 1440,
+      "overflow": false,
+      "unlabeled": 0,
+      "smallTargets": 0
+    },
+    {
+      "name": "step-3",
+      "width": 390,
+      "overflow": false,
+      "unlabeled": 0,
+      "smallTargets": 0
+    },
+    {
+      "name": "step-3",
+      "width": 1440,
+      "overflow": false,
+      "unlabeled": 0,
+      "smallTargets": 0
+    },
+    {
+      "name": "step-4",
+      "width": 390,
+      "overflow": false,
+      "unlabeled": 0,
+      "smallTargets": 0
+    },
+    {
+      "name": "step-4",
+      "width": 1440,
+      "overflow": false,
+      "unlabeled": 0,
+      "smallTargets": 0
+    },
+    {
+      "name": "home",
+      "width": 320,
+      "overflow": false,
+      "unlabeled": 0,
+      "smallTargets": 0
+    },
+    {
+      "name": "home",
+      "width": 390,
+      "overflow": false,
+      "unlabeled": 0,
+      "smallTargets": 0
+    },
+    {
+      "name": "home",
+      "width": 768,
+      "overflow": false,
+      "unlabeled": 0,
+      "smallTargets": 0
+    },
+    {
+      "name": "home",
+      "width": 1440,
+      "overflow": false,
+      "unlabeled": 0,
+      "smallTargets": 0
+    }
+  ],
+  "requests": [
+    {
+      "path": "/api/me",
+      "method": "GET",
+      "status": 401,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET",
+      "status": 204,
+      "private": false,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/auth/login",
+      "method": "POST",
+      "status": 200,
+      "private": true,
+      "csrfPresent": true,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET",
+      "status": 204,
+      "private": false,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/drafts",
+      "method": "POST",
+      "status": 201,
+      "private": true,
+      "csrfPresent": true,
+      "idempotencyPresent": true
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET",
+      "status": 204,
+      "private": false,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/drafts/bd013ac8-ea1b-4c88-b9cf-a4e5c28a46c2",
+      "method": "PATCH",
+      "status": 200,
+      "private": true,
+      "csrfPresent": true,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET",
+      "status": 204,
+      "private": false,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/drafts/bd013ac8-ea1b-4c88-b9cf-a4e5c28a46c2/logo",
+      "method": "POST",
+      "status": 200,
+      "private": true,
+      "csrfPresent": true,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET",
+      "status": 204,
+      "private": false,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/drafts/bd013ac8-ea1b-4c88-b9cf-a4e5c28a46c2",
+      "method": "PATCH",
+      "status": 200,
+      "private": true,
+      "csrfPresent": true,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET",
+      "status": 204,
+      "private": false,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/drafts/bd013ac8-ea1b-4c88-b9cf-a4e5c28a46c2/generations",
+      "method": "POST",
+      "status": 202,
+      "private": true,
+      "csrfPresent": true,
+      "idempotencyPresent": true
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET",
+      "status": 204,
+      "private": false,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/drafts/bd013ac8-ea1b-4c88-b9cf-a4e5c28a46c2",
+      "method": "PATCH",
+      "status": 200,
+      "private": true,
+      "csrfPresent": true,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/me",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/drafts/bd013ac8-ea1b-4c88-b9cf-a4e5c28a46c2",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/processings/cdb20e7c-fcf0-413d-b245-f768ee1ade29",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/drafts/bd013ac8-ea1b-4c88-b9cf-a4e5c28a46c2/logo",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/processings/cdb20e7c-fcf0-413d-b245-f768ee1ade29",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/processings/cdb20e7c-fcf0-413d-b245-f768ee1ade29/result",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/processings/cdb20e7c-fcf0-413d-b245-f768ee1ade29/result",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/drafts/00000000-0000-4000-8000-000000000001/generations",
+      "method": "POST",
+      "status": 419,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/processings/cdb20e7c-fcf0-413d-b245-f768ee1ade29/result",
+      "method": "GET",
+      "status": 410,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/drafts",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET",
+      "status": 204,
+      "private": false,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/drafts",
+      "method": "POST",
+      "status": 201,
+      "private": true,
+      "csrfPresent": true,
+      "idempotencyPresent": true
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET",
+      "status": 204,
+      "private": false,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/drafts/dd81fa21-fc6e-41bd-9032-8708d9a37a3e",
+      "method": "PATCH",
+      "status": 200,
+      "private": true,
+      "csrfPresent": true,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/sanctum/csrf-cookie",
+      "method": "GET",
+      "status": 204,
+      "private": false,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/drafts/dd81fa21-fc6e-41bd-9032-8708d9a37a3e",
+      "method": "PATCH",
+      "status": 200,
+      "private": true,
+      "csrfPresent": true,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/drafts",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/drafts/bd013ac8-ea1b-4c88-b9cf-a4e5c28a46c2",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/drafts/bd013ac8-ea1b-4c88-b9cf-a4e5c28a46c2/logo",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/account/usage",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/account/purchases",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/processings",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/account/subscription",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/credit-orders",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/drafts/bd013ac8-ea1b-4c88-b9cf-a4e5c28a46c2",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/drafts/bd013ac8-ea1b-4c88-b9cf-a4e5c28a46c2/logo",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/account/usage",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/account/purchases",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/processings",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/account/subscription",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/drafts/bd013ac8-ea1b-4c88-b9cf-a4e5c28a46c2",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/entitlements",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/credit-orders",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/quotations/drafts/bd013ac8-ea1b-4c88-b9cf-a4e5c28a46c2/logo",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    },
+    {
+      "path": "/api/processings/cdb20e7c-fcf0-413d-b245-f768ee1ade29",
+      "method": "GET",
+      "status": 200,
+      "private": true,
+      "csrfPresent": false,
+      "idempotencyPresent": false
+    }
+  ],
+  "errors": []
+}

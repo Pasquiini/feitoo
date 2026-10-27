@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "explicit credit selection",
+    "checkout preparation preserves logo and incomplete draft",
+    "stable checkout key after failure",
+    "cancelled return",
+    "URL success does not grant",
+    "backend pending then paid",
+    "no automatic PDF",
+    "manual paid emission",
+    "three responsive widths"
+  ],
+  "generationPosts": 1,
+  "checkoutAttempts": 2,
+  "errors": []
+}

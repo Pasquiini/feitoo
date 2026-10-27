@@ -1,0 +1,87 @@
+{
+  "selections": [
+    1,
+    3,
+    4,
+    40,
+    100,
+    250
+  ],
+  "tools": 2,
+  "layouts": [
+    {
+      "tool": "xml-to-excel",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-excel",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-excel",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-excel",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-excel",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-excel",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "width": 1440,
+      "overflow": false
+    }
+  ],
+  "completeBatchPreserved": true,
+  "purchaseCounts": [
+    4,
+    40,
+    100,
+    250
+  ],
+  "cancelledReturnPreservesBatch": true,
+  "googleSelectionRestored": true,
+  "pendingFailedExpiredDoNotStart": true,
+  "paidStartsOnce": true,
+  "plansUpdated": true,
+  "runtimeErrors": [],
+  "syntheticOnly": true
+}
