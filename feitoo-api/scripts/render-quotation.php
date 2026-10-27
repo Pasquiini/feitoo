@@ -22,6 +22,25 @@ if (! is_string($workspace) || ! preg_match('~/([0-9a-f-]{36})/([0-9a-f-]{36})/?
     || ! is_dir($workspace) || is_link($workspace) || ! is_file($workspace.'/snapshot.enc')) {
     exit(2);
 }
+// Fatal PHP limits cannot be caught as Throwable. Keep a small reserve so the
+// shutdown handler can write a fixed code, without copying the fatal message.
+umask(0077);
+$failureReserve = str_repeat('x', 131072);
+register_shutdown_function(static function () use ($workspace, &$failureReserve): void {
+    $failureReserve = null;
+    $error = error_get_last();
+    if (($error['type'] ?? null) !== E_ERROR) {
+        return;
+    }
+    $message = $error['message'] ?? '';
+    $code = match (true) {
+        preg_match('/\A(?:Allowed memory size of \d+ bytes exhausted|Out of memory \(allocated \d+ bytes\))/', $message) === 1 => 'memory_limit_exceeded',
+        preg_match('/\AMaximum execution time of \d+ seconds exceeded/', $message) === 1 => 'execution_timeout',
+        default => 'render_failed',
+    };
+    @file_put_contents($workspace.'/failure.json', json_encode(['code' => $code]));
+});
+$stage = 'bootstrap_failed';
 try {
     require dirname(__DIR__).'/vendor/autoload.php';
     umask(0077);
@@ -47,22 +66,36 @@ try {
     if (getenv('QUOTATION_SANDBOX_CHECK') === '1') {
         require __DIR__.'/probe-quotation-sandbox.php';
     }
+    $stage = 'snapshot_invalid';
     $key = base64_decode(substr((string) getenv('APP_KEY'), 7), true);
     $cipher = new Encrypter($key, (string) getenv('APP_CIPHER'));
     $snapshot = json_decode($cipher->decryptString(file_get_contents($workspace.'/snapshot.enc')), true, flags: JSON_THROW_ON_ERROR);
-    $quotation = Quotation::fromArray($snapshot['document']);
-    if ($snapshot['schema_version'] !== 1 || $snapshot['totals'] !== (array) $quotation->totals) {
+    if (! is_array($snapshot) || ($snapshot['schema_version'] ?? null) !== 1
+        || ! is_array($snapshot['document'] ?? null) || ! is_array($snapshot['totals'] ?? null)) {
         throw new QuotationPdfException('snapshot_invalid');
     }
-    $logo = is_file($workspace.'/logo.png') ? NormalizedQuotationLogo::fromBytes(file_get_contents($workspace.'/logo.png')) : null;
-    $pdf = (new QuotationPdfRenderer)->render($quotation, $logo);
-    if (file_put_contents($workspace.'/result.pdf', $pdf->bytes) !== strlen($pdf->bytes)) {
-        exit(2);
+    $stage = 'document_preparation_failed';
+    $quotation = Quotation::fromArray($snapshot['document']);
+    $stage = 'snapshot_invalid';
+    if ($snapshot['totals'] !== (array) $quotation->totals) {
+        throw new QuotationPdfException('snapshot_invalid');
     }
-    file_put_contents($workspace.'/result.json', json_encode(['pages' => $pdf->pages, 'sha256' => $pdf->sha256], JSON_THROW_ON_ERROR));
+    $stage = 'logo_normalization_failed';
+    $logo = is_file($workspace.'/logo.png') ? NormalizedQuotationLogo::fromBytes(file_get_contents($workspace.'/logo.png')) : null;
+    $stage = 'render_failed';
+    $pdf = (new QuotationPdfRenderer)->render($quotation, $logo);
+    $stage = 'result_write_failed';
+    if (file_put_contents($workspace.'/result.pdf', $pdf->bytes) !== strlen($pdf->bytes)) {
+        throw new QuotationPdfException($stage);
+    }
+    $meta = json_encode(['pages' => $pdf->pages, 'sha256' => $pdf->sha256], JSON_THROW_ON_ERROR);
+    if (file_put_contents($workspace.'/result.json', $meta) !== strlen($meta)) {
+        throw new QuotationPdfException($stage);
+    }
     exit(0);
 } catch (Throwable $error) {
-    $code = $error instanceof QuotationPdfException ? $error->reason : 'render_failed';
+    $code = $error instanceof QuotationPdfException && in_array($error->reason, QuotationPdfException::DIAGNOSTIC_REASONS, true)
+        ? $error->reason : $stage;
     file_put_contents($workspace.'/failure.json', json_encode(['code' => $code]));
     exit(2);
 }

@@ -7,6 +7,7 @@ namespace App\Console\Commands;
 use App\Domain\Quotations\NormalizedQuotationLogo;
 use App\Domain\Quotations\Quotation;
 use App\Services\Quotations\QuotationExecutionRunner;
+use App\Services\Quotations\QuotationPdfException;
 use App\Services\Quotations\QuotationSandboxProbe;
 use App\Support\Quotations\QuotationDemoFixtures;
 use Illuminate\Console\Command;
@@ -89,22 +90,44 @@ final class QuotationSandboxCheck extends Command
             $key = Encrypter::generateKey('AES-256-CBC');
             $cipher = new Encrypter($key, 'AES-256-CBC');
             foreach (['classic', 'modern'] as $template) {
-                $stage = $template.'_render_failed';
+                $stage = $template.'_document_preparation_failed';
                 $document = array_replace(QuotationDemoFixtures::simple(), ['template_id' => $template]);
                 if ($template === 'modern') {
                     $document['items'] = array_map(static fn (int $number): array => [
                         'description' => 'Serviço fictício '.$number.': instalação, manutenção preventiva e verificação de equipamentos de demonstração.',
                         'quantity' => '1.25', 'unit_price_cents' => 10000,
                     ], range(1, 24));
-                    $this->write($workspace.'/logo.png', NormalizedQuotationLogo::fromBytes(QuotationDemoFixtures::logo('png'))->png);
+                    $stage = $template.'_logo_fixture_failed';
+                    $logoBytes = QuotationDemoFixtures::logo('png');
+                    $stage = $template.'_logo_normalization_failed';
+                    $logo = NormalizedQuotationLogo::fromBytes($logoBytes);
+                    $stage = $template.'_logo_write_failed';
+                    $this->write($workspace.'/logo.png', $logo->png);
                 }
+                $stage = $template.'_document_validation_failed';
                 $quotation = Quotation::fromArray($document);
+                $stage = $template.'_snapshot_preparation_failed';
                 $this->write($workspace.'/snapshot.enc', $cipher->encryptString(json_encode([
                     'schema_version' => 1, 'document' => $document, 'totals' => (array) $quotation->totals,
                 ], JSON_THROW_ON_ERROR)));
                 // A stale report/result can never make a second subprocess appear successful.
+                $stage = $template.'_artifact_cleanup_failed';
                 $files->delete([$workspace.'/result.pdf', $workspace.'/result.json', $workspace.'/failure.json', $workspace.'/isolation.json']);
-                $runner->execute($workspace, $key, 'AES-256-CBC', sandboxCheck: true);
+                foreach (['result.pdf', 'result.json', 'failure.json', 'isolation.json'] as $artifact) {
+                    clearstatcache(true, $workspace.'/'.$artifact);
+                    if (file_exists($workspace.'/'.$artifact) || is_link($workspace.'/'.$artifact)) {
+                        throw new RuntimeException;
+                    }
+                }
+                $stage = $template.'_execution_failed';
+                try {
+                    $runner->execute($workspace, $key, 'AES-256-CBC', sandboxCheck: true);
+                } catch (QuotationPdfException $error) {
+                    if (in_array($error->reason, QuotationPdfException::DIAGNOSTIC_REASONS, true)) {
+                        $stage = $template.'_'.$error->reason;
+                    }
+                    throw $error;
+                }
                 $stage = 'isolation_failed';
                 $report = $workspace.'/isolation.json';
                 if (is_link($report) || ! is_file($report) || filesize($report) > 2048) {

@@ -54,8 +54,9 @@ final readonly class NormalizedQuotationLogo
 
             return new self($png, $width, $height);
         } finally {
-            imagedestroy($source);
-            imagedestroy($target);
+            // GdImage releases its native allocation when the last reference is
+            // removed. imagedestroy has no effect on PHP 8 and is deprecated in 8.5.
+            unset($source, $target);
         }
     }
 

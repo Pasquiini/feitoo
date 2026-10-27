@@ -120,7 +120,7 @@ final class QuotationPdfRenderer
             if (strlen($bytes) < 100 || strlen($bytes) > QuotationLimits::MAX_PDF_BYTES || ! str_starts_with($bytes, '%PDF-')
                 || ! preg_match('/startxref\s+\d+\s+%%EOF\s*\z/', substr($bytes, -2048))
                 || ($logo !== null && ! str_contains($bytes, '/Subtype /Image'))) {
-                throw new RuntimeException;
+                throw new QuotationPdfException('pdf_invalid');
             }
 
             return new QuotationPdf($bytes, $pages, hash('sha256', $bytes));
@@ -130,7 +130,7 @@ final class QuotationPdfRenderer
         } finally {
             unset($dompdf);
             if (is_dir($workspace) && ! $files->deleteDirectory($workspace)) {
-                throw new RuntimeException('Falha ao remover arquivos temporários do orçamento.');
+                throw new QuotationPdfException('cleanup_failed');
             }
         }
     }

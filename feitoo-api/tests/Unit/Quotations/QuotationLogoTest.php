@@ -12,6 +12,28 @@ use PHPUnit\Framework\TestCase;
 
 class QuotationLogoTest extends TestCase
 {
+    public function test_fixture_and_normalization_work_with_all_warnings_and_deprecations_as_exceptions(): void
+    {
+        $previous = error_reporting(E_ALL);
+        set_error_handler(static function (int $severity, string $message): never {
+            throw new \ErrorException($message, 0, $severity);
+        });
+        try {
+            foreach (['png', 'jpeg'] as $format) {
+                $logo = NormalizedQuotationLogo::fromBytes(QuotationDemoFixtures::logo($format));
+                // The child normalizes the parent's already normalized PNG again.
+                $childLogo = NormalizedQuotationLogo::fromBytes($logo->png);
+                $this->assertSame([240, 100], [$childLogo->width, $childLogo->height]);
+                $image = imagecreatefromstring($childLogo->png);
+                $this->assertSame($format === 'png' ? 127 : 0, (imagecolorat($image, 0, 0) >> 24) & 0x7F);
+                unset($image);
+            }
+        } finally {
+            restore_error_handler();
+            error_reporting($previous);
+        }
+    }
+
     public function test_normalizes_png_and_jpeg_and_preserves_alpha_without_metadata(): void
     {
         foreach (['png', 'jpeg'] as $format) {
@@ -29,7 +51,7 @@ class QuotationLogoTest extends TestCase
             $this->assertSame([240, 100], [$logo->width, $logo->height]);
             $image = imagecreatefromstring($logo->png);
             $this->assertSame($format === 'png' ? 127 : 0, (imagecolorat($image, 0, 0) >> 24) & 0x7F);
-            imagedestroy($image);
+            unset($image);
         }
     }
 
@@ -39,7 +61,7 @@ class QuotationLogoTest extends TestCase
         ob_start();
         imagepng($image);
         $bytes = ob_get_clean();
-        imagedestroy($image);
+        unset($image);
         $logo = NormalizedQuotationLogo::fromBytes($bytes);
         $this->assertSame([1200, 600], [$logo->width, $logo->height]);
     }

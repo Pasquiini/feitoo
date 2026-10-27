@@ -7,6 +7,7 @@ use App\Models\QuotationGeneration;
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Process\Exception\ProcessSignaledException;
 use Symfony\Component\Process\Exception\ProcessTimedOutException;
 use Symfony\Component\Process\Process;
 use Throwable;
@@ -98,16 +99,42 @@ class QuotationExecutionRunner
             $process->run();
         } catch (ProcessTimedOutException) {
             throw new QuotationPdfException('execution_timeout');
+        } catch (ProcessSignaledException) {
+            // A kill alone does not prove OOM or CPU exhaustion. Only classify
+            // resource signals when the OS actually reports that specific signal.
+            throw new QuotationPdfException(match ($process->getTermSignal()) {
+                24 => 'cpu_limit_exceeded', // Linux SIGXCPU
+                25 => 'file_size_limit_exceeded', // Linux SIGXFSZ
+                default => 'execution_terminated',
+            });
+        } catch (Throwable) {
+            throw new QuotationPdfException('execution_failed');
         } finally {
             if ($process->isRunning()) {
                 $process->stop(0);
             }
         }
         if (! $process->isSuccessful()) {
-            $failure = is_file($workspace.'/failure.json') ? json_decode(file_get_contents($workspace.'/failure.json', length: 1024), true) : [];
-            $reason = in_array($failure['code'] ?? '', ['unsupported_character', 'page_limit_exceeded', 'snapshot_invalid'], true) ? $failure['code'] : 'render_failed';
-            throw new QuotationPdfException($reason);
+            throw new QuotationPdfException($this->failureReason($workspace));
         }
+    }
+
+    private function failureReason(string $workspace): string
+    {
+        $path = $workspace.'/failure.json';
+        try {
+            clearstatcache(true, $path);
+            if (! is_link($path) && is_file($path) && filesize($path) <= 1024) {
+                $failure = json_decode(file_get_contents($path), true, flags: JSON_THROW_ON_ERROR);
+                if (is_array($failure) && in_array($failure['code'] ?? null, QuotationPdfException::DIAGNOSTIC_REASONS, true)) {
+                    return $failure['code'];
+                }
+            }
+        } catch (Throwable) {
+            // An absent/malformed/unreadable report supplies no evidence of cause.
+        }
+
+        return 'execution_failed';
     }
 
     public function environment(string $workspace, string $executionKey, string $cipher, bool $sandboxCheck = false): array

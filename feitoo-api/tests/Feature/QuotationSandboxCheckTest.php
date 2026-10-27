@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Domain\Quotations\Quotation;
 use App\Domain\Quotations\QuotationLimits;
 use App\Services\Quotations\QuotationExecutionRunner;
 use App\Services\Quotations\QuotationPdfException;
@@ -107,6 +108,13 @@ class QuotationSandboxCheckTest extends TestCase
             $snapshot = json_decode((new Encrypter($key, $cipher))->decryptString(file_get_contents($workspace.'/snapshot.enc')), true);
             $this->assertSame('contato@example.test', $snapshot['document']['issuer']['email']);
             $templates[] = $snapshot['document']['template_id'];
+            $quotation = Quotation::fromArray($snapshot['document']);
+            $this->assertSame((array) $quotation->totals, $snapshot['totals']);
+            if ($quotation->template->value === 'modern') {
+                $this->assertCount(24, $quotation->items);
+                $this->assertSame(300000, $quotation->totals->totalCents);
+                $this->assertSame('image/png', (new \finfo(FILEINFO_MIME_TYPE))->file($workspace.'/logo.png'));
+            }
             // Exercise the actual entrypoint, validator, Blade and Dompdf on every OS.
             // Only OS controls are simulated here; the separate Linux test runs real namespaces.
             $env = $runner->environment($workspace, $key, $cipher);
@@ -194,6 +202,94 @@ class QuotationSandboxCheckTest extends TestCase
         $this->assertStringNotContainsString('.env-secret', $output);
         $this->assertStringNotContainsString($this->roots[0], $output);
         $this->assertStringNotContainsString('Checagem concluída', $output);
+        $expected = match ($case) {
+            'timeout' => 'classic_execution_timeout',
+            'process' => 'classic_execution_failed',
+            'modern_stale' => 'isolation_failed',
+            'missing_pdf', 'checksum', 'pages', 'page_type', 'small', 'large', 'truncated', 'xref' => 'classic_pdf_invalid',
+            default => 'isolation_failed',
+        };
+        $this->assertStringContainsString('Checagem falhou: '.$expected.'.', $output);
+    }
+
+    public function test_snapshot_preparation_failure_has_a_specific_safe_code_and_cleans_up(): void
+    {
+        $runner = $this->fakeRunner();
+        $runner->shouldNotReceive('execute');
+        // The probe runs before preparation; make snapshot.enc unwritable as a file.
+        $probe = Mockery::mock(QuotationSandboxProbe::class);
+        $probe->shouldReceive('prepare')->once()->andReturnUsing(function (string $workspace): array {
+            $this->roots[] = dirname($workspace, 2);
+            mkdir($workspace.'/snapshot.enc');
+
+            return [];
+        });
+        $probe->shouldReceive('close')->once();
+        $this->app->instance(QuotationSandboxProbe::class, $probe);
+        $this->artisan('feitoo:quotation-sandbox-check')->expectsOutputToContain('classic_snapshot_preparation_failed')->assertFailed();
+    }
+
+    public function test_modern_logo_write_failure_is_not_reported_as_render_failure(): void
+    {
+        $this->fakeProbe();
+        $runner = $this->fakeRunner();
+        $runner->shouldReceive('execute')->once()->andReturnUsing(function (string $workspace): void {
+            $this->report($workspace);
+            $this->pdf($workspace);
+            mkdir($workspace.'/logo.png');
+        });
+        $this->artisan('feitoo:quotation-sandbox-check')->expectsOutputToContain('modern_logo_write_failed')->assertFailed();
+    }
+
+    public function test_unknown_exception_reason_is_never_printed(): void
+    {
+        $this->fakeProbe();
+        $runner = $this->fakeRunner();
+        $runner->shouldReceive('execute')->once()->andThrow(new QuotationPdfException('SECRET /private/.env'));
+        $this->assertSame(1, Artisan::call('feitoo:quotation-sandbox-check'));
+        $this->assertStringContainsString('classic_execution_failed', Artisan::output());
+        $this->assertStringNotContainsString('SECRET', Artisan::output());
+    }
+
+    public static function missingModernFeatures(): iterable
+    {
+        yield 'single page with image' => ['single_page'];
+        yield 'multiple pages without image' => ['missing_image'];
+    }
+
+    #[DataProvider('missingModernFeatures')]
+    public function test_modern_requires_both_multiple_pages_and_an_embedded_image(string $case): void
+    {
+        $this->fakeProbe();
+        $runner = $this->fakeRunner();
+        $runner->shouldReceive('execute')->twice()->andReturnUsing(function (string $workspace, string $key, string $cipher) use ($runner, $case): void {
+            $encrypter = new Encrypter($key, $cipher);
+            $snapshot = json_decode($encrypter->decryptString(file_get_contents($workspace.'/snapshot.enc')), true);
+            if ($snapshot['document']['template_id'] === 'modern') {
+                if ($case === 'single_page') {
+                    $snapshot['document']['items'] = array_slice($snapshot['document']['items'], 0, 1);
+                    $snapshot['totals'] = (array) Quotation::fromArray($snapshot['document'])->totals;
+                    file_put_contents($workspace.'/snapshot.enc', $encrypter->encryptString(json_encode($snapshot)));
+                } else {
+                    unlink($workspace.'/logo.png');
+                }
+            }
+            $process = new Process([PHP_BINARY, base_path('scripts/render-quotation.php')], $workspace, $runner->environment($workspace, $key, $cipher));
+            $process->disableOutput();
+            $this->assertSame(0, $process->run());
+            $pdf = $runner->readResult($workspace);
+            if ($snapshot['document']['template_id'] === 'modern') {
+                if ($case === 'single_page') {
+                    $this->assertSame(1, $pdf->pages);
+                    $this->assertStringContainsString('/Subtype /Image', $pdf->bytes);
+                } else {
+                    $this->assertGreaterThan(1, $pdf->pages);
+                    $this->assertStringNotContainsString('/Subtype /Image', $pdf->bytes);
+                }
+            }
+            $this->report($workspace);
+        });
+        $this->artisan('feitoo:quotation-sandbox-check')->expectsOutputToContain('modern_pdf_invalid')->assertFailed();
     }
 
     public function test_php_fallback_is_refused_even_if_runner_claims_available(): void
@@ -240,7 +336,7 @@ class QuotationSandboxCheckTest extends TestCase
             'fwrite(STDOUT, "CHILD-SENSITIVE"); fwrite(STDERR, "CHILD-SENSITIVE"); exit(5);']);
         $this->assertSame(1, Artisan::call('feitoo:quotation-sandbox-check'));
         $output = Artisan::output();
-        $this->assertStringContainsString('classic_render_failed', $output);
+        $this->assertStringContainsString('classic_execution_failed', $output);
         $this->assertStringNotContainsString('CHILD-SENSITIVE', $output);
     }
 

@@ -112,7 +112,9 @@ final class QuotationDemoFixtures
             return (string) ob_get_contents();
         } finally {
             ob_end_clean();
-            imagedestroy($image);
+            // GD images are objects since PHP 8.0; imagedestroy is a no-op and
+            // emits E_DEPRECATED on PHP 8.5 under the diagnostic's strict handler.
+            unset($image);
         }
     }
 }
