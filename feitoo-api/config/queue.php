@@ -30,6 +30,14 @@ return [
     */
 
     'connections' => [
+        'quotations' => [
+            'driver' => 'database',
+            'connection' => null,
+            'table' => 'jobs',
+            'queue' => 'quotations',
+            'retry_after' => 180,
+            'after_commit' => false,
+        ],
         'documents' => [
             'driver' => 'database',
             'connection' => env('DB_QUEUE_CONNECTION'),

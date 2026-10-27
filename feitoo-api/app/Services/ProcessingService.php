@@ -12,6 +12,7 @@ use App\Models\Processing;
 use App\Models\ProcessingFileResult;
 use App\Models\User;
 use App\Rules\SafeXml;
+use App\Services\Quotations\QuotationGenerationService;
 use App\Support\Documents\DocumentException;
 use App\Support\Documents\DocxValidator;
 use Illuminate\Http\UploadedFile;
@@ -28,6 +29,7 @@ class ProcessingService
     /** @param list<UploadedFile> $uploads */
     public function upload(Processing $processing, array $uploads, User $owner): Processing
     {
+        abort_if($processing->tool === ProcessingTool::QuotationGenerator, 409);
         $written = [];
         $disk = config('feitoo.processing.disk');
 
@@ -122,6 +124,10 @@ class ProcessingService
 
     public function removeFiles(Processing $processing, bool $onlyIfExpired = false, ?User $owner = null): Processing
     {
+        if ($processing->tool === ProcessingTool::QuotationGenerator) {
+            return app(QuotationGenerationService::class)->purge($processing, $onlyIfExpired, $owner);
+        }
+
         return DB::transaction(function () use ($processing, $onlyIfExpired, $owner): Processing {
             $locked = Processing::query()->lockForUpdate()->findOrFail($processing->id);
             if ($owner) {

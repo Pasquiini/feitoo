@@ -13,8 +13,18 @@ use Illuminate\Support\Facades\DB;
 
 class EntitlementService
 {
+    public function freeLimits(ProcessingTool $tool): array
+    {
+        abort_if($tool === ProcessingTool::QuotationGenerator, 422);
+        $key = in_array($tool, [ProcessingTool::XmlToExcel, ProcessingTool::ProductsFromXml], true)
+            ? 'monetization.xml_demo' : ($tool === ProcessingTool::DocxToPdf ? 'documents.limits.free' : 'monetization.free');
+
+        return ['per_processing' => (int) config($key.'.per_processing'), 'daily' => (int) config($key.'.daily')];
+    }
+
     public function usage(User $user, ?Carbon $local = null, bool $locked = false, ProcessingTool $tool = ProcessingTool::XmlToExcel): array
     {
+        abort_if($tool === ProcessingTool::QuotationGenerator, 422);
         $local ??= Carbon::now(config('monetization.free.timezone'));
         $plan = app(SubscriptionService::class)->current($user, $locked)?->grantsPro() ? 'pro' : 'free';
         $query = $user->processings()->whereIn('entitlement_source', ['free', 'pro'])
@@ -22,10 +32,11 @@ class EntitlementService
         // A locking read also avoids an earlier repeatable-read snapshot while waiting for the User lock.
         $used = (int) ($locked ? $query->lockForUpdate()->get(['usage_files_count'])->sum('usage_files_count') : $query->sum('usage_files_count'));
         $source = $tool === ProcessingTool::DocxToPdf ? 'documents.limits.' : 'monetization.';
-        $daily = max(0, (int) config($source.$plan.'.daily'));
+        $configured = $plan === 'free' ? $this->freeLimits($tool) : config($source.'pro');
+        $daily = max(0, (int) $configured['daily']);
 
         return ['plan' => $plan, 'limits' => [
-            'per_processing' => max(0, min((int) config($source.$plan.'.per_processing'), (int) config($tool === ProcessingTool::DocxToPdf ? 'documents.max_files' : 'feitoo.uploads.max_processing_files'))),
+            'per_processing' => max(0, min((int) $configured['per_processing'], (int) config($tool === ProcessingTool::DocxToPdf ? 'documents.max_files' : 'feitoo.uploads.max_processing_files'))),
             'daily' => $daily, 'used_today' => $used, 'remaining_today' => max(0, $daily - $used),
             'resets_at' => $local->copy()->addDay()->startOfDay()->toIso8601String(),
         ]];
@@ -34,6 +45,7 @@ class EntitlementService
     // Caller holds the Processing lock. The User lock serializes starts across different batches.
     public function accept(Processing $processing, User $owner): void
     {
+        abort_if($processing->tool === ProcessingTool::QuotationGenerator, 409);
         $user = User::query()->lockForUpdate()->findOrFail($owner->id);
         $purchase = Purchase::query()->where('processing_id', $processing->id)->lockForUpdate()->first();
         if ($purchase?->status === PurchaseStatus::Paid) {

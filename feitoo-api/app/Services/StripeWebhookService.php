@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Enums\PurchaseStatus;
 use App\Models\Processing;
 use App\Models\Purchase;
+use App\Services\Quotations\QuotationOrderService;
 use Illuminate\Support\Facades\DB;
 use Stripe\Event;
 
@@ -14,6 +15,9 @@ class StripeWebhookService
     {
         app(StripeEnvironment::class)->assertObject($event, 400);
         app(StripeEnvironment::class)->assertObject($event->data->object, 400);
+        if (app(QuotationOrderService::class)->handle($event)) {
+            return;
+        }
         if (app(SubscriptionService::class)->handle($event)) {
             return;
         }

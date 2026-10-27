@@ -23,6 +23,8 @@ class UploadProcessingFilesRequest extends FormRequest
 
     public function authorize(): bool
     {
+        abort_if($this->route('processing')?->tool === ProcessingTool::QuotationGenerator, 409);
+
         // Ownership is checked by the route middleware before content validation.
         return true;
     }

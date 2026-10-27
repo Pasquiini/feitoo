@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Enums\ProcessingStatus;
 use App\Enums\ProcessingTool;
+use App\Models\QuotationGeneration;
 use App\Services\ProcessingPreviewService;
 use App\Services\ProductsFromXmlResultService;
 use App\Services\XmlOrganizerService;
@@ -14,6 +15,25 @@ class ProcessingResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
+        if ($this->tool === ProcessingTool::QuotationGenerator) {
+            $generation = QuotationGeneration::where('processing_id', $this->id)->first();
+            $expired = $this->status === ProcessingStatus::Expired || ! $this->expires_at?->isFuture();
+            $output = ! $expired && $this->status === ProcessingStatus::Completed ? $this->output()->first() : null;
+
+            return ['id' => $this->uuid, 'tool' => $this->tool->value, 'status' => $expired ? 'expired' : $this->status->value,
+                'created_at' => $this->created_at->toIso8601String(), 'completed_at' => $this->completed_at?->toIso8601String(),
+                'expires_at' => $this->expires_at?->toIso8601String(),
+                'quotation' => ['draft_uuid' => $generation?->draft_uuid, 'revision' => $generation?->draft_revision,
+                    'attempt' => $generation?->attempt, 'reservation_date' => $generation?->reservation_date,
+                    'pending_expires_at' => $generation?->pending_expires_at?->toIso8601String(),
+                    'source' => $generation?->source ?? 'free', 'consumption_status' => $generation?->consumption_status,
+                    'error_code' => $generation?->error_code,
+                    'retryable' => ! $expired && $this->status === ProcessingStatus::Failed && $generation?->consumption_status === 'released'
+                        && in_array($generation?->error_code, ['render_failed', 'execution_timeout', 'execution_failed', 'storage_unavailable', 'worker_abandoned'], true)],
+                'result' => ['available' => $output !== null, 'file_name' => $output?->original_name,
+                    'size' => $output?->size, 'error_message' => $this->status === ProcessingStatus::Failed
+                        ? 'Não foi possível gerar este orçamento. Nenhuma unidade foi consumida.' : null]];
+        }
         $output = $this->status === ProcessingStatus::Completed
             && $this->expires_at?->isFuture() ? $this->output()->first() : null;
 

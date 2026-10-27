@@ -42,6 +42,7 @@ class PurchaseService
 
     public function checkout(Processing $processing, User $owner): array
     {
+        abort_if($processing->tool === ProcessingTool::QuotationGenerator, 422);
         abort_if(in_array($processing->tool, [ProcessingTool::DocxToPdf, ProcessingTool::XmlToPdf, ProcessingTool::XmlOrganizer, ProcessingTool::XmlAnalyzer], true), 422, 'Use os limites Free ou Pro para esta ferramenta.');
         app(StripeEnvironment::class)->assertConfigured();
         if (! $this->stripe->available()) {

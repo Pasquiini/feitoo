@@ -17,7 +17,7 @@ $app->make(Kernel::class)->bootstrap();
 if (! $app->environment('local', 'testing') || DB::getDriverName() !== 'mysql') {
     throw new RuntimeException('This test requires local MySQL.');
 }
-config(['monetization.free.daily' => 5, 'monetization.free.per_processing' => 20]);
+config(['monetization.xml_demo.daily' => 5, 'monetization.xml_demo.per_processing' => 20]);
 if (($argv[1] ?? '') === 'worker') {
     try {
         DB::transaction(function () use ($argv): void {

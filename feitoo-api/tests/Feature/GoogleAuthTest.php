@@ -18,6 +18,26 @@ class GoogleAuthTest extends TestCase
 
     private array $history = [];
 
+    public function test_quotation_return_survives_google_success_and_cancellation(): void
+    {
+        $this->fakeGoogle();
+        $response = $this->postJson('/api/auth/google/start', ['intent' => 'login', 'return_to' => '/gerador-de-orcamentos'])->assertOk();
+        $this->completeGoogle(session('state'))->assertRedirect('http://localhost:4200/gerador-de-orcamentos');
+        $this->assertDatabaseCount('quotation_drafts', 0);
+        Auth::guard('web')->logout();
+        Auth::forgetGuards();
+        $this->postJson('/api/auth/google/start', ['intent' => 'login', 'return_to' => '/gerador-de-orcamentos'])->assertOk();
+        $this->get('/api/auth/google/callback?error=access_denied')
+            ->assertRedirect('http://localhost:4200/login?google_error=invalid_google&returnTo=%2Fgerador-de-orcamentos');
+    }
+
+    public function test_quotation_return_rejects_external_urls_and_personal_query_parameters(): void
+    {
+        foreach (['https://example.com', '//example.com', '/gerador-de-orcamentos?name=private', '/gerador-de-orcamentos#private'] as $path) {
+            $this->postJson('/api/auth/google/start', ['intent' => 'login', 'return_to' => $path])->assertUnprocessable();
+        }
+    }
+
     protected function setUp(): void
     {
         parent::setUp();

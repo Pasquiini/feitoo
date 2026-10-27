@@ -44,9 +44,9 @@ class ProcessingController extends Controller
 
     public function start(Request $request, Processing $processing, ProcessingStartService $service): JsonResponse
     {
-        $validated = $request->validate(['free_files_count' => ['sometimes', 'integer', 'min:1']]);
+        $validated = $request->validate(['free_files_count' => ['sometimes', 'integer', 'min:1', 'prohibits:free_file_ids'], 'free_file_ids' => ['sometimes', 'array', 'min:1', 'max:250'], 'free_file_ids.*' => ['required', 'uuid', 'distinct']]);
 
-        return (new ProcessingResource($service->start($processing, $request->user(), $validated['free_files_count'] ?? null)))->response()->setStatusCode(202);
+        return (new ProcessingResource($service->start($processing, $request->user(), $validated['free_files_count'] ?? null, $validated['free_file_ids'] ?? null)))->response()->setStatusCode(202);
     }
 
     public function files(Processing $processing): AnonymousResourceCollection

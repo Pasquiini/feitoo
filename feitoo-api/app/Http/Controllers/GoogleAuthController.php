@@ -16,7 +16,7 @@ class GoogleAuthController extends Controller
 {
     public function start(Request $request): JsonResponse
     {
-        $input = $request->validate(['intent' => ['required', 'in:login,link'], 'return_to' => ['sometimes', 'in:/,/conta,/xml-para-excel,/produtos-dos-xmls,/xml-para-pdf,/organizar-xml,/analisar-xml,/docx-para-pdf']]);
+        $input = $request->validate(['intent' => ['required', 'in:login,link'], 'return_to' => ['sometimes', 'in:/,/conta,/xml-para-excel,/produtos-dos-xmls,/xml-para-pdf,/organizar-xml,/analisar-xml,/docx-para-pdf,/gerador-de-orcamentos']]);
         abort_unless(config('services.google.client_id') && config('services.google.client_secret'), 503, 'Google indisponível.');
         $user = Auth::guard('web')->user();
         abort_if($input['intent'] === 'link' && ! $user, 401);
@@ -57,7 +57,7 @@ class GoogleAuthController extends Controller
                 $request->session()->put('completed_google_signup', true);
             }
 
-            $returnTo = in_array($context['return_to'] ?? '/', ['/', '/conta', '/xml-para-excel', '/produtos-dos-xmls', '/xml-para-pdf', '/organizar-xml', '/analisar-xml', '/docx-para-pdf'], true) ? $context['return_to'] ?? '/' : '/';
+            $returnTo = in_array($context['return_to'] ?? '/', ['/', '/conta', '/xml-para-excel', '/produtos-dos-xmls', '/xml-para-pdf', '/organizar-xml', '/analisar-xml', '/docx-para-pdf', '/gerador-de-orcamentos'], true) ? $context['return_to'] ?? '/' : '/';
 
             return redirect()->away(rtrim(config('feitoo.auth.frontend_url'), '/').$returnTo);
         } catch (Throwable $exception) {
@@ -65,7 +65,7 @@ class GoogleAuthController extends Controller
             $reason = $exception instanceof GoogleAccountException ? $exception->reason : 'invalid_google';
             $target = is_array($context) && ($context['intent'] ?? null) === 'link'
                 ? '/conta?google_error=link_conflict' : '/login?google_error='.$reason
-                    .(($context['return_to'] ?? null) === '/conta' ? '&returnTo=%2Fconta' : '');
+                    .(in_array($context['return_to'] ?? null, ['/conta', '/gerador-de-orcamentos'], true) ? '&returnTo='.rawurlencode($context['return_to']) : '');
 
             return redirect()->away(rtrim(config('feitoo.auth.frontend_url'), '/').$target);
         } finally {

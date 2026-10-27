@@ -16,7 +16,7 @@ class StoreProcessingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tool' => ['required', Rule::enum(ProcessingTool::class)],
+            'tool' => ['required', Rule::enum(ProcessingTool::class), Rule::notIn([ProcessingTool::QuotationGenerator->value])],
             'organizer' => ['exclude_unless:tool,xml-organizer', 'sometimes', 'array:criterion,detect_duplicates,duplicate_action,report,standardize_names'],
             'organizer.criterion' => ['sometimes', Rule::in(['year_month', 'supplier', 'issuer_document', 'year_month_supplier', 'model'])],
             'organizer.detect_duplicates' => ['sometimes', 'boolean'],

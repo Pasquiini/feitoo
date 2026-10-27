@@ -6,6 +6,11 @@ return [
         'daily' => (int) env('FREE_DAILY_FILES', 50),
         'timezone' => 'America/Sao_Paulo',
     ],
+    // Only these two tools use the commercial demonstration limits.
+    'xml_demo' => [
+        'per_processing' => (int) env('XML_DEMO_MAX_FILES_PER_PROCESSING', 3),
+        'daily' => (int) env('XML_DEMO_DAILY_FILES', 6),
+    ],
     'pro' => [
         'price_id' => env('STRIPE_PRO_PRICE_ID'),
         'amount' => (int) env('PRO_MONTHLY_CENTS', 2990),

@@ -42,7 +42,7 @@ class ProductsFromXmlTest extends TestCase
         $this->owner = User::factory()->create();
         $this->actingAs($this->owner, 'web');
         config(['feitoo.rate_limits.create_per_minute' => 1000, 'feitoo.rate_limits.upload_per_minute' => 1000,
-            'feitoo.rate_limits.access_per_minute' => 1000, 'feitoo.processing.queue_connection' => 'database']);
+            'feitoo.rate_limits.access_per_minute' => 1000, 'feitoo.processing.queue_connection' => 'database', 'monetization.xml_demo.per_processing' => 20, 'monetization.xml_demo.daily' => 50]);
     }
 
     private function fixture(int $number = 1): string

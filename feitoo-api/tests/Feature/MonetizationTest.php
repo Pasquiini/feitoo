@@ -4,7 +4,9 @@ namespace Tests\Feature;
 
 use App\Enums\ProcessingStatus;
 use App\Enums\PurchaseStatus;
+use App\Jobs\ProcessFiscalFilesJob;
 use App\Models\Processing;
+use App\Models\ProcessingFile;
 use App\Models\Purchase;
 use App\Models\User;
 use App\Services\StripeCheckoutGateway;
@@ -14,6 +16,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
 use Mockery;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Stripe\Checkout\Session;
 use Tests\TestCase;
 
@@ -31,9 +34,102 @@ class MonetizationTest extends TestCase
         $this->owner = User::factory()->create();
         $this->actingAs($this->owner, 'web');
         config(['feitoo.rate_limits.create_per_minute' => 1000, 'feitoo.rate_limits.upload_per_minute' => 1000,
-            'feitoo.rate_limits.access_per_minute' => 1000, 'monetization.free.per_processing' => 20,
-            'monetization.free.daily' => 50, 'monetization.stripe.secret_key' => 'sk_test_fake',
+            'feitoo.rate_limits.access_per_minute' => 1000, 'monetization.xml_demo.per_processing' => 20,
+            'monetization.xml_demo.daily' => 50, 'monetization.stripe.secret_key' => 'sk_test_fake',
             'monetization.stripe.webhook_secret' => 'whsec_test']);
+    }
+
+    public function test_demo_limits_are_enforced_for_both_tools_without_changing_other_tools(): void
+    {
+        config(['monetization.xml_demo.per_processing' => 3, 'monetization.xml_demo.daily' => 6]);
+        foreach (['xml-to-excel', 'products-from-xml'] as $tool) {
+            $this->getJson('/api/tools/'.$tool.'/config')->assertOk()->assertJsonPath('data.free.per_processing', 3)->assertJsonPath('data.free.daily', 6);
+            $this->getJson('/api/account/usage?tool='.$tool)->assertOk()->assertJsonPath('data.limits.per_processing', 3)->assertJsonPath('data.limits.remaining_today', 6);
+            $create = function (int $count) use ($tool) {
+                $id = $this->postJson('/api/processings', ['tool' => $tool])->assertCreated()->json('data.id');
+                $files = array_map(fn ($n) => UploadedFile::fake()->createWithContent('demo-'.$n.'.xml', '<document/>'), range(1, $count));
+                $this->postJson('/api/processings/'.$id.'/files', ['files' => $files])->assertOk();
+
+                return '/api/processings/'.$id;
+            };
+            $oversized = $create(4);
+            $this->postJson($oversized.'/start')->assertUnprocessable();
+            $this->postJson($create(3).'/start')->assertStatus(202);
+            $this->postJson($create(3).'/start')->assertStatus(202);
+            $this->postJson($create(1).'/start')->assertUnprocessable();
+            $this->getJson('/api/account/usage?tool='.$tool)->assertJsonPath('data.limits.used_today', 6);
+        }
+        foreach (['xml-to-pdf', 'xml-organizer', 'xml-analyzer'] as $tool) {
+            $this->getJson('/api/tools/'.$tool.'/config')->assertOk()->assertJsonPath('data.free.per_processing', 20)->assertJsonPath('data.free.daily', 50);
+        }
+    }
+
+    public function test_explicit_file_ids_select_only_owned_inputs_and_rollback_on_limit_failure(): void
+    {
+        config(['monetization.xml_demo.per_processing' => 3, 'monetization.xml_demo.daily' => 6]);
+        $p = $this->batch(4);
+        $ids = $p->files()->orderByDesc('id')->pluck('uuid')->all();
+        $foreign = $this->batch()->files()->first()->uuid;
+        $this->postJson($this->url($p).'/start', ['free_file_ids' => [$foreign]])->assertUnprocessable();
+        $this->postJson($this->url($p).'/start', ['free_file_ids' => $ids])->assertUnprocessable();
+        $this->assertSame(4, $p->files()->whereNull('removed_at')->count());
+        $this->postJson($this->url($p).'/start', ['free_file_ids' => array_slice($ids, 0, 3)])->assertStatus(202);
+        $this->assertEqualsCanonicalizing(array_slice($ids, 0, 3), $p->files()->whereNull('removed_at')->pluck('uuid')->all());
+    }
+
+    public static function paidBatches(): array
+    {
+        $cases = [];
+        foreach (['xml-to-excel', 'products-from-xml'] as $tool) {
+            foreach ([40, 100, 250] as $count) {
+                $cases[$tool.'-'.$count] = [$tool, $count];
+            }
+        }
+
+        return $cases;
+    }
+
+    #[DataProvider('paidBatches')]
+    public function test_checkout_and_signed_confirmation_preserve_every_selected_file(string $tool, int $count): void
+    {
+        config(['monetization.xml_demo.per_processing' => 3, 'monetization.xml_demo.daily' => 6]);
+        $id = $this->postJson('/api/processings', ['tool' => $tool])->assertCreated()->json('data.id');
+        foreach (array_chunk(range(1, $count), 20) as $chunk) {
+            $files = array_map(fn ($n) => UploadedFile::fake()->createWithContent('selected-'.$n.'.xml', '<document number="'.$n.'"/>'), $chunk);
+            $this->postJson('/api/processings/'.$id.'/files', ['files' => $files])->assertOk();
+        }
+        $processing = Processing::where('uuid', $id)->firstOrFail();
+        $snapshot = fn () => $processing->files()->where('kind', 'input')->orderBy('id')->get()
+            ->map(fn (ProcessingFile $file) => [
+                $file->uuid, $file->original_name, $file->storage_path, $file->removed_at,
+                hash('sha256', Storage::disk($file->storage_disk)->get($file->storage_path)),
+            ])->all();
+        $selected = $snapshot();
+        $this->assertCount($count, $selected);
+        $gateway = Mockery::mock(StripeCheckoutGateway::class);
+        $gateway->shouldReceive('available')->andReturn(true);
+        $gateway->shouldReceive('create')->once()->andReturn(Session::constructFrom([
+            'id' => 'cs_test_preserved', 'url' => 'https://checkout.stripe.com/c/pay/test', 'livemode' => false,
+        ]));
+        $this->app->instance(StripeCheckoutGateway::class, $gateway);
+        $this->postJson($this->url($processing).'/purchase')->assertOk()
+            ->assertJsonPath('data.purchase.files_count', $count)
+            ->assertJsonPath('data.purchase.package_code', $count <= 100 ? 'xml_100' : 'xml_250');
+        $this->assertSame($selected, $snapshot());
+        $this->postJson($this->url($processing).'/start')->assertUnprocessable()->assertJsonPath('code', 'payment_pending');
+        $this->postJson($this->url($processing).'/start', ['free_file_ids' => [$selected[0][0]]])->assertConflict();
+        $this->assertSame($selected, $snapshot());
+        $purchase = $processing->purchase()->firstOrFail();
+        $this->webhook($purchase)->assertOk();
+        $this->webhook($purchase)->assertOk();
+        $this->postJson($this->url($processing).'/start')->assertStatus(202)->assertJsonPath('data.files_count', $count);
+        $this->postJson($this->url($processing).'/start')->assertConflict();
+        $this->assertSame($selected, $snapshot());
+        $this->assertSame('purchase', $processing->fresh()->entitlement_source);
+        $this->getJson('/api/account/usage?tool='.$tool)->assertJsonPath('data.limits.used_today', 0);
+        $this->assertDatabaseCount('purchases', 1);
+        $this->assertDatabaseCount('stripe_webhook_events', 1);
+        Queue::assertPushed(ProcessFiscalFilesJob::class, 1);
     }
 
     private function batch(int $count = 1): Processing
@@ -102,7 +198,7 @@ class MonetizationTest extends TestCase
         $this->assertNull($p->fresh()->entitlement_source);
         $this->postJson($this->url($p).'/start', ['free_files_count' => 20])->assertStatus(202)->assertJsonPath('data.files_count', 20);
         $this->assertSame(1, $p->files()->whereNotNull('removed_at')->count());
-        config(['monetization.free.daily' => 25]);
+        config(['monetization.xml_demo.daily' => 25]);
         $q = $this->batch(10);
         $this->postJson($this->url($q).'/start', ['free_files_count' => 6])->assertUnprocessable()->assertJsonPath('code', 'usage_limit_exceeded');
         $this->assertSame(10, $q->fresh()->files_count);

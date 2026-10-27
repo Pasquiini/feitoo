@@ -29,6 +29,23 @@ return [
     */
 
     'disks' => [
+        'quotation_generations' => [
+            'driver' => 'local', 'root' => storage_path('app/private/quotation-generations'),
+            'visibility' => 'private', 'serve' => false, 'throw' => true, 'report' => false,
+        ],
+        'quotation_execution' => [
+            'driver' => 'local', 'root' => storage_path('app/private/quotation-execution'),
+            'visibility' => 'private', 'serve' => false, 'throw' => true, 'report' => false,
+        ],
+
+        'quotation_drafts' => [
+            'driver' => 'local',
+            'root' => storage_path('app/private/quotation-drafts'),
+            'visibility' => 'private',
+            'serve' => false,
+            'throw' => true,
+            'report' => false,
+        ],
 
         'processing' => [
             'driver' => 'local',

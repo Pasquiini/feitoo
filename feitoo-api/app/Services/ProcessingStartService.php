@@ -20,25 +20,34 @@ use Throwable;
 
 class ProcessingStartService
 {
-    public function start(Processing $processing, User $owner, ?int $freeFilesCount = null): Processing
+    public function start(Processing $processing, User $owner, ?int $freeFilesCount = null, ?array $freeFileIds = null): Processing
     {
+        abort_if($processing->tool === ProcessingTool::QuotationGenerator, 409);
         $connection = $processing->tool === ProcessingTool::DocxToPdf ? 'documents' : config('feitoo.processing.queue_connection');
         // A sync/deferred/failover driver could execute heavy work in the HTTP process.
         abort_unless(in_array(config('queue.connections.'.$connection.'.driver'), ['database', 'redis', 'sqs', 'beanstalkd'], true), 503);
 
-        return DB::transaction(function () use ($processing, $owner, $connection, $freeFilesCount): Processing {
+        return DB::transaction(function () use ($processing, $owner, $connection, $freeFilesCount, $freeFileIds): Processing {
             $locked = Processing::query()->lockForUpdate()->findOrFail($processing->id);
             abort_unless((int) $locked->user_id === (int) $owner->id, 404);
             abort_if($locked->status === ProcessingStatus::Expired || ! $locked->expires_at?->isFuture(), 410);
             abort_unless($locked->status === ProcessingStatus::Pending, 409);
             abort_unless($locked->files()->where('kind', 'input')->whereNull('removed_at')->exists(), 422, 'Envie ao menos um arquivo antes de iniciar.');
+            if ($freeFileIds !== null) {
+                abort_unless(count($freeFileIds) > 0 && count($freeFileIds) === count(array_unique($freeFileIds)), 422);
+                $freeFilesCount = count($freeFileIds);
+            }
             if ($freeFilesCount !== null) {
                 $purchase = $locked->purchase()->first();
                 abort_if($purchase && ! in_array($purchase->status, [PurchaseStatus::Expired, PurchaseStatus::Refunded], true), 409);
                 abort_unless($freeFilesCount > 0 && $freeFilesCount <= $locked->files_count, 422);
-                // Explicit user choice of the FIRST N files only. Surplus physical files remain
-                // private until deletion/TTL and are never parsed or counted as accepted work.
+                // Legacy callers choose the first N files. New clients submit explicit UUIDs.
+                // Surplus physical files remain private until deletion/TTL and are never parsed.
                 $selected = $locked->files()->where('kind', 'input')->whereNull('removed_at')->orderBy('id')->limit($freeFilesCount)->pluck('id');
+                if ($freeFileIds !== null) {
+                    $selected = $locked->files()->where('kind', 'input')->whereNull('removed_at')->whereIn('uuid', $freeFileIds)->pluck('id');
+                    abort_unless($selected->count() === $freeFilesCount, 422);
+                }
                 $locked->files()->where('kind', 'input')->whereNotIn('id', $selected)->update(['status' => ProcessingFileStatus::Removed, 'removed_at' => now()]);
                 $locked->files_count = $freeFilesCount;
                 $locked->total_size = $locked->files()->where('kind', 'input')->whereNull('removed_at')->sum('size');

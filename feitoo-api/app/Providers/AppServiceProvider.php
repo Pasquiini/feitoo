@@ -36,6 +36,14 @@ class AppServiceProvider extends ServiceProvider
         }
 
         RateLimiter::for('auth', fn (Request $request) => Limit::perMinute(10)->by($request->ip()));
+        RateLimiter::for('quotation-drafts', fn (Request $request) => [
+            Limit::perMinute(120)->by('draft-user:'.$request->user()->id),
+            Limit::perMinute(240)->by('draft-ip:'.$request->ip()),
+        ]);
+        RateLimiter::for('quotation-generate', fn (Request $request) => [
+            Limit::perMinute(10)->by('quotation-generate-user:'.$request->user()->id),
+            Limit::perMinute(30)->by('quotation-generate-ip:'.$request->ip()),
+        ]);
         RateLimiter::for('subscription-status', fn (Request $request) => Limit::perMinute(60)->by('user:'.$request->user()->id));
         RateLimiter::for('login', fn (Request $request) => [
             Limit::perMinute(20)->by('ip:'.$request->ip()),

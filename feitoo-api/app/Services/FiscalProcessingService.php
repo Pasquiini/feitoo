@@ -245,7 +245,7 @@ class FiscalProcessingService
 
     private function active(Processing $processing): bool
     {
-        return $processing->user_id !== null && in_array($processing->status, [ProcessingStatus::Queued, ProcessingStatus::Processing], true);
+        return $processing->tool !== ProcessingTool::QuotationGenerator && $processing->user_id !== null && in_array($processing->status, [ProcessingStatus::Queued, ProcessingStatus::Processing], true);
     }
 
     public function fail(string $uuid): void
