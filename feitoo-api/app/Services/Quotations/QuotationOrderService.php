@@ -17,7 +17,7 @@ class QuotationOrderService
 
     public function checkout(User $owner, string $key): QuotationCreditOrder
     {
-        if (! $this->stripe->available()) {
+        if (! config('quotations.enabled') || ! $this->stripe->available()) {
             throw new QuotationGenerationException('checkout_unavailable', 503);
         }
         // Persist before remote I/O: ambiguous failures reuse exactly the same provider key and payload.

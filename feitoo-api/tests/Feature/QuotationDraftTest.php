@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -76,6 +77,20 @@ class QuotationDraftTest extends TestCase
         $this->getJson($this->url($draft))->assertNotFound();
         $this->assertDatabaseCount('processings', 0);
         $this->assertDatabaseCount('purchases', 0);
+    }
+
+    public function test_preview_mode_keeps_drafts_but_blocks_generation_and_checkout(): void
+    {
+        config(['quotations.enabled' => false]);
+        $draft = $this->create();
+        $this->withHeader('Idempotency-Key', (string) Str::uuid())
+            ->postJson($this->url($draft).'/generations', ['revision' => 1])->assertStatus(503);
+        $this->withHeader('Idempotency-Key', (string) Str::uuid())
+            ->postJson('/api/quotations/credit-orders')->assertStatus(503);
+        $this->getJson($this->url($draft))->assertOk();
+        $this->assertDatabaseCount('processings', 0);
+        $this->assertDatabaseCount('quotation_credit_orders', 0);
+        $this->assertDatabaseCount('jobs', 0);
     }
 
     public function test_complete_editor_can_be_saved_without_processing(): void
@@ -238,6 +253,28 @@ class QuotationDraftTest extends TestCase
         $this->deleteJson($this->url($draft).'/logo', ['revision' => 3])->assertOk()->assertJsonPath('data.revision', 4)->assertJsonPath('data.logo_checksum', null);
         $this->getJson($this->url($draft).'/logo')->assertNotFound();
         $this->deleteJson($this->url($draft), ['revision' => 4])->assertNoContent();
+    }
+
+    public function test_rollback_keeps_the_logo_when_removing_a_logo_or_draft_fails(): void
+    {
+        $draft = $this->create();
+        $this->upload($draft);
+        $path = QuotationDraft::first()->logo_path;
+        $bytes = Storage::disk('quotation_drafts')->get($path);
+
+        foreach (['saving', 'deleting'] as $operation) {
+            $event = 'eloquent.'.$operation.': '.QuotationDraft::class;
+            Event::listen($event, fn () => throw new \RuntimeException('Synthetic transaction failure'));
+            try {
+                $this->deleteJson($this->url($draft).($operation === 'saving' ? '/logo' : ''), ['revision' => 2])
+                    ->assertStatus(500)->assertHeader('Cache-Control', 'no-store, private');
+            } finally {
+                Event::forget($event);
+            }
+            $this->assertSame(2, QuotationDraft::first()->revision);
+            $this->assertSame($path, QuotationDraft::first()->logo_path);
+            $this->assertSame($bytes, Storage::disk('quotation_drafts')->get($path));
+        }
     }
 
     public function test_invalid_logos_and_oversize_are_rejected_without_modifying_draft(): void

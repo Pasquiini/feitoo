@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'enabled' => (bool) env('QUOTATION_GENERATION_ENABLED', env('APP_ENV') !== 'production'),
+    'enabled' => (bool) env('QUOTATION_GENERATION_ENABLED', false),
     'credit_price_id' => env('STRIPE_QUOTATION_CREDITS_TEST_PRICE_ID'),
     'pro_limit' => 100,
     'timezone' => 'America/Sao_Paulo',

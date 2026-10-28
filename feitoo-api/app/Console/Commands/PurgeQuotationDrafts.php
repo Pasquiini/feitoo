@@ -24,7 +24,8 @@ class PurgeQuotationDrafts extends Command
                         return;
                     }
                     if ($draft->logo_path) {
-                        $disk->delete($draft->logo_path);
+                        $path = $draft->logo_path;
+                        DB::afterCommit(fn () => $disk->delete($path));
                     }
                     $draft->delete();
                 });

@@ -98,7 +98,8 @@ class QuotationDraftController extends Controller
             $draft = $this->owned($request, $uuid, true, false);
             $this->revision($request, $draft);
             if ($draft->logo_path) {
-                Storage::disk('quotation_drafts')->delete($draft->logo_path);
+                $path = $draft->logo_path;
+                DB::afterCommit(fn () => Storage::disk('quotation_drafts')->delete($path));
             }
             $draft->delete();
 
@@ -157,7 +158,8 @@ class QuotationDraftController extends Controller
             $draft = $this->owned($request, $uuid, true);
             $this->revision($request, $draft);
             if ($draft->logo_path) {
-                Storage::disk('quotation_drafts')->delete($draft->logo_path);
+                $path = $draft->logo_path;
+                DB::afterCommit(fn () => Storage::disk('quotation_drafts')->delete($path));
             }
             $draft->logo_path = $draft->logo_checksum = null;
             $this->touchDraft($draft);

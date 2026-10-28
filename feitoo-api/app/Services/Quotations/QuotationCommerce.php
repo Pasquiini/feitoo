@@ -41,7 +41,7 @@ class QuotationCommerce
                     'period_start' => Carbon::parse($pro->period_start, config('app.timezone'))->toIso8601String(),
                     'period_end' => Carbon::parse($pro->period_end, config('app.timezone'))->toIso8601String()] : ['active' => false, 'remaining' => 0],
                 'offer' => ['code' => 'quotation_5', 'credits' => 5, 'amount' => 990, 'currency' => 'brl',
-                    'available' => app(QuotationStripeGateway::class)->available()]];
+                    'available' => (bool) config('quotations.enabled') && app(QuotationStripeGateway::class)->available()]];
         }, 5);
     }
 
