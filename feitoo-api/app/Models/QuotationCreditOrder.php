@@ -10,6 +10,6 @@ class QuotationCreditOrder extends Model
 
     protected function casts(): array
     {
-        return ['expires_at' => 'immutable_datetime', 'paid_at' => 'immutable_datetime', 'amount' => 'integer', 'credits' => 'integer'];
+        return ['expires_at' => 'immutable_datetime', 'paid_at' => 'immutable_datetime', 'amount' => 'integer', 'credits' => 'integer', 'refunded_amount' => 'integer'];
     }
 }

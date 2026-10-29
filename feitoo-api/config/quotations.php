@@ -2,7 +2,12 @@
 
 return [
     'enabled' => (bool) env('QUOTATION_GENERATION_ENABLED', false),
-    'credit_price_id' => env('STRIPE_QUOTATION_CREDITS_TEST_PRICE_ID'),
+    'purchases_enabled' => (bool) env('QUOTATION_PURCHASES_ENABLED', false),
+    'credit_price_id' => match (env('STRIPE_MODE', 'test')) {
+        'test' => env('STRIPE_QUOTATION_CREDITS_TEST_PRICE_ID'),
+        'live' => env('STRIPE_QUOTATION_CREDITS_LIVE_PRICE_ID'),
+        default => null,
+    },
     'pro_limit' => 100,
     'timezone' => 'America/Sao_Paulo',
     'pending_minutes' => 30,

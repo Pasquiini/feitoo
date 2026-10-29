@@ -21,7 +21,7 @@ class QuotationOrderController extends Controller
 
     public function show(Request $request, string $uuid, QuotationOrderService $service)
     {
-        $order = QuotationCreditOrder::where('user_id', $request->user()->id)->where('uuid', $uuid)->first();
+        $order = QuotationCreditOrder::where('user_id', $request->user()->id)->where('stripe_mode', config('monetization.stripe.mode'))->where('uuid', $uuid)->first();
         abort_unless($order, 404);
 
         return response()->json(['data' => $service->resource($service->refresh($order))]);
@@ -29,7 +29,7 @@ class QuotationOrderController extends Controller
 
     public function index(Request $request, QuotationOrderService $service)
     {
-        $orders = QuotationCreditOrder::where('user_id', $request->user()->id)->latest('id')->paginate(20);
+        $orders = QuotationCreditOrder::where('user_id', $request->user()->id)->where('stripe_mode', config('monetization.stripe.mode'))->latest('id')->paginate(20);
 
         return response()->json(['data' => $orders->getCollection()->map(fn ($o) => $service->resource($o)),
             'meta' => ['current_page' => $orders->currentPage(), 'last_page' => $orders->lastPage()]]);

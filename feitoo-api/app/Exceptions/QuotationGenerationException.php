@@ -16,6 +16,7 @@ class QuotationGenerationException extends HttpException
             'credits_exhausted' => 'Não há créditos de orçamentos disponíveis.',
             'source_invalid' => 'Escolha uma origem de emissão disponível.',
             'checkout_unavailable' => 'A compra de créditos está temporariamente indisponível.',
+            'checkout_expired' => 'Esta tentativa de compra venceu. Consulte o pedido antes de iniciar outra compra.',
             'payment_mismatch' => 'Não foi possível validar o pagamento deste pedido.',
             'quotation_invalid' => 'Confira os dados do orçamento antes de gerar o PDF.',
             'generation_in_progress' => 'Já existe um orçamento em geração nesta conta.',

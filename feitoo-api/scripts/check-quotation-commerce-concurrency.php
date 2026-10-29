@@ -55,7 +55,7 @@ $app->make(Kernel::class)->bootstrap();
 config(['database.default' => 'mysql', 'database.connections.mysql.url' => null, 'database.connections.mysql.host' => '127.0.0.1',
     'database.connections.mysql.port' => $port, 'database.connections.mysql.database' => $database,
     'database.connections.mysql.username' => 'root', 'database.connections.mysql.password' => '',
-    'monetization.stripe.mode' => 'test', 'monetization.stripe.secret_key' => 'sk_test_fixture', 'monetization.stripe.webhook_secret' => 'whsec_fixture', 'quotations.credit_price_id' => 'price_fixture', 'quotations.enabled' => true, 'quotations.sandbox' => 'php',
+    'monetization.stripe.mode' => 'test', 'monetization.stripe.secret_key' => 'sk_test_fixture', 'monetization.stripe.webhook_secret' => 'whsec_fixture', 'quotations.credit_price_id' => 'price_fixture', 'quotations.enabled' => true, 'quotations.purchases_enabled' => true, 'quotations.sandbox' => 'php',
     'filesystems.disks.quotation_generations.root' => $root.'/fixtures', 'filesystems.disks.quotation_execution.root' => $root.'/execution']);
 DB::purge('mysql');
 set_exception_handler(static function (Throwable $error): void {

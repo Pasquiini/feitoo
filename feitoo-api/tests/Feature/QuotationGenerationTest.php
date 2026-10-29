@@ -14,6 +14,7 @@ use App\Services\FiscalProcessingService;
 use App\Services\Quotations\QuotationExecutionRunner;
 use App\Services\Quotations\QuotationGenerationService;
 use App\Services\Quotations\QuotationPdfException;
+use App\Services\Quotations\QuotationStripeGateway;
 use Carbon\Carbon;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -41,7 +42,7 @@ class QuotationGenerationTest extends TestCase
         $this->assertSame('sqlite', DB::getDriverName());
         $this->assertSame(':memory:', config('database.connections.sqlite.database'));
         $this->freezeSecond();
-        config(['quotations.enabled' => true, 'quotations.sandbox' => 'php']);
+        config(['quotations.enabled' => true, 'quotations.purchases_enabled' => false, 'quotations.sandbox' => 'php']);
         Storage::fake('quotation_drafts');
         Storage::fake('quotation_generations');
         Storage::fake('quotation_execution');
@@ -153,6 +154,65 @@ class QuotationGenerationTest extends TestCase
         $this->assertDatabaseCount('quotation_generations', 1);
         $this->assertDatabaseCount('jobs', 1);
         $this->assertSame(1, $this->quota()->reserved);
+    }
+
+    public function test_free_generation_works_with_checkout_disabled_even_with_a_configured_test_price(): void
+    {
+        config(['quotations.credit_price_id' => 'price_test_fixture']);
+        $gateway = Mockery::mock(QuotationStripeGateway::class);
+        $gateway->shouldNotReceive('available');
+        $gateway->shouldNotReceive('checkout');
+        $this->app->instance(QuotationStripeGateway::class, $gateway);
+
+        $this->getJson('/api/quotations/entitlements')->assertOk()
+            ->assertJsonPath('data.enabled', true)->assertJsonPath('data.offer.available', false);
+        $this->withHeader('Idempotency-Key', (string) Str::uuid())
+            ->postJson('/api/quotations/credit-orders', [])
+            ->assertStatus(503)->assertJsonPath('code', 'checkout_unavailable');
+        $uuid = $this->start()->assertStatus(202)->json('data.id');
+        $this->work($uuid);
+        $this->get($this->url($uuid).'/result')->assertOk();
+        $this->assertSame(1, $this->quota()->consumed);
+        $this->assertDatabaseCount('quotation_credit_orders', 0);
+        $this->assertDatabaseCount('purchases', 0);
+    }
+
+    public function test_tampered_snapshot_or_copied_logo_fails_without_consuming_and_cleans_execution_files(): void
+    {
+        foreach (['snapshot_path', 'logo_path'] as $asset) {
+            $draft = $this->draft();
+            $this->post('/api/quotations/drafts/'.$draft->uuid.'/logo', ['_method' => 'PUT', 'revision' => 1,
+                'logo' => UploadedFile::fake()->image('logo.png', 60, 30)], ['Accept' => 'application/json'])->assertOk();
+            $uuid = $this->start($draft->refresh())->assertStatus(202)->json('data.id');
+            $generation = QuotationGeneration::where('uuid', $uuid)->firstOrFail();
+            Storage::disk('quotation_generations')->put($generation->$asset, 'tampered');
+            $this->work($uuid);
+            $this->getJson($this->url($uuid))->assertOk()->assertJsonPath('data.status', 'failed')
+                ->assertJsonPath('data.result.available', false)->assertJsonPath('data.quotation.error_code', 'snapshot_invalid');
+            $this->assertSame('released', $generation->refresh()->consumption_status);
+            $this->assertSame(0, $this->quota()->reserved);
+            $this->assertSame(0, $this->quota()->consumed);
+            $this->assertSame([], Storage::disk('quotation_execution')->allFiles($uuid));
+            $this->assertSame(0, Processing::where('uuid', $uuid)->first()->files()->where('kind', 'output')->count());
+        }
+    }
+
+    public function test_manual_free_retry_after_midnight_keeps_the_original_daily_bucket(): void
+    {
+        $this->travelTo(Carbon::parse('2026-10-22T23:59:50-03:00'));
+        $uuid = $this->start()->assertStatus(202)->json('data.id');
+        for ($i = 0; $i < 3; $i++) {
+            $this->service->failAttempt($this->service->claim($uuid), 'render_failed');
+        }
+        $this->assertSame(0, $this->quota()->reserved);
+        $this->travel(20)->seconds();
+        $this->withHeader('Idempotency-Key', (string) Str::uuid())
+            ->postJson('/api/quotations/generations/'.$uuid.'/retry', ['attempt' => 3])->assertStatus(202);
+        $this->work($uuid);
+        $this->assertSame('2026-10-22', $this->quota()->reservation_date);
+        $this->assertSame(1, $this->quota()->consumed);
+        $this->assertDatabaseCount('quotation_daily_quotas', 1);
+        $this->getJson('/api/quotations/entitlements')->assertOk()->assertJsonPath('data.remaining', 1);
     }
 
     public function test_parallel_reservations_are_counted_and_other_accounts_are_independent(): void

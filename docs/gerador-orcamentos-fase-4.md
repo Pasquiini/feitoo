@@ -1,5 +1,9 @@
 # Gerador de Orçamentos — Fase 4: geração real, fila e Free diário
 
+**Revisão vigente: 28/10/2026.** Auditoria, correções e homologação **local** concluídas; homologação para produção permanece pendente de Linux e MySQL 8. As seções **15–23** registram o código efetivamente encontrado das Fases 4–6 e os resultados desta execução, prevalecendo sobre as seções históricas de 22/10 abaixo. `QUOTATION_GENERATION_ENABLED` e `FEITOO_QUOTATIONS_ENABLED` continuam desabilitadas por padrão. Novas compras também ficam bloqueadas por `QUOTATION_PURCHASES_ENABLED=false`. Relatório entregue para aprovação, sem autorização de publicação ou avanço comercial.
+
+## Registro histórico de 22/10/2026
+
 **Data:** 22/10/2026. **Resultado:** integração implementada e validada localmente, incluindo PDF real no navegador. A geração fica **desabilitada por padrão em produção** até homologação do sandbox Linux, banco e worker. Esta entrega não autoriza publicação nem início da Fase 5.
 
 Os relatórios de auditoria e das Fases 1, 2 e 3, os status Git e os diffs dos dois repositórios foram lidos antes das alterações. Foram preservados os trabalhos locais anteriores, inclusive monetização e autenticação. Nenhuma migration operacional, implantação, alteração de VPS/Supervisor/worker, operação Stripe, commit ou push foi executada.
@@ -221,3 +225,164 @@ Procedimento futuro, sujeito à aprovação:
 Rollback funcional: desabilitar novas emissões/retries pela flag e atualizar o cache de configuração pelo procedimento aprovado do ambiente. Manter status/download de resultados existentes, drenagem controlada dos jobs já reservados e reconciliador/purge para não deixar reservas presas. A flag não cancela trabalhos já aceitos. Preservar o ledger e os vínculos de emissão; não apagar consumo nem executar `migrate:rollback` em banco com emissões. Uma reversão de código precisa manter compatibilidade com o enum `quotation-generator` e com a limpeza/contabilização até encerrar os registros pendentes. Alterações de worker/deploy só ocorrerão em uma publicação futura autorizada.
 
 **Entrega local concluída; aguardando aprovação para a próxima fase.**
+
+## 15. Inspeção e inventário em 28/10/2026
+
+Lidos a auditoria e os relatórios das Fases 1, 2 e 3; inspecionados migrations, models, controllers/rotas, jobs, quotas/entitlements, renderer, discos, recuperação/limpeza, flags, frontend, testes e scripts de geração/comércio. O relatório da Fase 4 já existia e seu registro anterior foi preservado. Nenhum AGENTS.md foi encontrado nas árvores aplicáveis pesquisadas.
+
+O Git estava limpo na raiz e no repositório frontend no início da auditoria. Base da raiz/API: `71e5076`; frontend: `2800b56`. `feitoo-web` é um repositório aninhado registrado como gitlink na raiz, sem entrada correspondente em `.gitmodules`: `git submodule status` não funciona nessa árvore; status e diffs foram conferidos diretamente nos dois repositórios. Nenhum trabalho preexistente foi sobrescrito, revertido ou commitado.
+
+| Área e arquivos existentes                                                                     | Implementação efetivamente encontrada                                                                            | Evidência desta revisão / pendência                                                                            |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `app/Domain/Quotations/*`, `QuotationDraftDocument`                                            | DTO estrito, schema fechado, centavos inteiros, BigDecimal/HALF_UP e validação final separada do rascunho        | Suítes de domínio, logo, rascunho e geração passaram                                                           |
+| `QuotationPdfRenderer`, `QuotationTextLayout`, `resources/views/quotations/*`                  | Blade/Dompdf, Clássico/Moderno, paginação e fontes locais, sem HTML livre                                        | 28 PDFs reais, 64 páginas, extração e bounds conferidos; inspeção visual de quatro páginas representativas     |
+| `QuotationDraft`, `QuotationDraftController`, coordenador/IndexedDB Angular                    | Rascunhos criptografados, revisão, logo separado, login e recuperação, lista de rascunhos posterior já existente | Testes PHP/Angular e 24 cenários de navegador aprovados                                                        |
+| `QuotationGeneration`, `QuotationGenerationController`, `QuotationGenerationService`           | Snapshot criptografado e imutável, aliases idempotentes, reserva Free, retry e publicação transacional           | Testes de geração, E2E real e concorrência em MariaDB aprovados                                                |
+| `GenerateQuotationPdfJob`, `QuotationExecutionRunner`, `scripts/render-quotation.php`          | Fila própria `quotations`, slot por host, lease/token, subprocesso, limites, chave efêmera e validação da saída  | Execução real Windows passou; isolamento Bubblewrap/Linux não reexecutado nesta revisão                        |
+| `ReconcileQuotationGenerations`, purge e `routes/console.php`                                  | Recuperação de abandono, prazo pendente, limpeza de órfãos, retenção de consumo após excluir arquivos            | Testes de abandono/timeout/purge/duplicação passaram; scheduler e worker instalados no destino não verificados |
+| `Processing`, `ProcessingFile`, recurso/controller de Processing                               | Status e download privados, TTL após conclusão, histórico comercial explícito                                    | Sanctum/CSRF, ownership, downloads repetidos, expiração e isolamento fiscal aprovados localmente               |
+| `QuotationCommerce`, `QuotationOrderService`, `QuotationStripeGateway`, `QuotationCreditOrder` | Código posterior de Pro por período, créditos, pedidos, webhooks/reembolso e origem explícita já implementado    | Preservado; testes usam HTTP Stripe simulado. Compras novas agora exigem flag própria desligada por padrão     |
+| Frontend `features/quotations`, conta e saldos                                                 | Editor, etapas, confirmação, polling, retry, download e integração comercial posterior                           | 347 testes Angular e E2E real aprovados; edição/default público preservados                                    |
+| Bootstrap/SEO/build                                                                            | Bootstrap 5.3.8 sob `.quotation-app`, rota direta de prévia, flags de build e noindex                            | Build padrão e 15 testes públicos passaram; seis ferramentas mantidas no catálogo                              |
+
+Não foi necessário recriar tabelas, models, controllers, jobs, serviços ou renderer. Não foi encontrado um bloqueio funcional no fluxo Free local após as verificações. As lacunas de infraestrutura e de homologação do ambiente alvo permanecem nas seções 21–23.
+
+## 16. Arquitetura e fluxo atuais
+
+1. O visitante edita e visualiza localmente, sem consumir cota. IndexedDB conserva a cópia temporária; na conta, o rascunho remoto usa revisão e payload criptografado.
+2. Login preserva o rascunho e o logo; o retorno não gera automaticamente. A geração depende de nova ação e confirmação do usuário.
+3. O coordenador sincroniza o rascunho, estabiliza revisão/origem/chave idempotente e impede edição durante a preparação/confirmação.
+4. `POST /api/quotations/drafts/{uuid}/generations` aceita revisão e origem opcional (`free`, `pro`, `credit`), com UUID em `Idempotency-Key`. Dono, totais, preço, paths e HTML não são parâmetros aceitos.
+5. Sob transação e locks, o backend valida o rascunho completo pelo DTO da Fase 1, recalcula valores e verifica a revisão. O snapshot e a cópia do logo ficam exclusivos da emissão. Arquivos criados por transação malsucedida têm compensação e varredura de órfãos.
+6. A reserva financeira, Processing comercial, geração, alias e job database são registrados na mesma transação. A gravação física não participa da transação SQL; publicação usa compensação e referência registrada.
+7. O worker obtém slot de renderização, reclama token/lease e executa o Dompdf fora dos locks financeiros. O filho recebe snapshot recriptografado com chave efêmera, logo e fontes aprovadas; não recebe APP_KEY real nem credenciais herdadas.
+8. Somente a tentativa vigente publica o PDF e confirma o consumo. Repetições, worker antigo ou token expirado não publicam uma segunda saída.
+9. O frontend acompanha fila/processamento/sucesso/falha com polling limitado, pausa em aba oculta, backoff para 429 e ação de consulta manual. 401/419 pedem login e preservam o rascunho.
+10. Download usa `GET /api/processings/{uuid}/result`, sessão autenticada e ownership, `application/pdf`, `no-store, private` e `nosniff`. O TTL é de 120 minutos após sucesso. O link privado exige autenticação a cada acesso; não é URL pública ou token compartilhável.
+
+**Diferenças frente ao registro histórico:** a política retornada hoje é `explicit_source`, o corpo admite origem explícita e contas Pro elegíveis usam o bucket Pro existente. O comportamento antigo `one_per_day_all_accounts` deixou de descrever esta árvore após a Fase 5. Não foi removido o código posterior para simular uma implementação anterior. Esta homologação priorizou uma conta Free, sem assinatura/créditos e sem compra.
+
+## 17. Cota Free, segurança e concorrência
+
+O limite continua sendo **uma unidade por usuário/data de reserva em `America/Sao_Paulo`**, com `reserved + consumed <= 1` garantido pelas operações serializadas. Não é um contador por IP, por navegador, por item ou por página. A chave única é `(user_id, reservation_date)`.
+
+| Operação                                                         | Efeito comprovado                                                                                       |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Edição, prévia, salvar, login e confirmar apenas a revisão na UI | Não criam reserva/consumo                                                                               |
+| Emissão aceita                                                   | Reserva uma unidade; outra revisão da mesma conta não pode gerar simultaneamente                        |
+| Sucesso                                                          | Converte reserva em um consumo; PDF e atualização de estado são publicados sob locks                    |
+| Falha transitória/retry automático                               | Mantém a reserva original, sem débito adicional                                                         |
+| Falha definitiva/abandono terminal/expiração pendente            | Libera a reserva uma vez; consumo continua zero                                                         |
+| Retry manual permitido                                           | Reserva novamente no bucket original, com controle de tentativa e chave; nunca transfere para outro dia |
+| Replay, job duplicado ou re-download                             | Não consome novamente                                                                                   |
+| Exclusão/purge após sucesso                                      | Apaga conteúdo; conserva o consumo e o ledger                                                           |
+
+**Virada do dia:** a data é congelada na aceitação. Uma reserva das 23:59 de São Paulo concluída após 00:00 consome o bucket anterior. A nova data tem outra franquia; podem ocorrer duas conclusões no mesmo dia de relógio quando uma pertence à reserva do dia anterior. Essa é a política de bucket original já implementada e documentada, preservada nesta revisão; não há débito em dois dias. Os testes cobrem conclusão e retry manual cruzando a meia-noite.
+
+Ordem financeira encontrada: **User → Processing → Generation → Quota/bucket/grant**; a criação bloqueia também o rascunho. A fila deve compartilhar a conexão SQL padrão, tabela `jobs`, driver database e `after_commit=false`; configuração incompatível é recusada. Os cinco pares de concorrência real em MariaDB 10.4.32/InnoDB passaram: última unidade entre rascunhos diferentes, mesma chave, mesma revisão com chaves diferentes, claim duplicado e reconciliação concorrente. O script valida datadir privado e banco aleatório descartável antes de executar migrations, e remove somente esse banco ao terminar. O daemon em loopback/33077 foi iniciado apenas para o teste e encerrado em `finally`.
+
+Integridade do logo é conferida no rascunho, na cópia e na execução; normalização GD descarta metadados e rejeita imagens inválidas/excessivas. Testes novos adulteram separadamente o snapshot e o logo copiado: ambos falham com `snapshot_invalid`, sem saída e sem consumo, removendo workspace de execução.
+
+O job carrega somente UUID; erros são códigos fixos. O tratamento HTTP omite mensagens/traces/bindings de exceções e não grava payload/logo em sessão de validação. Discos comerciais são privados, `serve=false`, separados do fiscal. O subprocesso desativa recursos remotos, PHP/JavaScript do renderer e saída de erros; o modo PHP simples só é aceito em local/testing. Linux/produção exige Bubblewrap/prlimit. Não foi acrescentado fallback XML/fiscal.
+
+Prazos encontrados: render 30 s (timeout de parede com margem de 5 s), job 60 s, lease 90 s, `retry_after=180`, prazo pendente 30 min e três tentativas automáticas persistidas. O reconciliador roda a cada minuto no schedule; purge de rascunhos e Processing, por hora. Arquivos temporários normais são removidos em `finally`; interrupção abrupta depende da recuperação/varredura. Esses registros de schedule não provam que o scheduler do servidor está ativo.
+
+## 18. Correções realizadas e flags
+
+**Separação entre geração e venda:** antes, habilitar `quotations.enabled` também abria novas compras quando Stripe TEST estava configurado. Acrescentado `QUOTATION_PURCHASES_ENABLED`, com default **false**, em `config/quotations.php` e `.env.example`. `QuotationOrderService` bloqueia antes de criar pedido/chamar o provedor; `QuotationStripeGateway::available()` e o resumo de oferta também verificam a flag. Geração Free pode ser homologada sem abrir checkout. Confirmação de pedidos anteriores por webhook, saldo adquirido e downloads continuam disponíveis; teste específico confirma esse comportamento com compras novas bloqueadas.
+
+Os testes comerciais preexistentes e o script de concorrência comercial receberam opt-in explícito dessa configuração apenas nos fixtures, preservando sua cobertura. A suíte comercial usa HTTP Stripe simulado; nenhum produto, preço, sessão ou pagamento real foi criado.
+
+**Build de teste isolado:** criado `feitoo-web/scripts/build-quotation-generation-test.mjs`. Ele compila uma cópia em `dist/quotation-generation-test`, com geração habilitada apenas nesse artefato local, origem vazia e analytics desligado. Restaura os dois arquivos gerados de launch byte a byte em `finally`. Não sobrescreve `dist/feitoo-web`. O E2E agora aceita `FEITOO_TEST_BROWSER_ROOT`, força compras bloqueadas no backend descartável, confere que esgotar Free não habilita checkout e rejeita POSTs a `credit-orders` no trace do fluxo.
+
+| Flag                              | Default/estado final no código                 | Verificação                                                                                                   |
+| --------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `QUOTATION_GENERATION_ENABLED`    | `false`                                        | Backend em modo de prévia recusa novas emissões; somente testes específicos habilitam em configuração isolada |
+| `FEITOO_QUOTATIONS_ENABLED`       | Ausente/false; `launch.quotationEnabled=false` | Build padrão e arquivo gerado final mantêm PDF desabilitado, catálogo com seis ferramentas e rota noindex     |
+| `QUOTATION_PURCHASES_ENABLED`     | `false`                                        | Free gera PDF com emissão habilitada e checkout 503, sem pedido e sem chamada Stripe                          |
+| `QUOTATION_SANDBOX`               | Bubblewrap em Linux; PHP somente local/testing | Produção recusa fallback sem isolamento; não alterada                                                         |
+| `STRIPE_MODE` / Price de créditos | Restrição TEST preexistente preservada         | Live continua recusado; testes usam chaves/preços fictícios                                                   |
+
+Nenhum `.env` operacional foi editado, nenhuma flag de produção foi ativada e nenhum arquivo de configuração gerado ficou modificado. Não foram alterados preços, limites fiscais, dependências npm/Composer, editor ou templates para realizar essa correção.
+
+## 19. Testes executados nesta revisão
+
+| Verificação                                | Resultado em 28/10/2026                                                                                                                                                                                                                                            |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Backend completo antes das correções       | 506 casos, 4.842 assertions; 499 aprovados e 7 skips                                                                                                                                                                                                               |
+| Backend completo final                     | **510 casos, 4.899 assertions; 503 aprovados, 7 skips, zero falhas/erros**                                                                                                                                                                                         |
+| Casos novos de geração                     | Free com compras bloqueadas, integridade de snapshot/logo e retry manual após meia-noite                                                                                                                                                                           |
+| Caso novo de comércio                      | Webhook de pedido anterior continua confirmando/criando saldo com compras novas bloqueadas                                                                                                                                                                         |
+| Angular completo                           | **347 testes aprovados em 30 arquivos**                                                                                                                                                                                                                            |
+| Build padrão de produção                   | 15 rotas prerenderizadas; emissão false, sem catálogo/sitemap de orçamentos; configuração local original restaurada                                                                                                                                                |
+| Build separado para geração                | Compilação passou em `dist/quotation-generation-test`; não é artefato autorizado para deploy                                                                                                                                                                       |
+| SEO/assets públicos                        | **15 testes aprovados**, incluindo noindex e regressão das seis ferramentas                                                                                                                                                                                        |
+| E2E da geração                             | Laravel/Sanctum/CSRF reais, SQLite exclusivo em arquivo, job database e subprocesso PDF reais; login preservado, confirmação, clique duplicado, refresh em fila, snapshot/logo, dois downloads idênticos, Free esgotado, 419, 410 e layouts em 320/390/768/1440 px |
+| Navegador/editor padrão                    | **19 verificações**: modelos, cálculos, PNG/JPEG, 100 itens, textos, responsividade e PDF desabilitado                                                                                                                                                             |
+| Navegador/rascunhos                        | **24 cenários**, IndexedDB real e API simulada: login/cadastro/Google simulado, refresh, logo, conflitos/duas abas, sessão, expiração e falhas de storage                                                                                                          |
+| Navegador/seis ferramentas                 | **96 layouts e 8 downloads simulados**, seis ferramentas, zero erros de runtime                                                                                                                                                                                    |
+| Navegador/monetização fiscal               | Duas ferramentas, 12 layouts, checkout/retorno simulados, zero erros de runtime                                                                                                                                                                                    |
+| Concorrência Free/idempotência/recuperação | **Cinco pares de processos/conexões independentes aprovados em MariaDB 10.4.32/InnoDB**; não é comprovação em MySQL 8                                                                                                                                              |
+| PDF independente                           | **28 PDFs/64 páginas**, 14 cenários × dois modelos; hashes, xref, texto integral, A4, limites de conteúdo/rodapé, imagens e último item junto de totais aprovados por PyMuPDF                                                                                      |
+| Inspeção visual atual                      | Clássico simples, Moderno com logo transparente, página 11 do Clássico com 100 itens e última página do Moderno com texto longo: sem corte/colisão aparente                                                                                                        |
+| Pint/Prettier/diffs                        | Arquivos alterados formatados e `git diff --check` conferido nos dois repositórios                                                                                                                                                                                 |
+
+Os sete skips finais: LibreOffice real opcional; leitura de relatório por symlink; três casos de sinais Linux/POSIX; layout de montagem Linux e Bubblewrap real. Nenhum teste de geração Free, integridade, autorização, cota ou download ficou pulado. A suíte cobre ainda validação inválida, precisão financeira, rollback da fila, retries/falha terminal, token antigo, timeout real do subprocesso, expiração, purge, auth/CSRF/rate limiting e regressão fiscal/DOCX. Os testes Angular existentes exercitam falha de rede, 401/419, 429, troca de conta, timeout/pausa do polling, retry e download. Google real e LibreOffice real não foram novamente homologados.
+
+Houve uma tentativa E2E com timeout CDP no sandbox; a repetição autorizada fora dele passou. Não foi falha da aplicação. Os browsers de editor/rascunhos/ferramentas usam APIs simuladas, enquanto o E2E de geração usa API real local. Nenhuma das duas modalidades substitui validação de cookies/CORS entre os domínios reais.
+
+Evidências privadas/ignoradas pelo Git:
+
+- `feitoo-api/storage/app/private/quotation-validation/phase4-audit-20261028-junit.xml`;
+- `feitoo-api/storage/app/private/quotation-validation/runs/20261028-123634-7887d272/`: manifesto, 28 PDFs, extrações, `inspection.json` e previews;
+- `feitoo-api/storage/app/private/quotation-validation/mysql-phase4-20261022/concurrency-report.json`: resultado atual e conexões independentes;
+- `feitoo-web/dist/validation/quotation-generation/`: `report.json`, PDF real e screenshots do E2E; demais scripts em seus diretórios próprios de `dist/validation`.
+
+Somente dados fictícios foram utilizados. SQLite foi definido explicitamente nos processos PHPUnit e no E2E, com assertions de isolamento. Migrations do E2E e de concorrência rodaram exclusivamente nos bancos descartáveis desses testes. Não houve migration operacional nem consulta ao banco de clientes.
+
+## 20. Migrations e dependências existentes
+
+| Migration existente                                        | Tabelas/mudanças                                                                                                                                              |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `2026_10_22_000001_create_quotation_drafts_table.php`      | Rascunho criptografado, proprietário, revisão, importação idempotente, logo e expiração                                                                       |
+| `2026_10_22_000002_create_quotation_generation_tables.php` | `quotation_daily_quotas`, `quotation_generations`, `quotation_generation_requests`, unicidades/FKs e controle de tentativa/lease                              |
+| `2026_10_24_000001_create_quotation_commerce_tables.php`   | `quotation_credit_orders`, `quotation_credit_grants`, `quotation_pro_buckets`; origem e vínculos comerciais em geração; checks de integridade no driver mysql |
+
+**Nenhuma migration nova foi criada ou necessária para as correções desta revisão.** O código atual consulta as tabelas comerciais da Fase 5 mesmo no resumo de entitlements Free; instalar somente as migrations da Fase 4 não representa um schema suficiente para esta árvore. O conjunto existente foi aplicado nos testes descartáveis. A migration de comércio não habilita compras por si só. MySQL 8/SQL mode/schema do ambiente alvo ainda precisam ser verificados separadamente, sem editar migrations antigas ou executar rollback financeiro em operação.
+
+Ambiente local observado: Windows, PHP CLI 8.2.12, Dompdf 3.1.6 do lock, Angular 21 e Bootstrap 5.3.8. GD, DOM, mbstring, fileinfo, XML, ZIP, PDO SQLite e PDO mysql estão disponíveis. SOAP foi habilitado somente por `php -d extension=soap`, atendendo dependência fiscal preexistente. pcntl/POSIX não estão disponíveis neste host Windows. Não foram instaladas ou atualizadas dependências.
+
+## 21. Riscos e pendências de homologação
+
+1. **MySQL 8 não comprovado nesta execução.** Docker local não respondeu como daemon disponível; não foi iniciado/reconfigurado Docker Desktop para ampliar o escopo. MariaDB/InnoDB passou, mas não substitui MySQL 8, seu isolamento, SQL mode, FKs/checks e esquema equivalente ao destino.
+2. **Linux não reexecutado nesta revisão.** Os diagnósticos e documentação Linux já existem no repositório, inclusive evidência histórica, mas os seis skips de ambiente continuam pendentes nesta sessão. Homologar Bubblewrap, user namespaces, prlimit, pcntl, rede bloqueada, symlinks, permissões privadas, sinais, interrupção e limpeza sob o usuário do worker. Não usar modo PHP como fallback de produção.
+3. **Infraestrutura não acessada.** Worker dedicado, scheduler, PHP/extensões do servidor, storage/ACL/disco, chave, backup, retenção física e monitoramento do destino não foram verificados ou alterados. A disponibilidade do binário não prova worker/scheduler saudáveis; fila parada depende de deadline e reconciliador.
+4. **Carga/capacidade ainda pendentes.** Há slot por host/volume; múltiplos hosts exigem coordenação global antes de escalar. Medir p95, CPU/RSS, fila e disco com o máximo permitido. Um orçamento que exceda 20 páginas/10 MiB deve falhar integralmente, sem truncar. Não foi realizado ensaio de disco cheio nem teste de carga do ambiente alvo.
+5. **Filesystem e SQL têm commits distintos.** Compensação, fencing e varredura cobrem os caminhos testados; interrupção abrupta e falha física de volume precisam de ensaio operacional. `finally` não executa após SIGKILL/desligamento. TTL lógico não é garantia de exclusão física imediata ou de apagamento de backups.
+6. **Ambiente de usuário.** Edge headless local não homologa Safari/iOS/Android físicos, leitor de tela completo, Google real ou cookies/CORS entre domínios. IndexedDB pode ser removido/negado pelo navegador e não é cofre criptografado do perfil.
+7. **Warnings existentes.** Build mantém avisos de budget de SCSS e depreciação Sass `@import` do Bootstrap; passou sem erro. Não foi feita atualização de stack fora do escopo.
+
+## 22. Checklist de aceite
+
+| Critério solicitado                 | Situação                                                                                                           |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| 1. PDF real pelo renderer existente | Comprovado localmente, inclusive E2E real                                                                          |
+| 2. Clássico e Moderno               | Comprovados nos 28 PDFs e testes do renderer                                                                       |
+| 3. Dados/cálculos no backend        | Comprovados por DTO estrito, testes e snapshot recalculado                                                         |
+| 4. Jobs idempotentes                | Comprovados em testes, E2E e concorrência MariaDB                                                                  |
+| 5. Falhas sem consumo indevido      | Comprovadas em falhas técnicas, adulteração, abandono, rollback e retries                                          |
+| 6. Free diário consistente          | Comprovado no código/testes e MariaDB, com bucket original na virada do dia; MySQL 8 pendente                      |
+| 7. Download privado/autorizado      | Comprovado com sessão, ownership, TTL, 401/404/410 e re-download                                                   |
+| 8. Editor funcionando               | 347 testes Angular, 19 verificações de editor e 24 cenários de rascunho                                            |
+| 9. Seis ferramentas sem regressão   | Suíte backend, Angular, SEO e browser com seis ferramentas passaram; LibreOffice real opcional não executado       |
+| 10. Flags desabilitadas em produção | Defaults desabilitados preservados, build padrão conferido e compras com bloqueio adicional; servidor não acessado |
+
+**Decisão:** implementação e homologação local entregues para aprovação. Não declarar a Fase 4 pronta para produção enquanto as pendências de Linux, MySQL 8 e operação não forem comprovadas. O roteiro separado para essa etapa está em [gerador-orcamentos-fase-4-homologacao.md](gerador-orcamentos-fase-4-homologacao.md); não foi executado em infraestrutura real.
+
+## 23. Preparação para a Fase 5 e limites desta entrega
+
+A Fase 5 já tem código e migration no checkout: deve ser auditada como implementação existente, preservando ledger e contratos, sem criar um segundo comércio ou assinatura. A flag própria permite submeter geração e venda a liberações separadas. Nesta revisão, os testes comerciais ficaram restritos a doubles/fixtures; não houve Checkout real nem Stripe Live.
+
+Antes de qualquer fase comercial, aprovar regras e homologação de Pro/créditos, reembolsos, concorrência em MySQL 8 e reconciliação de pedidos existentes. Manter `QUOTATION_PURCHASES_ENABLED=false`, `QUOTATION_GENERATION_ENABLED=false` e `FEITOO_QUOTATIONS_ENABLED=false` até suas respectivas decisões de liberação. Catálogo, sitemap, noindex e hosting exigem revisão própria; não decorrem automaticamente da aprovação deste relatório.
+
+Não foram executados deploy, push, commit, migrations operacionais, comandos na VPS, alterações em Stripe Live ou ativação de flags de produção. Não foi criada funcionalidade ERP, cadastro de clientes/produtos ou pipeline fiscal alternativo.

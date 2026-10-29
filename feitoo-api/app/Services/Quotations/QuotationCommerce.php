@@ -33,6 +33,7 @@ class QuotationCommerce
             User::whereKey($user->id)->lockForUpdate()->firstOrFail();
             $pro = $this->pro($user);
             $credits = DB::table('quotation_credit_grants')->where('user_id', $user->id)
+                ->whereIn('order_id', DB::table('quotation_credit_orders')->select('id')->where('stripe_mode', config('monetization.stripe.mode')))
                 ->selectRaw('COALESCE(SUM(granted),0) granted, COALESCE(SUM(reserved),0) reserved, COALESCE(SUM(consumed),0) consumed, COALESCE(SUM(revoked),0) revoked')->first();
 
             return ['credits' => [...array_map('intval', (array) $credits), 'available' => (int) $credits->granted - (int) $credits->reserved - (int) $credits->consumed - (int) $credits->revoked],
@@ -41,7 +42,7 @@ class QuotationCommerce
                     'period_start' => Carbon::parse($pro->period_start, config('app.timezone'))->toIso8601String(),
                     'period_end' => Carbon::parse($pro->period_end, config('app.timezone'))->toIso8601String()] : ['active' => false, 'remaining' => 0],
                 'offer' => ['code' => 'quotation_5', 'credits' => 5, 'amount' => 990, 'currency' => 'brl',
-                    'available' => (bool) config('quotations.enabled') && app(QuotationStripeGateway::class)->available()]];
+                    'available' => (bool) config('quotations.enabled') && (bool) config('quotations.purchases_enabled') && app(QuotationStripeGateway::class)->available()]];
         }, 5);
     }
 
@@ -65,6 +66,7 @@ class QuotationCommerce
         }
         if ($source === 'credit') {
             $query = DB::table('quotation_credit_grants')->where('user_id', $user->id)->whereNull('blocked_at')
+                ->whereIn('order_id', DB::table('quotation_credit_orders')->select('id')->where('stripe_mode', config('monetization.stripe.mode')))
                 ->whereRaw('granted > reserved + consumed + revoked')->orderBy('id');
             if ($retry) {
                 $query->where('id', $retry->credit_grant_id);
