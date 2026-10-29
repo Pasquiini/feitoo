@@ -15,18 +15,21 @@ class QuotationOrderService
 {
     public function __construct(private readonly QuotationStripeGateway $stripe) {}
 
-    public function checkout(User $owner, string $key): QuotationCreditOrder
+    public function checkout(User $owner, string $key, string $destination = 'editor'): QuotationCreditOrder
     {
+        if (! in_array($destination, ['editor', 'account'], true)) {
+            throw new QuotationGenerationException('invalid_request', 422);
+        }
         if (! config('quotations.enabled') || ! config('quotations.purchases_enabled') || ! $this->stripe->available()) {
             throw new QuotationGenerationException('checkout_unavailable', 503);
         }
         // Persist before remote I/O: ambiguous failures reuse exactly the same provider key and payload.
-        $order = DB::transaction(function () use ($owner, $key) {
+        $order = DB::transaction(function () use ($owner, $key, $destination) {
             User::whereKey($owner->id)->lockForUpdate()->firstOrFail();
 
             return QuotationCreditOrder::firstOrCreate(['user_id' => $owner->id, 'idempotency_key' => $key],
                 ['uuid' => (string) Str::uuid(), 'stripe_mode' => config('monetization.stripe.mode'), 'package_code' => 'quotation_5', 'amount' => 990, 'currency' => 'brl',
-                    'credits' => 5, 'price_id' => config('quotations.credit_price_id'), 'expires_at' => now()->addHour()]);
+                    'credits' => 5, 'price_id' => config('quotations.credit_price_id'), 'return_destination' => $destination, 'expires_at' => now()->addHour()]);
         }, 5);
 
         $order->refresh(); // Load database defaults on newly created Eloquent instances too.
@@ -126,6 +129,8 @@ class QuotationOrderService
                 'granted' => $order->credits, 'created_at' => now(), 'updated_at' => now()]);
         } elseif ($session->status === 'expired' && $order->status !== 'paid') {
             $order->update(['status' => 'cancelled', 'checkout_url' => null]);
+        } elseif ($session->status !== 'open') {
+            $order->update(['checkout_url' => null]);
         }
     }
 
@@ -235,7 +240,10 @@ class QuotationOrderService
     public function resource(QuotationCreditOrder $order): array
     {
         return ['id' => $order->uuid, 'stripe_mode' => $order->stripe_mode, 'package_code' => $order->package_code, 'amount' => $order->amount, 'currency' => $order->currency,
-            'credits' => $order->credits, 'status' => $order->status, 'checkout_url' => $order->checkout_url,
+            'credits' => $order->credits, 'status' => $order->status,
+            'checkout_url' => $order->status === 'pending' && $order->expires_at->isFuture() ? $order->checkout_url : null,
+            'expires_at' => $order->expires_at->toIso8601String(),
+            'actions' => ['refresh' => $order->status === 'pending', 'resume_checkout' => $order->status === 'pending' && $order->expires_at->isFuture() && (bool) $order->checkout_url],
             'created_at' => $order->created_at->toIso8601String(), 'paid_at' => $order->paid_at?->toIso8601String(), 'refunded_amount' => $order->refunded_amount];
     }
 

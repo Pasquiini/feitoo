@@ -7,9 +7,17 @@ use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\QuotationDraftController;
 use App\Http\Controllers\QuotationGenerationController;
 use App\Http\Controllers\QuotationOrderController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Middleware\QuotationDraftAccountContext;
 use App\Http\Middleware\RequireProcessingOwner;
 use Illuminate\Support\Facades\Route;
+
+// Require the session and CSRF even without Origin/Referer, as for credit orders.
+Route::middleware('auth:sanctum')->prefix('api/account/subscription')->group(function () {
+    Route::get('/', [SubscriptionController::class, 'show'])->middleware('throttle:subscription-status');
+    Route::post('/checkout', [SubscriptionController::class, 'checkout'])->middleware('throttle:10,1');
+    Route::post('/portal', [SubscriptionController::class, 'portal'])->middleware('throttle:10,1');
+});
 
 // Session and CSRF are mandatory, including requests without Origin/Referer.
 Route::prefix('api/quotations/drafts')->middleware(['auth:sanctum', QuotationDraftAccountContext::class, 'throttle:quotation-drafts'])->group(function () {

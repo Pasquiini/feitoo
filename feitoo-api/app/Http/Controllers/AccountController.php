@@ -46,7 +46,7 @@ class AccountController extends Controller
         $page = $request->user()->processings()
             ->with(['output' => fn ($query) => $query->select('id', 'processing_id', 'original_name', 'expires_at')])
             ->withExists(['files as files_exist' => fn ($query) => $query->whereNull('removed_at')])
-            ->orderByDesc('created_at')->orderByDesc('id')->paginate(10);
+            ->orderByDesc('created_at')->orderByDesc('id')->paginate($request->input('per_page') == '3' ? 3 : 10);
 
         // Read only persisted totals for this owner's current page, never XML or preview data.
         $totals = DB::table('processing_file_results as results')

@@ -6,7 +6,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\ProcessingController;
 use App\Http\Controllers\StripeWebhookController;
-use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\XmlAnalysisController;
 use App\Http\Middleware\RequireProcessingOwner;
 use App\Services\EntitlementService;
@@ -70,12 +69,6 @@ Route::get('/health', function () {
 
 Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 Route::get('/user', [AuthController::class, 'me'])->middleware('auth:sanctum');
-
-Route::middleware('auth:sanctum')->prefix('account/subscription')->group(function () {
-    Route::get('/', [SubscriptionController::class, 'show'])->middleware('throttle:subscription-status');
-    Route::post('/checkout', [SubscriptionController::class, 'checkout'])->middleware('throttle:10,1');
-    Route::post('/portal', [SubscriptionController::class, 'portal'])->middleware('throttle:10,1');
-});
 
 Route::get('/account/usage', [BillingController::class, 'usage'])->middleware(['auth:sanctum', 'throttle:processing-access']);
 Route::get('/account/purchases', [BillingController::class, 'purchases'])->middleware(['auth:sanctum', 'throttle:processing-access']);

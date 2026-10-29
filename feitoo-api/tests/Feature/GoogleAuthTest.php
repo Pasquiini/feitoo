@@ -156,7 +156,7 @@ class GoogleAuthTest extends TestCase
         $password = $user->password;
         $this->actingAs($user, 'web');
         $this->fakeGoogle();
-        $this->completeGoogle($this->start('link'))->assertRedirect('http://localhost:4200/conta');
+        $this->completeGoogle($this->start('link'))->assertRedirect('http://localhost:4200/conta/perfil');
         $this->assertSame('google-subject-123', $user->fresh()->google_id);
         $this->assertSame($password, $user->fresh()->password);
         $this->assertDatabaseCount('users', 1);
@@ -173,12 +173,12 @@ class GoogleAuthTest extends TestCase
         $user = User::factory()->create(['email' => 'different@example.com']);
         $this->actingAs($user, 'web');
         $this->fakeGoogle();
-        $this->completeGoogle($this->start('link'))->assertRedirect('http://localhost:4200/conta?google_error=link_conflict');
+        $this->completeGoogle($this->start('link'))->assertRedirect('http://localhost:4200/conta/perfil?google_error=link_conflict');
         $this->assertNull($user->fresh()->google_id);
         User::factory()->create(['google_id' => 'google-subject-123']);
         $user->update(['email' => 'google@example.com']);
         $this->fakeGoogle();
-        $this->completeGoogle($this->start('link'))->assertRedirect('http://localhost:4200/conta?google_error=link_conflict');
+        $this->completeGoogle($this->start('link'))->assertRedirect('http://localhost:4200/conta/perfil?google_error=link_conflict');
         $this->assertNull($user->fresh()->google_id);
     }
 

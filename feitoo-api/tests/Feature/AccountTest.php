@@ -237,4 +237,15 @@ class AccountTest extends TestCase
             'mime_type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'extension' => 'xlsx',
             'size' => 10, 'checksum' => str_repeat('a', 64), 'expires_at' => $batch->expires_at]);
     }
+
+    public function test_overview_requests_only_three_owned_recent_files_and_bounds_other_page_sizes(): void
+    {
+        $owner = User::factory()->create();
+        for ($i = 0; $i < 5; $i++) {
+            $this->processing($owner);
+        }
+        $this->processing(User::factory()->create());
+        $this->actingAs($owner)->getJson('/api/processings?per_page=3')->assertOk()->assertJsonCount(3, 'data')->assertJsonPath('meta.total', 5);
+        $this->getJson('/api/processings?per_page=999')->assertOk()->assertJsonPath('meta.per_page', 10);
+    }
 }

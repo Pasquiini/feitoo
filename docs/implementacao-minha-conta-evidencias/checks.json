@@ -1,0 +1,739 @@
+[
+  {
+    "name": "No horizontal page overflow visao-geral-320",
+    "ok": true,
+    "detail": 305
+  },
+  {
+    "name": "No horizontal page overflow assinatura-320",
+    "ok": true,
+    "detail": 305
+  },
+  {
+    "name": "No horizontal page overflow creditos-320",
+    "ok": true,
+    "detail": 305
+  },
+  {
+    "name": "No horizontal page overflow arquivos-320",
+    "ok": true,
+    "detail": 305
+  },
+  {
+    "name": "No horizontal page overflow perfil-320",
+    "ok": true,
+    "detail": 305
+  },
+  {
+    "name": "No horizontal page overflow visao-geral-375",
+    "ok": true,
+    "detail": 360
+  },
+  {
+    "name": "No horizontal page overflow assinatura-375",
+    "ok": true,
+    "detail": 360
+  },
+  {
+    "name": "No horizontal page overflow creditos-375",
+    "ok": true,
+    "detail": 360
+  },
+  {
+    "name": "No horizontal page overflow arquivos-375",
+    "ok": true,
+    "detail": 360
+  },
+  {
+    "name": "No horizontal page overflow perfil-375",
+    "ok": true,
+    "detail": 360
+  },
+  {
+    "name": "No horizontal page overflow visao-geral-390",
+    "ok": true,
+    "detail": 375
+  },
+  {
+    "name": "No horizontal page overflow assinatura-390",
+    "ok": true,
+    "detail": 375
+  },
+  {
+    "name": "Subscription price status and CTA above fold",
+    "ok": true,
+    "detail": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinar Feitoo Pro",
+        "y": 482,
+        "bottom": 527
+      }
+    ]
+  },
+  {
+    "name": "No horizontal page overflow creditos-390",
+    "ok": true,
+    "detail": 375
+  },
+  {
+    "name": "Direct credit purchase above fold",
+    "ok": true,
+    "detail": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Atualizar saldo",
+        "y": 457,
+        "bottom": 501
+      },
+      {
+        "text": "Comprar 5 créditos",
+        "y": 692,
+        "bottom": 737
+      },
+      {
+        "text": "Consultar termos",
+        "y": 1193,
+        "bottom": 1211
+      },
+      {
+        "text": "Atualizar pedidos",
+        "y": 1000,
+        "bottom": 1044
+      }
+    ]
+  },
+  {
+    "name": "No horizontal page overflow arquivos-390",
+    "ok": true,
+    "detail": 375
+  },
+  {
+    "name": "No horizontal page overflow perfil-390",
+    "ok": true,
+    "detail": 375
+  },
+  {
+    "name": "No horizontal page overflow visao-geral-768",
+    "ok": true,
+    "detail": 753
+  },
+  {
+    "name": "No horizontal page overflow assinatura-768",
+    "ok": true,
+    "detail": 753
+  },
+  {
+    "name": "No horizontal page overflow creditos-768",
+    "ok": true,
+    "detail": 753
+  },
+  {
+    "name": "No horizontal page overflow arquivos-768",
+    "ok": true,
+    "detail": 753
+  },
+  {
+    "name": "No horizontal page overflow perfil-768",
+    "ok": true,
+    "detail": 753
+  },
+  {
+    "name": "No horizontal page overflow visao-geral-1024",
+    "ok": true,
+    "detail": 1009
+  },
+  {
+    "name": "No horizontal page overflow assinatura-1024",
+    "ok": true,
+    "detail": 1009
+  },
+  {
+    "name": "No horizontal page overflow creditos-1024",
+    "ok": true,
+    "detail": 1009
+  },
+  {
+    "name": "No horizontal page overflow arquivos-1024",
+    "ok": true,
+    "detail": 1009
+  },
+  {
+    "name": "No horizontal page overflow perfil-1024",
+    "ok": true,
+    "detail": 1009
+  },
+  {
+    "name": "No horizontal page overflow visao-geral-1440",
+    "ok": true,
+    "detail": 1425
+  },
+  {
+    "name": "No horizontal page overflow assinatura-1440",
+    "ok": true,
+    "detail": 1425
+  },
+  {
+    "name": "No horizontal page overflow creditos-1440",
+    "ok": true,
+    "detail": 1425
+  },
+  {
+    "name": "No horizontal page overflow arquivos-1440",
+    "ok": true,
+    "detail": 1425
+  },
+  {
+    "name": "No horizontal page overflow perfil-1440",
+    "ok": true,
+    "detail": 1425
+  },
+  {
+    "name": "Overview limited to three files",
+    "ok": true,
+    "detail": 3
+  },
+  {
+    "name": "No horizontal page overflow overview-three-files-390",
+    "ok": true,
+    "detail": 375
+  },
+  {
+    "name": "Keyboard activates account navigation",
+    "ok": true,
+    "detail": null
+  },
+  {
+    "name": "Client navigation and focus assinatura",
+    "ok": true,
+    "detail": {
+      "current": "Assinatura",
+      "focus": "H1"
+    }
+  },
+  {
+    "name": "Client navigation and focus creditos",
+    "ok": true,
+    "detail": {
+      "current": "Créditos",
+      "focus": "H1"
+    }
+  },
+  {
+    "name": "Client navigation and focus arquivos",
+    "ok": true,
+    "detail": {
+      "current": "Arquivos",
+      "focus": "H1"
+    }
+  },
+  {
+    "name": "Client navigation and focus perfil",
+    "ok": true,
+    "detail": {
+      "current": "Perfil",
+      "focus": "H1"
+    }
+  },
+  {
+    "name": "No purchase creation during navigation",
+    "ok": true,
+    "detail": [
+      {
+        "scenario": "many-history",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/account/subscription",
+        "query": "",
+        "owner": null
+      },
+      {
+        "scenario": "many-history",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/account/usage",
+        "query": "",
+        "owner": null
+      },
+      {
+        "scenario": "many-history",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/quotations/entitlements",
+        "query": "",
+        "owner": "900001"
+      },
+      {
+        "scenario": "many-history",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/quotations/entitlements",
+        "query": "",
+        "owner": "900001"
+      },
+      {
+        "scenario": "many-history",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/quotations/credit-orders",
+        "query": "?page=1",
+        "owner": "900001"
+      },
+      {
+        "scenario": "many-history",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/processings",
+        "query": "?page=1",
+        "owner": null
+      }
+    ]
+  },
+  {
+    "name": "Legacy fragment credits-title",
+    "ok": true,
+    "detail": "/conta/creditos"
+  },
+  {
+    "name": "Legacy fragment buy-credits-title",
+    "ok": true,
+    "detail": "/conta/creditos"
+  },
+  {
+    "name": "Legacy fragment plan-title",
+    "ok": true,
+    "detail": "/conta/assinatura"
+  },
+  {
+    "name": "Legacy fragment history-title",
+    "ok": true,
+    "detail": "/conta/arquivos"
+  },
+  {
+    "name": "Legacy fragment profile-title",
+    "ok": true,
+    "detail": "/conta/perfil"
+  },
+  {
+    "name": "Legacy fragment quotation-credits-title",
+    "ok": true,
+    "detail": "/conta/creditos"
+  },
+  {
+    "name": "Legacy fragment purchases-title",
+    "ok": true,
+    "detail": "/conta/creditos"
+  },
+  {
+    "name": "No horizontal page overflow subscription-pro-active-390",
+    "ok": true,
+    "detail": 375
+  },
+  {
+    "name": "No horizontal page overflow subscription-pro-active-768",
+    "ok": true,
+    "detail": 753
+  },
+  {
+    "name": "No horizontal page overflow subscription-pro-active-1440",
+    "ok": true,
+    "detail": 1425
+  },
+  {
+    "name": "No horizontal page overflow subscription-scheduled-390",
+    "ok": true,
+    "detail": 375
+  },
+  {
+    "name": "No horizontal page overflow subscription-scheduled-768",
+    "ok": true,
+    "detail": 753
+  },
+  {
+    "name": "No horizontal page overflow subscription-scheduled-1440",
+    "ok": true,
+    "detail": 1425
+  },
+  {
+    "name": "No horizontal page overflow subscription-pro-pending-390",
+    "ok": true,
+    "detail": 375
+  },
+  {
+    "name": "No horizontal page overflow subscription-pro-pending-768",
+    "ok": true,
+    "detail": 753
+  },
+  {
+    "name": "No horizontal page overflow subscription-pro-pending-1440",
+    "ok": true,
+    "detail": 1425
+  },
+  {
+    "name": "No horizontal page overflow subscription-remote-incomplete-390",
+    "ok": true,
+    "detail": 375
+  },
+  {
+    "name": "No horizontal page overflow subscription-remote-incomplete-768",
+    "ok": true,
+    "detail": 753
+  },
+  {
+    "name": "No horizontal page overflow subscription-remote-incomplete-1440",
+    "ok": true,
+    "detail": 1425
+  },
+  {
+    "name": "No horizontal page overflow subscription-past-due-390",
+    "ok": true,
+    "detail": 375
+  },
+  {
+    "name": "No horizontal page overflow subscription-past-due-768",
+    "ok": true,
+    "detail": 753
+  },
+  {
+    "name": "No horizontal page overflow subscription-past-due-1440",
+    "ok": true,
+    "detail": 1425
+  },
+  {
+    "name": "No horizontal page overflow subscription-period-expired-390",
+    "ok": true,
+    "detail": 375
+  },
+  {
+    "name": "No horizontal page overflow subscription-period-expired-768",
+    "ok": true,
+    "detail": 753
+  },
+  {
+    "name": "No horizontal page overflow subscription-period-expired-1440",
+    "ok": true,
+    "detail": 1425
+  },
+  {
+    "name": "No horizontal page overflow subscription-paused-390",
+    "ok": true,
+    "detail": 375
+  },
+  {
+    "name": "No horizontal page overflow subscription-paused-768",
+    "ok": true,
+    "detail": 753
+  },
+  {
+    "name": "No horizontal page overflow subscription-paused-1440",
+    "ok": true,
+    "detail": 1425
+  },
+  {
+    "name": "No horizontal page overflow subscription-subscription-error-390",
+    "ok": true,
+    "detail": 375
+  },
+  {
+    "name": "No horizontal page overflow subscription-subscription-error-768",
+    "ok": true,
+    "detail": 753
+  },
+  {
+    "name": "No horizontal page overflow subscription-subscription-error-1440",
+    "ok": true,
+    "detail": 1425
+  },
+  {
+    "name": "No horizontal page overflow subscription-offer-unavailable-390",
+    "ok": true,
+    "detail": 375
+  },
+  {
+    "name": "No horizontal page overflow subscription-offer-unavailable-768",
+    "ok": true,
+    "detail": 753
+  },
+  {
+    "name": "No horizontal page overflow subscription-offer-unavailable-1440",
+    "ok": true,
+    "detail": 1425
+  },
+  {
+    "name": "Resume calls the existing Pro endpoint",
+    "ok": true,
+    "detail": {
+      "scenario": "pro-pending",
+      "mode": "normal",
+      "method": "POST",
+      "path": "/api/account/subscription/checkout",
+      "query": "",
+      "owner": null
+    }
+  },
+  {
+    "name": "Payment management calls Portal",
+    "ok": true,
+    "detail": {
+      "scenario": "past-due",
+      "mode": "normal",
+      "method": "POST",
+      "path": "/api/account/subscription/portal",
+      "query": "",
+      "owner": null
+    }
+  },
+  {
+    "name": "Direct purchase uses allowlisted destination and technical UUID",
+    "ok": true,
+    "detail": [
+      {
+        "scenario": "free-zero",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/sanctum/csrf-cookie",
+        "query": "",
+        "owner": null
+      },
+      {
+        "scenario": "free-zero",
+        "mode": "normal",
+        "method": "POST",
+        "path": "/api/quotations/credit-orders",
+        "query": "",
+        "owner": "900001"
+      },
+      {
+        "scenario": "free-zero",
+        "mode": "normal",
+        "method": "CHECKOUT",
+        "key": "8a472a47-7802-42a8-b787-52dba2881a37",
+        "body": {
+          "return_destination": "account"
+        }
+      }
+    ]
+  },
+  {
+    "name": "No horizontal page overflow credit-pending-390",
+    "ok": true,
+    "detail": 375
+  },
+  {
+    "name": "URL success never confirms payment",
+    "ok": true,
+    "detail": null
+  },
+  {
+    "name": "No horizontal page overflow credit-paid-390",
+    "ok": true,
+    "detail": 375
+  },
+  {
+    "name": "Backend paid refreshes the visible balance",
+    "ok": true,
+    "detail": null
+  },
+  {
+    "name": "Payment return never generates or charges automatically",
+    "ok": true,
+    "detail": [
+      {
+        "scenario": "free-zero",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/sanctum/csrf-cookie",
+        "query": "",
+        "owner": null
+      },
+      {
+        "scenario": "free-zero",
+        "mode": "normal",
+        "method": "POST",
+        "path": "/api/quotations/credit-orders",
+        "query": "",
+        "owner": "900001"
+      },
+      {
+        "scenario": "free-zero",
+        "mode": "normal",
+        "method": "CHECKOUT",
+        "key": "8a472a47-7802-42a8-b787-52dba2881a37",
+        "body": {
+          "return_destination": "account"
+        }
+      },
+      {
+        "scenario": "purchase-pending",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/me",
+        "query": "",
+        "owner": null
+      },
+      {
+        "scenario": "purchase-pending",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/quotations/entitlements",
+        "query": "",
+        "owner": "900001"
+      },
+      {
+        "scenario": "purchase-pending",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/quotations/credit-orders",
+        "query": "?page=1",
+        "owner": "900001"
+      },
+      {
+        "scenario": "purchase-pending",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/quotations/credit-orders/12345678-1234-4234-8234-123456789abc",
+        "query": "",
+        "owner": "900001"
+      },
+      {
+        "scenario": "purchase-pending",
+        "mode": "credit-paid",
+        "method": "GET",
+        "path": "/api/quotations/credit-orders/12345678-1234-4234-8234-123456789abc",
+        "query": "",
+        "owner": "900001"
+      },
+      {
+        "scenario": "purchase-pending",
+        "mode": "credit-paid",
+        "method": "GET",
+        "path": "/api/quotations/entitlements",
+        "query": "",
+        "owner": "900001"
+      }
+    ]
+  },
+  {
+    "name": "No horizontal page overflow files-populated-390",
+    "ok": true,
+    "detail": 375
+  },
+  {
+    "name": "Delete confirmation focuses confirm action",
+    "ok": true,
+    "detail": null
+  },
+  {
+    "name": "Cancel returns focus to delete trigger",
+    "ok": true,
+    "detail": null
+  },
+  {
+    "name": "No horizontal page overflow files-populated-768",
+    "ok": true,
+    "detail": 753
+  },
+  {
+    "name": "No horizontal page overflow files-populated-1440",
+    "ok": true,
+    "detail": 1425
+  },
+  {
+    "name": "Profile saves through the existing PATCH",
+    "ok": true,
+    "detail": null
+  },
+  {
+    "name": "Email remains readonly",
+    "ok": true,
+    "detail": null
+  },
+  {
+    "name": "Google link calls the existing authenticated endpoint",
+    "ok": true,
+    "detail": null
+  },
+  {
+    "name": "No horizontal page overflow credit-error-1440",
+    "ok": true,
+    "detail": 1425
+  },
+  {
+    "name": "Failure does not render false empty purchases",
+    "ok": true,
+    "detail": null
+  },
+  {
+    "name": "No horizontal page overflow credit-loading-1440",
+    "ok": true,
+    "detail": 1425
+  },
+  {
+    "name": "Expired commercial session navigates to authentication",
+    "ok": true,
+    "detail": null
+  },
+  {
+    "name": "No runtime exceptions",
+    "ok": true,
+    "detail": []
+  },
+  {
+    "name": "Return context keeps aria-current credit-pending-390",
+    "ok": true,
+    "detail": "/conta/creditos?quotation_order=12345678-1234-4234-8234-123456789abc&payment=success"
+  },
+  {
+    "name": "Return context keeps aria-current credit-paid-390",
+    "ok": true,
+    "detail": "/conta/creditos?quotation_order=12345678-1234-4234-8234-123456789abc&payment=success"
+  }
+]

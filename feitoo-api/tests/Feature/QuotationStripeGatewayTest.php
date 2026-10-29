@@ -28,28 +28,29 @@ class QuotationStripeGatewayTest extends TestCase
 
     public static function modes(): array
     {
-        return ['TEST' => ['test'], 'LIVE simulated' => ['live']];
+        return ['TEST' => ['test'], 'LIVE simulated' => ['live'], 'Account TEST' => ['test', 'account'], 'Account LIVE simulated' => ['live', 'account']];
     }
 
     #[DataProvider('modes')]
-    public function test_sdk_uses_verified_price_product_metadata_and_stable_key_in_both_modes(string $mode): void
+    public function test_sdk_uses_verified_price_product_metadata_and_stable_key_in_both_modes(string $mode, string $destination = 'editor'): void
     {
         config(['quotations.credit_price_id' => 'price_fixture', 'monetization.stripe.mode' => $mode, 'monetization.stripe.secret_key' => 'sk_'.$mode.'_fixture']);
-        $order = new QuotationCreditOrder(['uuid' => 'technical-uuid', 'stripe_mode' => $mode, 'price_id' => 'price_fixture', 'amount' => 990, 'currency' => 'brl', 'expires_at' => now()->addHour()]);
+        $order = new QuotationCreditOrder(['uuid' => 'technical-uuid', 'return_destination' => $destination, 'stripe_mode' => $mode, 'price_id' => 'price_fixture', 'amount' => 990, 'currency' => 'brl', 'expires_at' => now()->addHour()]);
         $http = Mockery::mock(ClientInterface::class);
         $http->shouldReceive('request')->once()->ordered()->withArgs(function ($method, $url, $headers, $params) {
             $this->assertSame(['product'], $params['expand']);
 
             return $method === 'get' && str_ends_with($url, '/v1/prices/price_fixture');
         })->andReturn([json_encode($this->price($mode)), 200, []]);
-        $http->shouldReceive('request')->once()->ordered()->withArgs(function ($method, $url, $headers, $params) {
+        $http->shouldReceive('request')->once()->ordered()->withArgs(function ($method, $url, $headers, $params) use ($destination) {
             $this->assertSame(['quotation_order' => 'technical-uuid', 'operation' => 'quotation_credits'], $params['metadata']);
             $this->assertSame($params['metadata'], $params['payment_intent_data']['metadata']);
             $this->assertSame([['price' => 'price_fixture', 'quantity' => 1]], $params['line_items']);
             $this->assertSame('false', $params['adaptive_pricing']['enabled']);
             $this->assertSame('false', $params['automatic_tax']['enabled']);
             $this->assertSame('false', $params['allow_promotion_codes']);
-            $this->assertStringContainsString('quotation_order=technical-uuid', $params['success_url']);
+            $this->assertStringContainsString(($destination === 'account' ? '/conta/creditos' : '/gerador-de-orcamentos').'?quotation_order=technical-uuid', $params['success_url']);
+            $this->assertStringContainsString($destination === 'account' ? '/conta/creditos?' : '/gerador-de-orcamentos?', $params['cancel_url']);
             $this->assertStringContainsString('quotation-order-technical-uuid', implode(' ', $headers));
             $this->assertArrayNotHasKey('customer_email', $params);
             $this->assertArrayNotHasKey('price_data', $params['line_items'][0]);

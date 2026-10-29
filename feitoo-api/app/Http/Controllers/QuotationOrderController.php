@@ -12,11 +12,12 @@ class QuotationOrderController extends Controller
 {
     public function store(Request $request, QuotationOrderService $service)
     {
-        if ($request->all() || ! Str::isUuid($request->header('Idempotency-Key', ''))) {
+        $request->validate(['return_destination' => ['sometimes', 'required', 'in:editor,account']]);
+        if ($request->except('return_destination') || ! Str::isUuid($request->header('Idempotency-Key', ''))) {
             throw ValidationException::withMessages(['request' => ['Envie apenas uma chave idempotente UUID.']]);
         }
 
-        return response()->json(['data' => $service->resource($service->checkout($request->user(), $request->header('Idempotency-Key')))], 201);
+        return response()->json(['data' => $service->resource($service->checkout($request->user(), $request->header('Idempotency-Key'), $request->input('return_destination', 'editor')))], 201);
     }
 
     public function show(Request $request, string $uuid, QuotationOrderService $service)

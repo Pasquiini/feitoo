@@ -1,0 +1,6106 @@
+[
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-credits",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "api-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "empty-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "many-history",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "loading",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "session-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "session-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "session-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "session-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "session-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "session-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "session-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "session-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "session-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "session-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "past-due",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "past-due",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "past-due",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "past-due",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "past-due",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "past-due",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "past-due",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "past-due",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "unpaid",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "unpaid",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "unpaid",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "unpaid",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "unpaid",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "unpaid",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "unpaid",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "unpaid",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "canceled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "canceled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "canceled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "canceled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "canceled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "canceled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "canceled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "canceled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "incomplete-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "incomplete-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "incomplete-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "incomplete-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "incomplete-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "incomplete-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "incomplete-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "incomplete-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "scheduled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "scheduled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "scheduled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "scheduled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "scheduled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "scheduled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "scheduled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "scheduled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "period-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "period-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "period-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "period-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "period-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "period-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "period-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "period-expired",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "paused",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "paused",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "paused",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "paused",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "paused",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "paused",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "paused",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "paused",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "trialing",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "trialing",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "trialing",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "trialing",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "trialing",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "trialing",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "trialing",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "trialing",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "offer-unavailable",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "offer-unavailable",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "offer-unavailable",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "offer-unavailable",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "offer-unavailable",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "offer-unavailable",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "offer-unavailable",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "offer-unavailable",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "return-confirming",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "return-confirming",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "return-confirming",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "return-confirming",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "return-confirming",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "return-confirming",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "return-confirming",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "return-confirming",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "return-cancelled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "return-cancelled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "return-cancelled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "return-cancelled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "return-cancelled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "return-cancelled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "return-cancelled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "return-cancelled",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "POST",
+    "path": "/api/account/subscription/checkout",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "POST",
+    "path": "/api/account/subscription/portal",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "purchase-pending",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/drafts",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "billing-expired",
+    "method": "POST",
+    "path": "/api/account/subscription/checkout",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "history-expired",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "POST",
+    "path": "/api/account/subscription/checkout",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "POST",
+    "path": "/api/account/subscription/checkout",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "subscription-error",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "POST",
+    "path": "/api/account/subscription/checkout",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "quota-error",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "free-zero",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "return-confirming",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/me",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "return-confirming",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/health",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "return-confirming",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "return-confirming",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/purchases",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "return-confirming",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/processings",
+    "query": "?page=1",
+    "owner": null
+  },
+  {
+    "scenario": "return-confirming",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "return-confirming",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/entitlements",
+    "query": "",
+    "owner": "900001"
+  },
+  {
+    "scenario": "return-confirming",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/quotations/credit-orders",
+    "query": "?page=1",
+    "owner": "900001"
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/subscription",
+    "query": "",
+    "owner": null
+  },
+  {
+    "scenario": "pro-active",
+    "mode": "normal",
+    "method": "GET",
+    "path": "/api/account/usage",
+    "query": "",
+    "owner": null
+  }
+]

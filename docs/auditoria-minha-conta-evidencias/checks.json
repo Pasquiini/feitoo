@@ -1,0 +1,598 @@
+[
+  {
+    "test": "Free subscribe click",
+    "requests": [
+      {
+        "scenario": "free-zero",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/quotations/credit-orders",
+        "query": "?page=1",
+        "owner": "900001"
+      },
+      {
+        "scenario": "free-zero",
+        "mode": "normal",
+        "method": "POST",
+        "path": "/api/account/subscription/checkout",
+        "query": "",
+        "owner": null
+      }
+    ],
+    "error": "Seu plano e assinatura Pro\nFeitoo Free\n3 XMLs por processamento\n6 XMLs por dia\n\nNão foi possível abrir a Stripe. Tente novamente.\n\nMais espaço para sua rotina\n\nR$ 29,90/mês\n\nAssinar Feitoo Pro\n\n250 XMLs por processamento · 500 XMLs por dia · Retenção de 24 horas\n\nUso hoje · XML para Excel\n0 / 6 XMLs\n6 restantes\n\nDentro do limite de hoje\n\nRenova à meia-noite, no horário de São Paulo."
+  },
+  {
+    "test": "Pro portal click",
+    "requests": [
+      {
+        "scenario": "pro-active",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/quotations/credit-orders",
+        "query": "?page=1",
+        "owner": "900001"
+      },
+      {
+        "scenario": "pro-active",
+        "mode": "normal",
+        "method": "POST",
+        "path": "/api/account/subscription/portal",
+        "query": "",
+        "owner": null
+      }
+    ]
+  },
+  {
+    "test": "Account pending credit order",
+    "orderActions": [
+      {
+        "text": "Atualizar saldo e compras",
+        "href": null
+      }
+    ]
+  },
+  {
+    "test": "Buy card click, unchanged local generation flag",
+    "url": "http://localhost:4317/gerador-de-orcamentos?etapa=revisar#quotation-editor",
+    "commerce": false,
+    "text": "Confira antes de gerarMinha empresaAinda não informadaClienteAinda não informadoItens1Total R$ 0,00 ○Preencha os campos obrigatórios e confira os valores.  Conferir dados da prévia Gerar orçamento em PDF ↗ Geração de PDF indisponível nesta etapa. Você pode editar, conferir a prévia e salvar seu rascunho sem consumir cotas ou créditos.  Rascunhos ficam neste navegador por 24 horas após a última edição. Ao entrar, também são salvos de forma privada na sua conta pelo mesmo prazo. Você pode descartá-los a qualquer momento. Cópias locais temporárias podem permanecer no navegador até sua exclusão. Evite preencher dados pessoais em dispositivos compartilhados. ",
+    "requests": [
+      {
+        "scenario": "purchase-pending",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/health",
+        "query": "",
+        "owner": null
+      },
+      {
+        "scenario": "purchase-pending",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/account/usage",
+        "query": "",
+        "owner": null
+      },
+      {
+        "scenario": "purchase-pending",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/account/purchases",
+        "query": "?page=1",
+        "owner": null
+      },
+      {
+        "scenario": "purchase-pending",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/processings",
+        "query": "?page=1",
+        "owner": null
+      },
+      {
+        "scenario": "purchase-pending",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/account/subscription",
+        "query": "",
+        "owner": null
+      },
+      {
+        "scenario": "purchase-pending",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/quotations/entitlements",
+        "query": "",
+        "owner": "900001"
+      },
+      {
+        "scenario": "purchase-pending",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/quotations/credit-orders",
+        "query": "?page=1",
+        "owner": "900001"
+      },
+      {
+        "scenario": "purchase-pending",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/quotations/drafts",
+        "query": "",
+        "owner": "900001"
+      }
+    ]
+  },
+  {
+    "test": "Plans Pro CTA",
+    "url": "/conta",
+    "focused": "<body ngcm=\"\">\n    <app-root ng-version=\"21.2.25\" _nghost-ng-c183687325=\"\"><a _ngcontent-ng-c183687325=\"\" href=\"#main-content\" class=\"skip-link\">Pular para o conteúdo</a><header _ngcontent-ng-c183687325=\"\" class=\"site-header container\"><a _ngcontent-ng-c183687325=\"\" routerlink=\"/\" aria-label=\"Feitoo, início\" class=\"brand\" href=\"/\">feitoo<span _ngcontent-ng-c183687325=\"\" aria-hidden=\"true\">.</span></a><div _ngcontent-ng-c183687325=\"\" class=\"header-actions\"><button _ngcontent-ng-c183687325=\"\" type=\"button\" aria-controls=\"primary-nav\" class=\"mobile-menu-toggle\" aria-expanded=\"false\"> Menu <svg _ngcontent-ng-c183687325=\"\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" aria-hidden=\"true\" focusable=\"false\"><path _ngcontent-ng-c183687325=\"\" d=\"M4 6h16 M4 12h16 M4 18h16\"></path></svg></button><nav _ngcontent-ng-c183687325=\"\" id=\"primary-nav\" aria-label=\"Navegação principal\"><details _ngcontent-ng-c183687325=\"\" class=\"tools-menu\"><summary _ngcontent-ng-c183687325=\"\">Ferramentas</summary><div _ngcontent-ng-c183687325=\"\" class=\"tools-dropdown\"><a _ngcontent-ng-c183687325=\"\" routerlink=\"/\" fragment=\"ferramentas\" href=\"/#ferramentas\">Ver todas as ferramentas ↗</a><section _ngcontent-ng-c183687325=\"\"><h2 _ngcontent-ng-c183687325=\"\">XML e Fiscal</h2><a _ngcontent-ng-c183687325=\"\" href=\"/xml-para-excel\">XML para Excel</a><!--container--><a _ngcontent-ng-c183687325=\"\" href=\"/produtos-dos-xmls\">Produtos dos XMLs</a><!--container--><a _ngcontent-ng-c183687325=\"\" href=\"/xml-para-pdf\">XML para PDF</a><!--container--><a _ngcontent-ng-c183687325=\"\" href=\"/organizar-xml\">Organizar XML</a><!--container--><a _ngcontent-ng-c183687325=\"\" href=\"/analisar-xml\">Analisar XML</a><!--container--><!--container--><!--container--></section><section _ngcontent-ng-c183687325=\"\"><h2 _ngcontent-ng-c183687325=\"\">Documentos</h2><!--container--><!--container--><!--container--><!--container--><!--container--><a _ngcontent-ng-c183687325=\"\" href=\"/docx-para-pdf\">DOCX para PDF</a><!--container--><!--container--></section><!--container--></div></details><a _ngcontent-ng-c183687325=\"\" routerlink=\"/planos\" href=\"/planos\">Planos</a><a _ngcontent-ng-c183687325=\"\" routerlink=\"/seguranca\" href=\"/seguranca\">Segurança</a></nav><div _ngcontent-ng-c183687325=\"\" class=\"header-account\"><!--container--><details _ngcontent-ng-c183687325=\"\" class=\"account-menu\"><summary _ngcontent-ng-c183687325=\"\" aria-label=\"Minha conta\"><span _ngcontent-ng-c183687325=\"\" aria-hidden=\"true\" class=\"account-initial\">C</span><span _ngcontent-ng-c183687325=\"\" class=\"account-name\">Minha conta</span></summary><div _ngcontent-ng-c183687325=\"\"><p _ngcontent-ng-c183687325=\"\">Olá, Conta de auditoria simulada.</p><a _ngcontent-ng-c183687325=\"\" routerlink=\"/conta\" class=\"btn btn-outline-secondary btn-sm\" href=\"/conta\">Minha conta</a><button _ngcontent-ng-c183687325=\"\" type=\"button\" class=\"btn btn-outline-secondary btn-sm\"> Sair </button></div></details><!--container--><!--container--></div></div></header><main _ngcontent-ng-c183687325=\"\" id=\"main-content\" tabindex=\"-1\" class=\"container\"><!--container--><router-outlet _ngcontent-ng-c183687325=\"\"></router-outlet><app-account-page _nghost-ng-c3858342151=\"\"><section _ngcontent-ng-c3858342151=\"\" aria-labelledby=\"account-title\" class=\"account-page\"><header _ngcontent-ng-c3858342151=\"\" class=\"account-heading mb-4\"><h1 _ngcontent-ng-c3858342151=\"\" id=\"account-title\">Minha conta</h1><p _ngcontent-ng-c3858342151=\"\" class=\"text-secondary\">Acompanhe seus benefícios, compras e arquivos em um só lugar.</p></header><nav _ngcontent-ng-c3858342151=\"\" aria-label=\"Áreas da minha conta\" class=\"account-navigation\"><a _ngcontent-ng-c3858342151=\"\" href=\"#account-overview\">Visão geral</a><a _ngcontent-ng-c3858342151=\"\" href=\"#credits-title\">Meus créditos</a><a _ngcontent-ng-c3858342151=\"\" href=\"#buy-credits-title\">Comprar créditos</a><a _ngcontent-ng-c3858342151=\"\" href=\"#purchases-title\">Movimentações e compras</a><a _ngcontent-ng-c3858342151=\"\" href=\"#plan-title\">Assinatura Pro</a><a _ngcontent-ng-c3858342151=\"\" href=\"#history-title\">Histórico</a><a _ngcontent-ng-c3858342151=\"\" href=\"#profile-title\">Dados e segurança</a></nav><section _ngcontent-ng-c3858342151=\"\" id=\"account-overview\" aria-labelledby=\"overview-title\" class=\"account-overview\"><h2 _ngcontent-ng-c3858342151=\"\" id=\"overview-title\" class=\"section-title\">Visão geral</h2><p _ngcontent-ng-c3858342151=\"\">Confira o uso de cada ferramenta e encontre seus resultados no histórico.</p><div _ngcontent-ng-c3858342151=\"\" class=\"d-flex flex-wrap gap-3\"><a _ngcontent-ng-c3858342151=\"\" routerlink=\"/gerador-de-orcamentos\" class=\"btn btn-primary\" href=\"/gerador-de-orcamentos\">Criar orçamento</a><a _ngcontent-ng-c3858342151=\"\" routerlink=\"/\" fragment=\"ferramentas\" class=\"btn btn-outline-primary\" href=\"/#ferramentas\">Escolher ferramenta</a><a _ngcontent-ng-c3858342151=\"\" href=\"#history-title\" class=\"btn btn-outline-secondary\">Baixar resultados recentes</a></div></section><div _ngcontent-ng-c3858342151=\"\" class=\"account-credit-areas\"><section _ngcontent-ng-c3858342151=\"\" aria-labelledby=\"credits-title\" class=\"account-panel\"><h2 _ngcontent-ng-c3858342151=\"\" id=\"credits-title\" class=\"section-title\">Meus créditos</h2><p _ngcontent-ng-c3858342151=\"\"><strong _ngcontent-ng-c3858342151=\"\">0 créditos pagos de orçamentos disponíveis</strong></p><p _ngcontent-ng-c3858342151=\"\" class=\"small\"> 0 reservados · 0 utilizados · 0 revogados </p><!--container--><!--container--><p _ngcontent-ng-c3858342151=\"\">Free: 1 orçamento disponível hoje.</p><!--container--><!--container--><p _ngcontent-ng-c3858342151=\"\"> Créditos pagos de orçamentos, franquias do plano e compras de lotes XML têm usos próprios. </p><a _ngcontent-ng-c3858342151=\"\" href=\"#quotation-credits-title\">Consultar créditos e benefícios de orçamentos</a><p _ngcontent-ng-c3858342151=\"\" class=\"small text-secondary\"> O uso de XML para Excel aparece no seu plano. Cada ferramenta consulta sua própria franquia antes de processar. </p></section><section _ngcontent-ng-c3858342151=\"\" aria-labelledby=\"buy-credits-title\" class=\"account-panel\"><h2 _ngcontent-ng-c3858342151=\"\" id=\"buy-credits-title\" class=\"section-title\">Comprar créditos</h2><p _ngcontent-ng-c3858342151=\"\"><strong _ngcontent-ng-c3858342151=\"\">5 créditos de orçamentos · R$ 9,90</strong></p><!--container--><!--container--><p _ngcontent-ng-c3858342151=\"\"> Para orçamentos, confira o pacote, o preço e a disponibilidade no editor. Os créditos pagos são exclusivos para gerar orçamentos em PDF. </p><a _ngcontent-ng-c3858342151=\"\" routerlink=\"/gerador-de-orcamentos\" fragment=\"quotation-editor\" class=\"btn btn-outline-primary\" href=\"/gerador-de-orcamentos?etapa=revisar#quotation-editor\">Ver pacote de orçamentos</a><p _ngcontent-ng-c3858342151=\"\" class=\"small text-secondary\"> Para um lote XML maior, selecione os arquivos na ferramenta. A compra avulsa informa o preço e vale para aquele lote. </p><a _ngcontent-ng-c3858342151=\"\" routerlink=\"/xml-para-excel\" href=\"/xml-para-excel\">Selecionar lote XML</a><p _ngcontent-ng-c3858342151=\"\" class=\"small text-secondary\"> O saldo só é liberado após a confirmação do pagamento. Compras indisponíveis não podem ser concluídas. </p></section></div><div _ngcontent-ng-c3858342151=\"\" class=\"account-commercial\"><section _ngcontent-ng-c3858342151=\"\" aria-labelledby=\"plan-title\" class=\"account-panel plan-panel\"><h2 _ngcontent-ng-c3858342151=\"\" id=\"plan-title\" class=\"section-title\">Seu plano e assinatura Pro</h2><div _ngcontent-ng-c3858342151=\"\" class=\"plan-heading d-flex flex-wrap align-items-center gap-2 mb-3\"><h3 _ngcontent-ng-c3858342151=\"\">Feitoo Free</h3><!--container--></div><ul _ngcontent-ng-c3858342151=\"\" class=\"plan-benefits\"><li _ngcontent-ng-c3858342151=\"\">3 XMLs por processamento</li><li _ngcontent-ng-c3858342151=\"\">6 XMLs por dia</li><!--container--></ul><!--container--><!--container--><!--container--><!--container--><!--container--><!--container--><!--container--><div _ngcontent-ng-c3858342151=\"\" class=\"upgrade-offer d-flex flex-wrap align-items-center gap-3\"><div _ngcontent-ng-c3858342151=\"\"><strong _ngcontent-ng-c3858342151=\"\">Mais espaço para sua rotina</strong><p _ngcontent-ng-c3858342151=\"\">R$&nbsp;29,90/mês</p></div><button _ngcontent-ng-c3858342151=\"\" type=\"button\" class=\"btn btn-primary\"> Assinar Feitoo Pro </button><p _ngcontent-ng-c3858342151=\"\" class=\"small text-secondary\"> 250 XMLs por processamento · 500 XMLs por dia · Retenção de 24 horas </p></div><!--container--><!--container--><!--container--><section _ngcontent-ng-c3858342151=\"\" aria-labelledby=\"usage-title\" class=\"usage-section\"><h3 _ngcontent-ng-c3858342151=\"\" id=\"usage-title\">Uso hoje · XML para Excel</h3><div _ngcontent-ng-c3858342151=\"\" class=\"usage-numbers d-flex flex-wrap gap-2\"><strong _ngcontent-ng-c3858342151=\"\">0 / 6 XMLs</strong><span _ngcontent-ng-c3858342151=\"\">6 restantes</span></div><progress _ngcontent-ng-c3858342151=\"\" aria-labelledby=\"usage-title\" value=\"0\" max=\"6\" aria-valuetext=\"0 de 6 XMLs usados hoje\"></progress><p _ngcontent-ng-c3858342151=\"\" class=\"small usage-state\">Dentro do limite de hoje</p><p _ngcontent-ng-c3858342151=\"\" class=\"small text-secondary\">Renova à meia-noite, no horário de São Paulo.</p></section><!--container--></section><section _ngcontent-ng-c3858342151=\"\" aria-labelledby=\"purchases-title\" class=\"account-panel purchases-panel\" aria-busy=\"false\"><h2 _ngcontent-ng-c3858342151=\"\" id=\"purchases-title\" class=\"section-title\">Movimentações e compras</h2><p _ngcontent-ng-c3858342151=\"\" class=\"small text-secondary\"> Compras avulsas de XML, vinculadas ao lote. <a _ngcontent-ng-c3858342151=\"\" href=\"#quotation-credits-title\">Ver compras e consumo de orçamentos</a>. </p><!--container--><!--container--><!--container--><p _ngcontent-ng-c3858342151=\"\" class=\"text-secondary\">Você ainda não fez compras avulsas.</p><!--container--><!--container--><!--container--></section></div><div _ngcontent-ng-c3858342151=\"\" class=\"account-top\"><section _ngcontent-ng-c3858342151=\"\" aria-labelledby=\"profile-title\" class=\"account-panel\"><h2 _ngcontent-ng-c3858342151=\"\" id=\"profile-title\" class=\"section-title\">Seus dados</h2><form _ngcontent-ng-c3858342151=\"\" novalidate=\"\" aria-busy=\"false\" class=\"ng-untouched ng-pristine ng-valid\"><fieldset _ngcontent-ng-c3858342151=\"\"><label _ngcontent-ng-c3858342151=\"\" for=\"account-name\" class=\"form-label\">Nome</label><input _ngcontent-ng-c3858342151=\"\" id=\"account-name\" formcontrolname=\"name\" autocomplete=\"name\" maxlength=\"120\" required=\"\" aria-describedby=\"account-name-error\" class=\"form-control ng-untouched ng-pristine ng-valid\" aria-invalid=\"false\"><p _ngcontent-ng-c3858342151=\"\" id=\"account-name-error\" class=\"field-error\"></p><label _ngcontent-ng-c3858342151=\"\" for=\"account-email\" class=\"form-label\">E-mail</label><input _ngcontent-ng-c3858342151=\"\" id=\"account-email\" type=\"email\" readonly=\"\" aria-describedby=\"email-hint\" class=\"form-control readonly-field\"><p _ngcontent-ng-c3858342151=\"\" id=\"email-hint\" class=\"small text-secondary\"> O e-mail não pode ser alterado nesta página. </p><dl _ngcontent-ng-c3858342151=\"\" class=\"profile-details d-flex flex-wrap gap-3\"><div _ngcontent-ng-c3858342151=\"\"><dt _ngcontent-ng-c3858342151=\"\" class=\"small text-secondary\">Formas de acesso</dt><dd _ngcontent-ng-c3858342151=\"\"> E-mail e senha </dd></div><div _ngcontent-ng-c3858342151=\"\"><dt _ngcontent-ng-c3858342151=\"\" class=\"small text-secondary\">Conta criada em</dt><dd _ngcontent-ng-c3858342151=\"\">01/10/2026</dd></div></dl><button _ngcontent-ng-c3858342151=\"\" type=\"submit\" class=\"btn btn-primary\"> Salvar nome </button></fieldset></form><!--container--><!--container--></section><section _ngcontent-ng-c3858342151=\"\" aria-labelledby=\"security-title\" class=\"account-panel\"><h2 _ngcontent-ng-c3858342151=\"\" id=\"security-title\" class=\"section-title\">Segurança e acesso</h2><div _ngcontent-ng-c3858342151=\"\" class=\"google-access\"><h3 _ngcontent-ng-c3858342151=\"\">Google</h3><p _ngcontent-ng-c3858342151=\"\">Não conectado</p><p _ngcontent-ng-c3858342151=\"\" class=\"small text-secondary\"> Vincule uma conta Google com o mesmo e-mail do Feitoo. </p><button _ngcontent-ng-c3858342151=\"\" type=\"button\" class=\"btn btn-outline-secondary\"> Vincular Google </button><!--container--><!--container--></div><h3 _ngcontent-ng-c3858342151=\"\">Senha</h3><details _ngcontent-ng-c3858342151=\"\" class=\"password-disclosure\"><summary _ngcontent-ng-c3858342151=\"\">Alterar senha</summary><p _ngcontent-ng-c3858342151=\"\" id=\"password-hint\" class=\"small text-secondary\"> Use de 12 a 72 caracteres, até 72 bytes. </p><form _ngcontent-ng-c3858342151=\"\" novalidate=\"\" aria-busy=\"false\" class=\"ng-untouched ng-pristine ng-invalid\"><fieldset _ngcontent-ng-c3858342151=\"\"><label _ngcontent-ng-c3858342151=\"\" for=\"account-current-password\" class=\"form-label\">Senha atual</label><input _ngcontent-ng-c3858342151=\"\" id=\"account-current-password\" formcontrolname=\"current_password\" type=\"password\" autocomplete=\"current-password\" maxlength=\"72\" required=\"\" aria-describedby=\"current-password-error\" class=\"form-control ng-untouched ng-pristine ng-invalid\" aria-invalid=\"false\"><p _ngcontent-ng-c3858342151=\"\" id=\"current-password-error\" class=\"field-error\">  </p><label _ngcontent-ng-c3858342151=\"\" for=\"account-password\" class=\"form-label\">Nova senha</label><input _ngcontent-ng-c3858342151=\"\" id=\"account-password\" formcontrolname=\"password\" type=\"password\" autocomplete=\"new-password\" maxlength=\"72\" required=\"\" aria-describedby=\"new-password-error password-hint\" class=\"form-control ng-untouched ng-pristine ng-invalid\" aria-invalid=\"false\"><p _ngcontent-ng-c3858342151=\"\" id=\"new-password-error\" class=\"field-error\">  </p><label _ngcontent-ng-c3858342151=\"\" for=\"account-confirmation\" class=\"form-label\">Confirmar nova senha</label><input _ngcontent-ng-c3858342151=\"\" id=\"account-confirmation\" formcontrolname=\"password_confirmation\" type=\"password\" autocomplete=\"new-password\" maxlength=\"72\" required=\"\" aria-describedby=\"confirmation-error\" class=\"form-control ng-untouched ng-pristine ng-invalid\" aria-invalid=\"false\"><p _ngcontent-ng-c3858342151=\"\" id=\"confirmation-error\" class=\"field-error\">  </p><button _ngcontent-ng-c3858342151=\"\" type=\"submit\" class=\"btn btn-outline-primary\"> Atualizar senha </button></fieldset></form><!--container--><!--container--></details><!--container--><!--container--></section></div><!--container--><section _ngcontent-ng-c3858342151=\"\" aria-labelledby=\"history-title\" class=\"history-section\" aria-busy=\"false\"><div _ngcontent-ng-c3858342151=\"\" class=\"history-heading d-flex flex-wrap align-items-center gap-3\"><div _ngcontent-ng-c3858342151=\"\"><h2 _ngcontent-ng-c3858342151=\"\" id=\"history-title\" tabindex=\"-1\">Processamentos recentes</h2><p _ngcontent-ng-c3858342151=\"\" class=\"small text-secondary\"> Os arquivos expiram automaticamente. O registro do processamento permanece. </p></div><button _ngcontent-ng-c3858342151=\"\" type=\"button\" class=\"btn btn-outline-secondary btn-sm\"> Atualizar histórico </button></div><!--container--><!--container--><!--container--><div _ngcontent-ng-c3858342151=\"\" class=\"empty-history\"><p _ngcontent-ng-c3858342151=\"\">Você ainda não fez nenhum processamento.</p><a _ngcontent-ng-c3858342151=\"\" routerlink=\"/xml-para-excel\" class=\"btn btn-primary\" href=\"/xml-para-excel\">Converter XML para Excel</a></div><!--container--><ul _ngcontent-ng-c3858342151=\"\" class=\"history-list\"><!--container--></ul><!--container--></section><section _ngcontent-ng-c3858342151=\"\" class=\"account-card mt-4\"><h2 _ngcontent-ng-c3858342151=\"\" id=\"quotation-credits-title\" class=\"section-title\">Créditos e compras de orçamentos</h2><app-quotation-commerce _ngcontent-ng-c3858342151=\"\"><section aria-label=\"Créditos e benefícios de orçamentos\"><!--container--><p>Você pode gerar um orçamento gratuitamente hoje.</p><!--container--><!--container--><!--container--><p> Créditos de orçamentos: 0 disponíveis, 0 reservados e 0 utilizados. </p><!--container--><p> Créditos exclusivos para orçamentos, sem expiração comercial. PDF e rascunho possuem prazos próprios. </p><!--container--><!--container--><!--container--><!--container--><h2>Compras de créditos para orçamentos</h2><!--container--><p>Nenhuma compra comercial nesta página.</p><!--container--><button type=\"button\" class=\"btn btn-outline-primary\"> Atualizar saldo e compras </button><!--container--><!--container--><!--container--></section></app-quotation-commerce></section><section _ngcontent-ng-c3858342151=\"\" aria-labelledby=\"privacy-title\" class=\"account-privacy mt-4\"><h2 _ngcontent-ng-c3858342151=\"\" id=\"privacy-title\" class=\"section-title\">Privacidade e segurança</h2><p _ngcontent-ng-c3858342151=\"\" class=\"small text-secondary\"> Seus arquivos são privados e ficam disponíveis apenas durante o prazo informado. Você também pode excluí-los ao terminar. </p><nav _ngcontent-ng-c3858342151=\"\" aria-label=\"Privacidade da conta\" class=\"d-flex flex-wrap gap-3\"><a _ngcontent-ng-c3858342151=\"\" routerlink=\"/seguranca\" href=\"/seguranca\">Segurança</a><a _ngcontent-ng-c3858342151=\"\" routerlink=\"/privacidade\" href=\"/privacidade\">Privacidade</a><a _ngcontent-ng-c3858342151=\"\" routerlink=\"/termos\" href=\"/termos\">Termos</a></nav></section></section></app-account-page><!--container--><small _ngcontent-ng-c183687325=\"\" role=\"status\" class=\"d-block mt-4 text-secondary\">API conectada.</small><!--container--></main><footer _ngcontent-ng-c183687325=\"\" class=\"site-footer container\"><div _ngcontent-ng-c183687325=\"\" class=\"footer-identity\"><a _ngcontent-ng-c183687325=\"\" routerlink=\"/\" class=\"brand\" href=\"/\">feitoo<span _ngcontent-ng-c183687325=\"\" aria-hidden=\"true\">.</span></a><p _ngcontent-ng-c183687325=\"\">Ferramentas online para resolver tarefas com arquivos.</p><a _ngcontent-ng-c183687325=\"\" href=\"mailto:suporte@feitoo.com.br\">suporte@feitoo.com.br</a></div><div _ngcontent-ng-c183687325=\"\" class=\"footer-groups\"><nav _ngcontent-ng-c183687325=\"\" aria-label=\"Ferramentas\"><h2 _ngcontent-ng-c183687325=\"\">Ferramentas</h2><a _ngcontent-ng-c183687325=\"\" href=\"/xml-para-excel\">XML para Excel</a><a _ngcontent-ng-c183687325=\"\" href=\"/produtos-dos-xmls\">Produtos dos XMLs</a><a _ngcontent-ng-c183687325=\"\" href=\"/xml-para-pdf\">XML para PDF</a><a _ngcontent-ng-c183687325=\"\" href=\"/organizar-xml\">Organizar XML</a><a _ngcontent-ng-c183687325=\"\" href=\"/analisar-xml\">Analisar XML</a><a _ngcontent-ng-c183687325=\"\" href=\"/docx-para-pdf\">DOCX para PDF</a><!--container--></nav><nav _ngcontent-ng-c183687325=\"\" aria-label=\"Produto\"><h2 _ngcontent-ng-c183687325=\"\">Produto</h2><a _ngcontent-ng-c183687325=\"\" routerlink=\"/planos\" href=\"/planos\">Planos</a><a _ngcontent-ng-c183687325=\"\" routerlink=\"/seguranca\" href=\"/seguranca\">Segurança</a></nav><nav _ngcontent-ng-c183687325=\"\" aria-label=\"Legal\"><h2 _ngcontent-ng-c183687325=\"\">Legal</h2><a _ngcontent-ng-c183687325=\"\" routerlink=\"/privacidade\" href=\"/privacidade\">Privacidade</a><a _ngcontent-ng-c183687325=\"\" routerlink=\"/termos\" href=\"/termos\">Termos</a></nav><nav _ngcontent-ng-c183687325=\"\" aria-label=\"Conta\"><h2 _ngcontent-ng-c183687325=\"\">Conta</h2><a _ngcontent-ng-c183687325=\"\" routerlink=\"/conta\" href=\"/conta\">Minha conta</a><!--container--><!--container--></nav></div><div _ngcontent-ng-c183687325=\"\" class=\"footer-bottom\"><small _ngcontent-ng-c183687325=\"\">© 2026 Feitoo. Todos os direitos reservados.</small><button _ngcontent-ng-c183687325=\"\" type=\"button\" class=\"link-button\"> Preferências de cookies </button></div></footer><app-cookie-preferences _ngcontent-ng-c183687325=\"\"><!--container--></app-cookie-preferences></app-root>\n  <link rel=\"modulepreload\" href=\"chunk-3L7JLFN7.js\"><link rel=\"modulepreload\" href=\"chunk-2C4ADK2W.js\"><link rel=\"modulepreload\" href=\"chunk-5EVL743T.js\"><link rel=\"modulepreload\" href=\"chunk-AM3VYNON.js\"><link rel=\"modulepreload\" href=\"chunk-KSJBN7AS.js\"><link rel=\"modulepreload\" href=\"chunk-535WGBH3.js\"><link rel=\"modulepreload\" href=\"chunk-FNX7T5JX.js\"><link rel=\"modulepreload\" href=\"chunk-FULWM2KE.js\"><script src=\"main.js\" type=\"module\"></script>\n\n</body>",
+    "scrollY": 0
+  },
+  {
+    "test": "Session expires during billing click",
+    "url": "/conta",
+    "remainsAccount": true,
+    "planText": "Seu plano e assinatura Pro\nFeitoo Free\n3 XMLs por processamento\n6 XMLs por dia\n\nNão foi possível abrir a Stripe. Tente novamente.\n\nMais espaço para sua rotina\n\nR$ 29,90/mês\n\nAssinar Feitoo Pro\n\n250 XMLs por processamento · 500 XMLs por dia · Retenção de 24 horas\n\nUso hoje · XML para Excel\n0 / 6 XMLs\n6 restantes\n\nDentro do limite de hoje\n\nRenova à meia-noite, no horário de São Paulo."
+  },
+  {
+    "test": "Session expires during history refresh",
+    "url": "/login?returnTo=%2Fconta"
+  },
+  {
+    "test": "Keyboard 32 Tab presses",
+    "focus": [
+      {
+        "tag": "A",
+        "text": "Pular para o conteúdo",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "feitoo.",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "SUMMARY",
+        "text": "Ferramentas",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "Planos",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "Segurança",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "SUMMARY",
+        "text": "C\nMinha conta",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "Visão geral",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "Meus créditos",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "Comprar créditos",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "Movimentações e compras",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "Assinatura Pro",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "Histórico",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "Dados e segurança",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "Criar orçamento",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "Escolher ferramenta",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "Baixar resultados recentes",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "Consultar créditos e benefícios de orçamentos",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "Ver pacote de orçamentos",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "Selecionar lote XML",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Assinar Feitoo Pro",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "Ver compras e consumo de orçamentos",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "id": "account-name",
+        "outline": "solid"
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "id": "account-email",
+        "outline": "solid"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Salvar nome",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Vincular Google",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "SUMMARY",
+        "text": "Alterar senha",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Atualizar histórico",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "Converter XML para Excel",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Atualizar saldo e compras",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "Segurança",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "Privacidade",
+        "id": "",
+        "outline": "solid"
+      },
+      {
+        "tag": "A",
+        "text": "Termos",
+        "id": "",
+        "outline": "solid"
+      }
+    ]
+  },
+  {
+    "test": "Browser",
+    "version": {
+      "protocolVersion": "1.3",
+      "product": "Edg/156.0.4314.50",
+      "revision": "@af2ba23ae0ecf7084d900446fc59d5119dd5fd5e",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+      "jsVersion": "15.6.12.7"
+    }
+  },
+  {
+    "test": "Native fragment URL resolution",
+    "base": "http://localhost:4317/",
+    "links": [
+      {
+        "text": "Visão geral",
+        "attribute": "#account-overview",
+        "resolved": "http://localhost:4317/#account-overview"
+      },
+      {
+        "text": "Meus créditos",
+        "attribute": "#credits-title",
+        "resolved": "http://localhost:4317/#credits-title"
+      },
+      {
+        "text": "Comprar créditos",
+        "attribute": "#buy-credits-title",
+        "resolved": "http://localhost:4317/#buy-credits-title"
+      },
+      {
+        "text": "Movimentações e compras",
+        "attribute": "#purchases-title",
+        "resolved": "http://localhost:4317/#purchases-title"
+      },
+      {
+        "text": "Assinatura Pro",
+        "attribute": "#plan-title",
+        "resolved": "http://localhost:4317/#plan-title"
+      },
+      {
+        "text": "Histórico",
+        "attribute": "#history-title",
+        "resolved": "http://localhost:4317/#history-title"
+      },
+      {
+        "text": "Dados e segurança",
+        "attribute": "#profile-title",
+        "resolved": "http://localhost:4317/#profile-title"
+      },
+      {
+        "text": "Baixar resultados recentes",
+        "attribute": "#history-title",
+        "resolved": "http://localhost:4317/#history-title"
+      },
+      {
+        "text": "Consultar créditos e benefícios de orçamentos",
+        "attribute": "#quotation-credits-title",
+        "resolved": "http://localhost:4317/#quotation-credits-title"
+      },
+      {
+        "text": "Ver compras e consumo de orçamentos",
+        "attribute": "#quotation-credits-title",
+        "resolved": "http://localhost:4317/#quotation-credits-title"
+      }
+    ]
+  },
+  {
+    "test": "Real click Meus créditos anchor",
+    "url": "http://localhost:4317/#credits-title",
+    "account": false,
+    "title": "Ferramentas online para arquivos, documentos e planilhas."
+  },
+  {
+    "test": "Subscription-only API error recovery controls",
+    "actions": []
+  },
+  {
+    "test": "Computed styles at 768px",
+    "style": [
+      {
+        "selector": ".account-panel",
+        "width": 348.5,
+        "height": 497.234375,
+        "fontSize": "16px",
+        "lineHeight": "26.4px",
+        "color": "rgb(36, 54, 49)",
+        "background": "rgb(255, 255, 255)",
+        "padding": "24px",
+        "grid": "none"
+      },
+      {
+        "selector": ".plan-panel",
+        "width": 407.765625,
+        "height": 684.5,
+        "fontSize": "16px",
+        "lineHeight": "26.4px",
+        "color": "rgb(36, 54, 49)",
+        "background": "rgba(0, 0, 0, 0)",
+        "padding": "32px",
+        "grid": "none"
+      },
+      {
+        "selector": ".upgrade-offer button",
+        "width": 170.109375,
+        "height": 45.171875,
+        "fontSize": "16px",
+        "lineHeight": "22.4px",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(18, 93, 84)",
+        "padding": "10.4px 18.4px",
+        "grid": "none"
+      },
+      {
+        "selector": ".purchases-panel",
+        "width": 281.234375,
+        "height": 231.609375,
+        "fontSize": "16px",
+        "lineHeight": "26.4px",
+        "color": "rgb(36, 54, 49)",
+        "background": "rgb(255, 255, 255)",
+        "padding": "24px",
+        "grid": "none"
+      },
+      {
+        "selector": ".account-navigation",
+        "width": 713,
+        "height": 118,
+        "fontSize": "16px",
+        "lineHeight": "26.4px",
+        "color": "rgb(36, 54, 49)",
+        "background": "rgba(0, 0, 0, 0)",
+        "padding": "12px 0px",
+        "grid": "none"
+      },
+      {
+        "selector": ".account-top",
+        "width": 713,
+        "height": 426.984375,
+        "fontSize": "16px",
+        "lineHeight": "26.4px",
+        "color": "rgb(36, 54, 49)",
+        "background": "rgba(0, 0, 0, 0)",
+        "padding": "0px",
+        "grid": "344.5px 344.5px"
+      },
+      {
+        "selector": ".history-section",
+        "width": 713,
+        "height": 217.328125,
+        "fontSize": "16px",
+        "lineHeight": "26.4px",
+        "color": "rgb(36, 54, 49)",
+        "background": "rgba(0, 0, 0, 0)",
+        "padding": "0px",
+        "grid": "none"
+      },
+      {
+        "selector": "app-quotation-commerce h2",
+        "width": 713,
+        "height": 26.671875,
+        "fontSize": "23.2px",
+        "lineHeight": "26.68px",
+        "color": "rgb(36, 54, 49)",
+        "background": "rgba(0, 0, 0, 0)",
+        "padding": "0px",
+        "grid": "none"
+      },
+      {
+        "selector": "app-quotation-commerce button",
+        "width": 225.1875,
+        "height": 45.171875,
+        "fontSize": "16px",
+        "lineHeight": "22.4px",
+        "color": "rgb(18, 93, 84)",
+        "background": "rgba(0, 0, 0, 0)",
+        "padding": "10.4px 18.4px",
+        "grid": "none"
+      }
+    ]
+  },
+  {
+    "test": "Checkout loading button",
+    "disabled": true,
+    "label": "Abrindo…"
+  },
+  {
+    "test": "Escape in account menu with summary focused",
+    "open": true,
+    "focus": "SUMMARY"
+  },
+  {
+    "test": "Credit error persists after successful retry",
+    "text": "Você pode gerar um orçamento gratuitamente hoje.\n\nCréditos de orçamentos: 0 disponíveis, 0 reservados e 0 utilizados.\n\nCréditos exclusivos para orçamentos, sem expiração comercial. PDF e rascunho possuem prazos próprios.\n\nNão foi possível consultar os créditos.\n\nCompras de créditos para orçamentos\n\nNenhuma compra comercial nesta página.\n\nAtualizar saldo e compras",
+    "requests": [
+      {
+        "scenario": "free-zero",
+        "mode": "quota-error",
+        "method": "GET",
+        "path": "/api/quotations/entitlements",
+        "query": "",
+        "owner": "900001"
+      },
+      {
+        "scenario": "free-zero",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/quotations/entitlements",
+        "query": "",
+        "owner": "900001"
+      },
+      {
+        "scenario": "free-zero",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/quotations/credit-orders",
+        "query": "?page=1",
+        "owner": "900001"
+      }
+    ]
+  },
+  {
+    "test": "Pro activation does not refresh quotation entitlements",
+    "plan": "Feitoo Pro\nAtivo",
+    "quota": "Você já utilizou seu orçamento gratuito de hoje.\n\nVolte em 30/10/2026 00:00 (São Paulo) para usar a nova franquia.\n\nCréditos de orçamentos: 0 disponíveis, 0 reservados e 0 utilizados.\n\nCréditos exclusivos para orçamentos, sem expiração comercial. PDF e rascunho possuem prazos próprios.\n\nCompras de créditos para orçamentos\n\nNenhuma compra comercial nesta página.\n\nAtualizar saldo e compras",
+    "requests": [
+      {
+        "scenario": "return-confirming",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/quotations/entitlements",
+        "query": "",
+        "owner": "900001"
+      },
+      {
+        "scenario": "return-confirming",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/quotations/credit-orders",
+        "query": "?page=1",
+        "owner": "900001"
+      },
+      {
+        "scenario": "pro-active",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/account/subscription",
+        "query": "",
+        "owner": null
+      },
+      {
+        "scenario": "pro-active",
+        "mode": "normal",
+        "method": "GET",
+        "path": "/api/account/usage",
+        "query": "",
+        "owner": null
+      }
+    ]
+  }
+]

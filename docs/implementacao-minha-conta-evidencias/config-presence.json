@@ -1,0 +1,12 @@
+{
+  "stripe_mode": "test",
+  "stripe_key_test": true,
+  "stripe_key_live": false,
+  "webhook_present": true,
+  "quotation_test_price_present": false,
+  "quotation_live_price_present": false,
+  "quotation_generation_enabled": false,
+  "quotation_purchases_enabled": false,
+  "frontend_quotation_default": true,
+  "operational_migrations_executed": false
+}

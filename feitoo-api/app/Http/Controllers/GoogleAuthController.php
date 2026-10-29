@@ -16,7 +16,7 @@ class GoogleAuthController extends Controller
 {
     public function start(Request $request): JsonResponse
     {
-        $input = $request->validate(['intent' => ['required', 'in:login,link'], 'return_to' => ['sometimes', 'in:/,/conta,/xml-para-excel,/produtos-dos-xmls,/xml-para-pdf,/organizar-xml,/analisar-xml,/docx-para-pdf,/gerador-de-orcamentos']]);
+        $input = $request->validate(['intent' => ['required', 'in:login,link'], 'return_to' => ['sometimes', 'in:/,/conta,/conta/assinatura,/conta/creditos,/conta/arquivos,/conta/perfil,/xml-para-excel,/produtos-dos-xmls,/xml-para-pdf,/organizar-xml,/analisar-xml,/docx-para-pdf,/gerador-de-orcamentos']]);
         abort_unless(config('services.google.client_id') && config('services.google.client_secret'), 503, 'Google indisponível.');
         $user = Auth::guard('web')->user();
         abort_if($input['intent'] === 'link' && ! $user, 401);
@@ -24,7 +24,7 @@ class GoogleAuthController extends Controller
         $request->session()->put('google_auth_context', [
             'intent' => $input['intent'], 'user_id' => $input['intent'] === 'link' ? $user->id : null,
             'started_at' => now()->timestamp,
-            'return_to' => $input['intent'] === 'link' ? '/conta' : ($input['return_to'] ?? '/'),
+            'return_to' => $input['intent'] === 'link' ? '/conta/perfil' : ($input['return_to'] ?? '/'),
         ]);
         $redirect = Socialite::driver('google')->enablePKCE()->scopes(['openid', 'email', 'profile'])
             ->with(['prompt' => 'select_account'])->redirect();
@@ -57,15 +57,15 @@ class GoogleAuthController extends Controller
                 $request->session()->put('completed_google_signup', true);
             }
 
-            $returnTo = in_array($context['return_to'] ?? '/', ['/', '/conta', '/xml-para-excel', '/produtos-dos-xmls', '/xml-para-pdf', '/organizar-xml', '/analisar-xml', '/docx-para-pdf', '/gerador-de-orcamentos'], true) ? $context['return_to'] ?? '/' : '/';
+            $returnTo = in_array($context['return_to'] ?? '/', ['/', '/conta', '/conta/assinatura', '/conta/creditos', '/conta/arquivos', '/conta/perfil', '/xml-para-excel', '/produtos-dos-xmls', '/xml-para-pdf', '/organizar-xml', '/analisar-xml', '/docx-para-pdf', '/gerador-de-orcamentos'], true) ? $context['return_to'] ?? '/' : '/';
 
             return redirect()->away(rtrim(config('feitoo.auth.frontend_url'), '/').$returnTo);
         } catch (Throwable $exception) {
             Log::notice('Google authentication failed.', ['exception_type' => $exception::class]);
             $reason = $exception instanceof GoogleAccountException ? $exception->reason : 'invalid_google';
             $target = is_array($context) && ($context['intent'] ?? null) === 'link'
-                ? '/conta?google_error=link_conflict' : '/login?google_error='.$reason
-                    .(in_array($context['return_to'] ?? null, ['/conta', '/gerador-de-orcamentos'], true) ? '&returnTo='.rawurlencode($context['return_to']) : '');
+                ? '/conta/perfil?google_error=link_conflict' : '/login?google_error='.$reason
+                    .(in_array($context['return_to'] ?? null, ['/conta', '/conta/assinatura', '/conta/creditos', '/conta/arquivos', '/conta/perfil', '/gerador-de-orcamentos'], true) ? '&returnTo='.rawurlencode($context['return_to']) : '');
 
             return redirect()->away(rtrim(config('feitoo.auth.frontend_url'), '/').$target);
         } finally {

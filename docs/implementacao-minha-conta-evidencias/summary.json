@@ -1,0 +1,428 @@
+{
+  "screenshots": 65,
+  "checks": 97,
+  "checks_passed": 97,
+  "viewports": [
+    320,
+    375,
+    390,
+    768,
+    1024,
+    1440
+  ],
+  "frontend": {
+    "tests": 360,
+    "files": 35,
+    "passed": 360
+  },
+  "backend": {
+    "name": "D:\\backup\\Projetos\\feitoo\\feitoo-api\\phpunit.xml",
+    "tests": "538",
+    "assertions": "5157",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "7",
+    "time": "76.918233"
+  },
+  "tools": {
+    "tools": 6,
+    "layouts": 96,
+    "downloads": 8,
+    "runtime_errors": []
+  },
+  "artifacts": [
+    {
+      "name": "arquivos-1024.png",
+      "width": 1024,
+      "height": 1166,
+      "sha256": "42389f5be3b8a4bf6c89090ffe0d4d78d25aab06cbb9c502f2a57c69d351dc87"
+    },
+    {
+      "name": "arquivos-1440.png",
+      "width": 1440,
+      "height": 1166,
+      "sha256": "0bfe066230248292d39b3dccb43dbd0ae736b2eddc0ac7c0254595f33c1d64e4"
+    },
+    {
+      "name": "arquivos-320.png",
+      "width": 320,
+      "height": 1470,
+      "sha256": "4c91579df31a35027ae54b80f59d74e7a7a1dd8a9d21394a0fe5539cc2a5f7bc"
+    },
+    {
+      "name": "arquivos-375.png",
+      "width": 375,
+      "height": 1470,
+      "sha256": "4d5ffc03ada3e89b994d804c40b999150de1f6f5b175ea54b3992e52c18b48ca"
+    },
+    {
+      "name": "arquivos-390.png",
+      "width": 390,
+      "height": 1447,
+      "sha256": "b337f6184cf2b71b621e1443f2c107639b11d4955be39c032cc3e12cab83c142"
+    },
+    {
+      "name": "arquivos-768.png",
+      "width": 768,
+      "height": 1298,
+      "sha256": "08af66cf0a26b8c1ef3003b58f1919266cdc0e7a75f9d84af3ed297b8acf8fc3"
+    },
+    {
+      "name": "assinatura-1024.png",
+      "width": 1024,
+      "height": 1694,
+      "sha256": "2e13895ba64f2716c93383c00b40981bb98472ab3e0cd1a79459d62db3be668b"
+    },
+    {
+      "name": "assinatura-1440.png",
+      "width": 1440,
+      "height": 1694,
+      "sha256": "bc5c208ab7d4fcd12d03a42105904ac1b24023b21448826a26486e6b52cb1251"
+    },
+    {
+      "name": "assinatura-320.png",
+      "width": 320,
+      "height": 2252,
+      "sha256": "9c4174fe30ec39ac24f38c0bce4037ed4c22390543f6ca732a887ce41f57c23c"
+    },
+    {
+      "name": "assinatura-375.png",
+      "width": 375,
+      "height": 2182,
+      "sha256": "a8f69b941650355fa65f79201da3c0902bfe695501ea74e1d3b7f3fdbba3d52b"
+    },
+    {
+      "name": "assinatura-390.png",
+      "width": 390,
+      "height": 2108,
+      "sha256": "ced9c88ff367ae26d4c03b546a9fa03da5f61896aaf0209c8e6f50e49945e6de"
+    },
+    {
+      "name": "assinatura-768.png",
+      "width": 768,
+      "height": 1820,
+      "sha256": "3db74d82bd7be3c14c14812cf6c15ba906a5922da50bfc1ccf63be0b648c1d17"
+    },
+    {
+      "name": "credit-error-1440.png",
+      "width": 1440,
+      "height": 1478,
+      "sha256": "b48ccf3bdd6bf323c0108f1454a3f5c5671288676748df8f230c95ef6c31df16"
+    },
+    {
+      "name": "credit-loading-1440.png",
+      "width": 1440,
+      "height": 1478,
+      "sha256": "c389fcb7971bf8a00546f507a2a3868a1808b41ef89c289035f958844cc5889d"
+    },
+    {
+      "name": "credit-paid-390.png",
+      "width": 390,
+      "height": 2102,
+      "sha256": "65a83ea9f93dbf70c22f588196cdb224f3a3e6cc220c9a73575fae7efeafb2ca"
+    },
+    {
+      "name": "credit-pending-390.png",
+      "width": 390,
+      "height": 2261,
+      "sha256": "62102720879ea160da0dfca3ff0708b2df17d5c75e796ea0483c95dbc177ac49"
+    },
+    {
+      "name": "creditos-1024.png",
+      "width": 1024,
+      "height": 1535,
+      "sha256": "c10a88a4b373ae225041c1280e6e214058b320f0ee108714282e34db2540b428"
+    },
+    {
+      "name": "creditos-1440.png",
+      "width": 1440,
+      "height": 1515,
+      "sha256": "5a866562cb454f1d583712bdf80dccd5c1ac72966473197498fe2822fca66457"
+    },
+    {
+      "name": "creditos-320.png",
+      "width": 320,
+      "height": 2170,
+      "sha256": "09f71284dd8a3a03bc3395d3e855c6050b2c48dd2cfdac37b62f15efc5496ec0"
+    },
+    {
+      "name": "creditos-375.png",
+      "width": 375,
+      "height": 2050,
+      "sha256": "2049c4b1c68e633f64facfbcf4295139c15e540171fa3557fefb22cce7209adb"
+    },
+    {
+      "name": "creditos-390.png",
+      "width": 390,
+      "height": 2018,
+      "sha256": "8f88b7b889806954e74507862a9a392490c9dfe3c793bb74fb108f56906fd99b"
+    },
+    {
+      "name": "creditos-768.png",
+      "width": 768,
+      "height": 1703,
+      "sha256": "fbfcfea95f0a82709230fc3e9279437be3e80cc2a779f2cca6a867726f446fab"
+    },
+    {
+      "name": "files-populated-1440.png",
+      "width": 1440,
+      "height": 2633,
+      "sha256": "13ebaabf24ffd569e8a9976e71ff0d65b082a8297b3fd0a6eac40664cb1a52c4"
+    },
+    {
+      "name": "files-populated-390.png",
+      "width": 390,
+      "height": 3943,
+      "sha256": "4383498490e1709d770e82d74758eaff60e5c3273311a8a0609864a75ab97f83"
+    },
+    {
+      "name": "files-populated-768.png",
+      "width": 768,
+      "height": 2760,
+      "sha256": "359c58a9020b4d2fbc2ed88ff6abb62daca64a2169347c62a8b0b70a52d710b2"
+    },
+    {
+      "name": "overview-three-files-390.png",
+      "width": 390,
+      "height": 1942,
+      "sha256": "189cb3c64ff80dce919719880850eaf59fda2957a0eb2a808fc41b9eb7ea7fec"
+    },
+    {
+      "name": "perfil-1024.png",
+      "width": 1024,
+      "height": 1426,
+      "sha256": "0dd2a6e2e27d44797e83e6b5dc303773cca6448f7492ebab8b0a86f85be797ef"
+    },
+    {
+      "name": "perfil-1440.png",
+      "width": 1440,
+      "height": 1426,
+      "sha256": "fae35a6ceaf099e2b61ec14afc13e8ac94c704e48a6da29a1c334dbe732368cf"
+    },
+    {
+      "name": "perfil-320.png",
+      "width": 320,
+      "height": 2179,
+      "sha256": "081aecf71fc12d23c631d5a7930d5f072bcf4b49e3fc5fd1ed147dc379ffbd0f"
+    },
+    {
+      "name": "perfil-375.png",
+      "width": 375,
+      "height": 2136,
+      "sha256": "a87ab13c953f50b10aef86495dc21a35470cbd87b9822da53d74ff63e0670ecc"
+    },
+    {
+      "name": "perfil-390.png",
+      "width": 390,
+      "height": 2103,
+      "sha256": "c23c98d2c29b7c5b4e207b30289ec2c6bc25369fa77b564e4976090909ffc48c"
+    },
+    {
+      "name": "perfil-768.png",
+      "width": 768,
+      "height": 1574,
+      "sha256": "554b90754d3112175a6f789216b2fe63b54a594ec894077697c02d68db2c4454"
+    },
+    {
+      "name": "subscription-offer-unavailable-1440.png",
+      "width": 1440,
+      "height": 1686,
+      "sha256": "871a40cbf4d371405fd21887b5450233942ccae90f76e6bb12fd104a52cb7e55"
+    },
+    {
+      "name": "subscription-offer-unavailable-390.png",
+      "width": 390,
+      "height": 2123,
+      "sha256": "118cca9f7d2229ebe73a3e1a0924a08631f665f92301157077ca7b215ed40dfa"
+    },
+    {
+      "name": "subscription-offer-unavailable-768.png",
+      "width": 768,
+      "height": 1813,
+      "sha256": "210eb45fa105b817060270e688b155142df691619ab4bb386c399594444c8f6e"
+    },
+    {
+      "name": "subscription-past-due-1440.png",
+      "width": 1440,
+      "height": 1898,
+      "sha256": "c0cc0d4674d6d23a7300c3a65f3fc2b66610fb83057368fcafd4dba48807c1ab"
+    },
+    {
+      "name": "subscription-past-due-390.png",
+      "width": 390,
+      "height": 2412,
+      "sha256": "356f905b7757fd753d75bf7de4cb9eaf05b36d9e7e3e584ec191558e8dc2d31a"
+    },
+    {
+      "name": "subscription-past-due-768.png",
+      "width": 768,
+      "height": 2050,
+      "sha256": "777566b6b054d130c648ab13cca09dff620137fd085ffca80a2b80522dc72492"
+    },
+    {
+      "name": "subscription-paused-1440.png",
+      "width": 1440,
+      "height": 1834,
+      "sha256": "71b2d93f856aa53aa4f8974d846af1b2a729a1f5bb4df8e980e4aba91ba3fba8"
+    },
+    {
+      "name": "subscription-paused-390.png",
+      "width": 390,
+      "height": 2273,
+      "sha256": "9cbf12f3f23c260b4758751bd01d40fd806fc18ce10f28a311c6cd066370e4e4"
+    },
+    {
+      "name": "subscription-paused-768.png",
+      "width": 768,
+      "height": 1960,
+      "sha256": "a8326a6aec3263fb3232660cf8e2b6672e14047826fc257fe90d4e33eb63c7a8"
+    },
+    {
+      "name": "subscription-period-expired-1440.png",
+      "width": 1440,
+      "height": 1834,
+      "sha256": "1da8778f23039c7c6cd5d8b755215c316583d801bb1ac2a77ba173db0028e207"
+    },
+    {
+      "name": "subscription-period-expired-390.png",
+      "width": 390,
+      "height": 2298,
+      "sha256": "a4c1c50933902f4961a5a31a0eab9b510a0a65c7fea039bf287af815572daa23"
+    },
+    {
+      "name": "subscription-period-expired-768.png",
+      "width": 768,
+      "height": 1985,
+      "sha256": "d36220605a18475188997fa06bad605f45beaf38b5d8c0496b10da95217acfcd"
+    },
+    {
+      "name": "subscription-pro-active-1440.png",
+      "width": 1440,
+      "height": 1732,
+      "sha256": "e9b6b7d837c581d4b05d4bd568272944dd3cc831b499aa0d9c9c1248d2122a27"
+    },
+    {
+      "name": "subscription-pro-active-390.png",
+      "width": 390,
+      "height": 2147,
+      "sha256": "54619b3256f372eec077a13d9f316130593f026c42986e66eb7862988cee56c6"
+    },
+    {
+      "name": "subscription-pro-active-768.png",
+      "width": 768,
+      "height": 1858,
+      "sha256": "55f7e277de1defd58b1004d92d918c263f354627e176b6ccb85080f863f71924"
+    },
+    {
+      "name": "subscription-pro-pending-1440.png",
+      "width": 1440,
+      "height": 1834,
+      "sha256": "cd669c3e0141f900c40b33a0b7e1b0735e529b69f66f57fc9965fe392a68f23d"
+    },
+    {
+      "name": "subscription-pro-pending-390.png",
+      "width": 390,
+      "height": 2333,
+      "sha256": "3abb16b1ad3ce1589cacfd88df2080b5c7ae031d47a159e8cd75503dd469d1b4"
+    },
+    {
+      "name": "subscription-pro-pending-768.png",
+      "width": 768,
+      "height": 1960,
+      "sha256": "137995745eb1d5a617b7c174f168a6e8ad8a199daab81ce86af5084369263be7"
+    },
+    {
+      "name": "subscription-remote-incomplete-1440.png",
+      "width": 1440,
+      "height": 1834,
+      "sha256": "9a865fdde34efe780d57d45ab9884c67edf4b5197a9e5d85258a850363429001"
+    },
+    {
+      "name": "subscription-remote-incomplete-390.png",
+      "width": 390,
+      "height": 2298,
+      "sha256": "0d2776e2cf57b8d257068525cc9e92ba2f847912b96b5bbb071e56b447e8ece7"
+    },
+    {
+      "name": "subscription-remote-incomplete-768.png",
+      "width": 768,
+      "height": 1960,
+      "sha256": "16bc528ee61a5fe01c0a29393ca91432885ca45cc992958b01a76565940fd4e5"
+    },
+    {
+      "name": "subscription-scheduled-1440.png",
+      "width": 1440,
+      "height": 1732,
+      "sha256": "ca2491edafdf02f020114e9cbbfdf7bba666c4b51ad588626ae388280b73ca2f"
+    },
+    {
+      "name": "subscription-scheduled-390.png",
+      "width": 390,
+      "height": 2147,
+      "sha256": "94798530849d58495f5c31512f59e472148bdde59c4a2ec2ce238c84661f4562"
+    },
+    {
+      "name": "subscription-scheduled-768.png",
+      "width": 768,
+      "height": 1858,
+      "sha256": "3b773da583496d9247574adfb184b8c7a1704bc580d12c75c9df5fb812e09d06"
+    },
+    {
+      "name": "subscription-subscription-error-1440.png",
+      "width": 1440,
+      "height": 1166,
+      "sha256": "4603be77277c42c5f228fb1b54249b62dbb6df55a05cb13240022d079735b577"
+    },
+    {
+      "name": "subscription-subscription-error-390.png",
+      "width": 390,
+      "height": 1447,
+      "sha256": "707329544b5677b56b119035ab83247287f80bdbd7f94ff0cc3ce84faede1d65"
+    },
+    {
+      "name": "subscription-subscription-error-768.png",
+      "width": 768,
+      "height": 1298,
+      "sha256": "6cd65566d76e52c42aa1f05ea53b2987e632378d7cf295663969d14e6eef99d5"
+    },
+    {
+      "name": "visao-geral-1024.png",
+      "width": 1024,
+      "height": 1318,
+      "sha256": "bf59fea8d5cdad22e705454cfd02493ed86b20a80f425b129283f676f182df59"
+    },
+    {
+      "name": "visao-geral-1440.png",
+      "width": 1440,
+      "height": 1318,
+      "sha256": "c281d10e004d9771349be9c5cb87f1e9b757ffe58dbf85693057742f5b41ab27"
+    },
+    {
+      "name": "visao-geral-320.png",
+      "width": 320,
+      "height": 1884,
+      "sha256": "1ff6e955fc3973c182c9c9e125810425d7e1b97e624a2c30d6dd5a17ef512248"
+    },
+    {
+      "name": "visao-geral-375.png",
+      "width": 375,
+      "height": 1824,
+      "sha256": "fa2148de1f6e51b9a8470de75e12e9aa453314882815244c8a4cd8b6deacb4e6"
+    },
+    {
+      "name": "visao-geral-390.png",
+      "width": 390,
+      "height": 1769,
+      "sha256": "5031a1574dd8a05f1571c1fb81c4764a4a26442903da263e001227a0578ef9bb"
+    },
+    {
+      "name": "visao-geral-768.png",
+      "width": 768,
+      "height": 1445,
+      "sha256": "49e840051c5dc7e720fb8787070aa7a6720dce14ffdb39e4fb78d88b605f5ae3"
+    }
+  ],
+  "financial_operations_real": false,
+  "deploy": false,
+  "build_passed": true
+}

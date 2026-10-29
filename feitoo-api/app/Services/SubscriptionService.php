@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\SubscriptionStatus;
+use App\Exceptions\BillingException;
 use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Support\Carbon;
@@ -23,11 +24,30 @@ class SubscriptionService
     public function summary(User $user): array
     {
         $subscription = $this->current($user);
+        $terminal = ! $subscription || in_array($subscription->status, [SubscriptionStatus::Canceled, SubscriptionStatus::IncompleteExpired], true);
+        $localAttempt = $subscription && $subscription->status === SubscriptionStatus::Incomplete && ! $subscription->provider_subscription_id;
+        // Old ambiguous attempts must be reconciled, never replayed beyond Stripe's key retention.
+        $recoverable = $localAttempt && ($subscription->checkout_session_id || $subscription->created_at->greaterThan(now()->subHours(23)));
+        $portal = (bool) ($user->stripe_customer_id && $subscription && $this->stripe->portalAvailable());
+        $state = match (true) {
+            ! $subscription => 'free',
+            $subscription->grantsPro() && $subscription->cancel_at_period_end => 'cancel_scheduled',
+            $subscription->grantsPro() => 'active',
+            $localAttempt => $recoverable ? 'checkout_pending' : 'reconciliation_required',
+            $subscription->status === SubscriptionStatus::Incomplete => 'payment_pending',
+            in_array($subscription->status, [SubscriptionStatus::PastDue, SubscriptionStatus::Unpaid], true) => 'payment_due',
+            $terminal => 'ended',
+            $subscription->status === SubscriptionStatus::Active => 'period_ended',
+            default => $subscription->status->value,
+        };
 
-        return ['offer' => ['amount' => (int) config('monetization.pro.amount'), 'currency' => 'brl',
-            'per_processing' => min((int) config('monetization.pro.per_processing'), (int) config('feitoo.uploads.max_processing_files')),
-            'daily' => (int) config('monetization.pro.daily'), 'available' => $this->stripe->available()],
+        return ['state' => $state, 'actions' => ['checkout' => $terminal && $this->stripe->available(),
+            'resume_checkout' => (bool) ($recoverable && $this->stripe->available()), 'portal' => $portal, 'refresh' => true],
+            'offer' => ['amount' => (int) config('monetization.pro.amount'), 'currency' => 'brl',
+                'per_processing' => min((int) config('monetization.pro.per_processing'), (int) config('feitoo.uploads.max_processing_files')),
+                'daily' => (int) config('monetization.pro.daily'), 'available' => $this->stripe->available()],
             'subscription' => $subscription ? ['status' => $subscription->status->value,
+                'amount' => $subscription->contract_amount, 'currency' => $subscription->contract_currency,
                 'current_period_end' => $subscription->current_period_end?->toIso8601String(),
                 'cancel_at_period_end' => $subscription->cancel_at_period_end,
                 'grants_pro' => $subscription->grantsPro()] : null];
@@ -36,7 +56,9 @@ class SubscriptionService
     public function checkout(User $owner): string
     {
         app(StripeEnvironment::class)->assertConfigured();
-        abort_unless($this->stripe->available(), 503);
+        if (! $this->stripe->available()) {
+            throw new BillingException('checkout_unavailable', 'Novas assinaturas estão temporariamente indisponíveis.', 503);
+        }
 
         $subscription = DB::transaction(function () use ($owner) {
             $user = User::whereKey($owner->id)->lockForUpdate()->firstOrFail();
@@ -44,18 +66,27 @@ class SubscriptionService
                 $user->forceFill(['stripe_customer_id' => $this->stripe->customer($user)])->save();
             }
             $subscription = $this->current($user);
-            abort_if($subscription?->provider_subscription_id && $subscription->status === SubscriptionStatus::Incomplete, 409, 'Gerencie o pagamento da assinatura existente.');
-            abort_if($subscription && ! in_array($subscription->status, [SubscriptionStatus::Canceled, SubscriptionStatus::IncompleteExpired, SubscriptionStatus::Incomplete], true), 409, 'Gerencie sua assinatura existente.');
+            if (($subscription?->provider_subscription_id && $subscription->status === SubscriptionStatus::Incomplete)
+                || ($subscription && ! in_array($subscription->status, [SubscriptionStatus::Canceled, SubscriptionStatus::IncompleteExpired, SubscriptionStatus::Incomplete], true))) {
+                throw new BillingException('subscription_exists', 'Gerencie o pagamento da assinatura existente.', 409);
+            }
             if ($subscription?->checkout_url && $subscription->checkout_expires_at?->isFuture()) {
                 return $subscription;
             }
             if ($subscription?->checkout_session_id && ! $subscription->provider_subscription_id) {
                 $session = $this->stripe->session($subscription->checkout_session_id);
-                abort_unless($session->status === 'expired', 409, 'Aguardando confirmação da assinatura existente.');
+                if ($session->status !== 'expired') {
+                    throw new BillingException('subscription_confirmation_pending', 'Aguardando confirmação da assinatura existente.', 409);
+                }
+            }
+            if ($subscription && ! $subscription->checkout_session_id && ! $subscription->provider_subscription_id
+                && $subscription->created_at->lessThanOrEqualTo(now()->subHours(23))) {
+                throw new BillingException('subscription_reconciliation_required', 'Consulte sua assinatura antes de tentar novamente.', 409);
             }
             if (! $subscription || $subscription->provider_subscription_id || $subscription->checkout_session_id) {
                 $subscription = Subscription::create(['user_id' => $user->id, 'provider_customer_id' => $user->stripe_customer_id,
-                    'provider_price_id' => config('monetization.pro.price_id')]);
+                    'provider_price_id' => config('monetization.pro.price_id'),
+                    'contract_amount' => (int) config('monetization.pro.amount'), 'contract_currency' => 'brl']);
             }
 
             return $subscription;
@@ -65,9 +96,15 @@ class SubscriptionService
         return DB::transaction(function () use ($subscription, $owner) {
             User::whereKey($owner->id)->lockForUpdate()->firstOrFail();
             $subscription = Subscription::whereKey($subscription->id)->lockForUpdate()->firstOrFail();
-            abort_if($subscription->provider_subscription_id, 409, 'Gerencie sua assinatura existente.');
+            if ($subscription->provider_subscription_id) {
+                throw new BillingException('subscription_exists', 'Gerencie sua assinatura existente.', 409);
+            }
             if ($subscription->checkout_url && $subscription->checkout_expires_at?->isFuture()) {
-                app(StripeEnvironment::class)->assertSession($this->stripe->session($subscription->checkout_session_id), true);
+                $remote = $this->stripe->session($subscription->checkout_session_id);
+                app(StripeEnvironment::class)->assertSession($remote, true);
+                if ($remote->status !== 'open') {
+                    throw new BillingException('subscription_confirmation_pending', 'Consulte a confirmação da assinatura.', 409);
+                }
 
                 return $subscription->checkout_url;
             }
@@ -82,7 +119,9 @@ class SubscriptionService
 
     public function portal(User $user): string
     {
-        abort_unless($user->stripe_customer_id && $this->current($user), 404);
+        if (! $user->stripe_customer_id || ! $this->current($user)) {
+            throw new BillingException('portal_unavailable', 'Não há assinatura para gerenciar.', 409);
+        }
 
         return $this->stripe->portal($user->stripe_customer_id);
     }
@@ -133,6 +172,8 @@ class SubscriptionService
                 throw new \RuntimeException('Unknown subscription status.');
             }
             $local->update(['provider_subscription_id' => $remote->id, 'status' => $status,
+                'contract_amount' => $item->price->unit_amount ?? $local->contract_amount,
+                'contract_currency' => $item->price->currency ?? $local->contract_currency,
                 'current_period_start' => isset($item->current_period_start) ? Carbon::createFromTimestamp($item->current_period_start) : null,
                 'current_period_end' => isset($item->current_period_end) ? Carbon::createFromTimestamp($item->current_period_end) : null,
                 'cancel_at_period_end' => (bool) $remote->cancel_at_period_end,

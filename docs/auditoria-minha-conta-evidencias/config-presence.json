@@ -1,0 +1,13 @@
+{
+    "source": "Local .env presence only; not the deployed production configuration",
+    "mode": "test",
+    "key_mode": "test",
+    "webhook_secret_present": true,
+    "pro_price_present": true,
+    "quotation_test_price_present": false,
+    "quotation_live_price_present": false,
+    "quotation_generation_flag": "(default false)",
+    "quotation_purchases_flag": "(default false)",
+    "cached_configuration_file_present": false,
+    "stripe_requests": 0
+}

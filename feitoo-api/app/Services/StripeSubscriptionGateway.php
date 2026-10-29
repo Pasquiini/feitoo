@@ -17,10 +17,15 @@ class StripeSubscriptionGateway
             && str_starts_with((string) config('monetization.pro.price_id'), 'price_');
     }
 
+    public function portalAvailable(): bool
+    {
+        return app(StripeCheckoutGateway::class)->available();
+    }
+
     protected function client(): StripeClient
     {
         app(StripeEnvironment::class)->assertConfigured();
-        if (! $this->available()) {
+        if (! $this->portalAvailable()) {
             throw new BillingException('checkout_unavailable', 'A assinatura Pro ainda não está disponível.', 503);
         }
         CurlClient::instance()->setConnectTimeout(5);
@@ -43,14 +48,17 @@ class StripeSubscriptionGateway
 
         return ['mode' => 'subscription', 'customer' => $subscription->provider_customer_id,
             'line_items' => [['price' => $subscription->provider_price_id, 'quantity' => 1]],
-            'success_url' => $frontend.'/conta?subscription=confirming',
-            'cancel_url' => $frontend.'/conta?subscription=cancelled',
+            'success_url' => $frontend.'/conta/assinatura?subscription=confirming',
+            'cancel_url' => $frontend.'/conta/assinatura?subscription=cancelled',
             'subscription_data' => ['metadata' => ['feitoo_subscription' => (string) $subscription->id]],
             'metadata' => ['feitoo_subscription' => (string) $subscription->id]];
     }
 
     public function checkout(Subscription $subscription): Session
     {
+        if (! $this->available()) {
+            throw new BillingException('checkout_unavailable', 'A assinatura Pro está temporariamente indisponível.', 503);
+        }
         $client = $this->client();
         $price = $client->prices->retrieve($subscription->provider_price_id);
         app(StripeEnvironment::class)->assertObject($price);
@@ -92,7 +100,7 @@ class StripeSubscriptionGateway
     {
         $this->validateCustomer($customer);
         $session = $this->client()->billingPortal->sessions->create(['customer' => $customer,
-            'return_url' => rtrim(config('feitoo.auth.frontend_url'), '/').'/conta']);
+            'return_url' => rtrim(config('feitoo.auth.frontend_url'), '/').'/conta/assinatura']);
         app(StripeEnvironment::class)->assertObject($session);
         abort_unless($session->customer === $customer && preg_match('~^https://billing\.stripe\.com/~', (string) $session->url), 503);
 

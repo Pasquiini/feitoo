@@ -1,0 +1,593 @@
+{
+  "layouts": [
+    {
+      "tool": "xml-to-excel",
+      "state": "idle",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-excel",
+      "state": "idle",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-excel",
+      "state": "idle",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-excel",
+      "state": "idle",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-excel",
+      "state": "idle",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-excel",
+      "state": "idle",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-excel",
+      "state": "selected",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-excel",
+      "state": "selected",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-excel",
+      "state": "processing",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-excel",
+      "state": "result",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-excel",
+      "state": "result",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-excel",
+      "state": "result",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-excel",
+      "state": "result",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-excel",
+      "state": "result",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-excel",
+      "state": "result",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-excel",
+      "state": "failed",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "state": "idle",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "state": "idle",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "state": "idle",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "state": "idle",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "state": "idle",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "state": "idle",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "state": "selected",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "state": "selected",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "state": "processing",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "state": "result",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "state": "result",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "state": "result",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "state": "result",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "state": "result",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "state": "result",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "tool": "products-from-xml",
+      "state": "failed",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-pdf",
+      "state": "idle",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-pdf",
+      "state": "idle",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-pdf",
+      "state": "idle",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-pdf",
+      "state": "idle",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-pdf",
+      "state": "idle",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-pdf",
+      "state": "idle",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-pdf",
+      "state": "selected",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-pdf",
+      "state": "selected",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-pdf",
+      "state": "processing",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-pdf",
+      "state": "result",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-pdf",
+      "state": "result",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-pdf",
+      "state": "result",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-pdf",
+      "state": "result",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-pdf",
+      "state": "result",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-pdf",
+      "state": "result",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "tool": "xml-to-pdf",
+      "state": "failed",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "xml-organizer",
+      "state": "idle",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "tool": "xml-organizer",
+      "state": "idle",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "tool": "xml-organizer",
+      "state": "idle",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "xml-organizer",
+      "state": "idle",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "tool": "xml-organizer",
+      "state": "idle",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "tool": "xml-organizer",
+      "state": "idle",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "tool": "xml-organizer",
+      "state": "selected",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "xml-organizer",
+      "state": "selected",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "tool": "xml-organizer",
+      "state": "processing",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "xml-organizer",
+      "state": "result",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "tool": "xml-organizer",
+      "state": "result",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "tool": "xml-organizer",
+      "state": "result",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "xml-organizer",
+      "state": "result",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "tool": "xml-organizer",
+      "state": "result",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "tool": "xml-organizer",
+      "state": "result",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "tool": "xml-organizer",
+      "state": "failed",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "xml-analyzer",
+      "state": "idle",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "tool": "xml-analyzer",
+      "state": "idle",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "tool": "xml-analyzer",
+      "state": "idle",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "xml-analyzer",
+      "state": "idle",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "tool": "xml-analyzer",
+      "state": "idle",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "tool": "xml-analyzer",
+      "state": "idle",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "tool": "xml-analyzer",
+      "state": "selected",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "xml-analyzer",
+      "state": "selected",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "tool": "xml-analyzer",
+      "state": "processing",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "xml-analyzer",
+      "state": "result",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "tool": "xml-analyzer",
+      "state": "result",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "tool": "xml-analyzer",
+      "state": "result",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "xml-analyzer",
+      "state": "result",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "tool": "xml-analyzer",
+      "state": "result",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "tool": "xml-analyzer",
+      "state": "result",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "tool": "xml-analyzer",
+      "state": "failed",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "docx_to_pdf",
+      "state": "idle",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "tool": "docx_to_pdf",
+      "state": "idle",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "tool": "docx_to_pdf",
+      "state": "idle",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "docx_to_pdf",
+      "state": "idle",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "tool": "docx_to_pdf",
+      "state": "idle",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "tool": "docx_to_pdf",
+      "state": "idle",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "tool": "docx_to_pdf",
+      "state": "selected",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "docx_to_pdf",
+      "state": "selected",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "tool": "docx_to_pdf",
+      "state": "processing",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "docx_to_pdf",
+      "state": "result",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "tool": "docx_to_pdf",
+      "state": "result",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "tool": "docx_to_pdf",
+      "state": "result",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "tool": "docx_to_pdf",
+      "state": "result",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "tool": "docx_to_pdf",
+      "state": "result",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "tool": "docx_to_pdf",
+      "state": "result",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "tool": "docx_to_pdf",
+      "state": "failed",
+      "width": 390,
+      "overflow": false
+    }
+  ],
+  "downloads": 8,
+  "upload": true,
+  "invalidFormat": true,
+  "removal": true,
+  "queued": true,
+  "processing": true,
+  "partial": true,
+  "completed": true,
+  "failed": true,
+  "retry": true,
+  "expired": true,
+  "runtimeErrors": [],
+  "syntheticOnly": true
+}

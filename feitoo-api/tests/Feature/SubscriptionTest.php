@@ -14,8 +14,10 @@ use App\Services\SubscriptionService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Mockery;
+use Stripe\ApiRequestor;
 use Stripe\Checkout\Session;
 use Stripe\Event;
+use Stripe\HttpClient\ClientInterface;
 use Tests\TestCase;
 
 class SubscriptionTest extends TestCase
@@ -69,7 +71,7 @@ class SubscriptionTest extends TestCase
         $this->actingAs($user);
         $gateway = Mockery::mock(StripeSubscriptionGateway::class)->makePartial();
         $gateway->shouldReceive('available')->andReturn(true);
-        $gateway->shouldReceive('session')->andReturn(Session::constructFrom(['id' => 'cs_test_pro', 'livemode' => false, 'url' => 'https://checkout.stripe.com/c/pay/test']));
+        $gateway->shouldReceive('session')->andReturn(Session::constructFrom(['id' => 'cs_test_pro', 'status' => 'open', 'livemode' => false, 'url' => 'https://checkout.stripe.com/c/pay/test']));
         $gateway->shouldReceive('customer')->once()->andReturn('cus_reused');
         $gateway->shouldReceive('checkout')->once()->withArgs(fn ($sub) => $sub->provider_price_id === 'price_pro')->andReturn(Session::constructFrom([
             'id' => 'cs_test_pro', 'livemode' => false, 'url' => 'https://checkout.stripe.com/c/pay/test', 'expires_at' => now()->addHour()->timestamp]));
@@ -131,13 +133,14 @@ class SubscriptionTest extends TestCase
         $user = User::factory()->create();
         $this->subscription($user);
         $gateway = Mockery::mock(StripeSubscriptionGateway::class);
+        $gateway->shouldReceive('portalAvailable')->andReturn(true);
         $gateway->shouldReceive('portal')->once()->with($user->stripe_customer_id)->andReturn('https://billing.stripe.com/p/session/test');
         $gateway->shouldReceive('available')->andReturn(true);
         $this->app->instance(StripeSubscriptionGateway::class, $gateway);
         $this->actingAs($user)->postJson('/api/account/subscription/portal', ['customer' => 'cus_other'])->assertOk();
         $response = $this->getJson('/api/account/subscription')->assertOk();
         $this->assertStringNotContainsString('cus_test', $response->getContent());
-        $this->actingAs(User::factory()->create())->postJson('/api/account/subscription/portal')->assertNotFound();
+        $this->actingAs(User::factory()->create())->postJson('/api/account/subscription/portal')->assertConflict()->assertJsonPath('code', 'portal_unavailable');
     }
 
     public function test_signed_checkout_webhook_activates_pro_and_rejects_invalid_signature_and_live_event(): void
@@ -176,7 +179,7 @@ class SubscriptionTest extends TestCase
         $user = User::factory()->create();
         $gateway = Mockery::mock(StripeSubscriptionGateway::class);
         $gateway->shouldReceive('available')->andReturn(true);
-        $gateway->shouldReceive('session')->andReturn(Session::constructFrom(['id' => 'cs_test_pro', 'livemode' => false, 'url' => 'https://checkout.stripe.com/c/pay/test']));
+        $gateway->shouldReceive('session')->andReturn(Session::constructFrom(['id' => 'cs_test_pro', 'status' => 'open', 'livemode' => false, 'url' => 'https://checkout.stripe.com/c/pay/test']));
         $gateway->shouldReceive('customer')->once()->andReturn('cus_retry');
         $attempts = [];
         $gateway->shouldReceive('checkout')->twice()->andReturnUsing(function ($sub) use (&$attempts) {
@@ -235,5 +238,102 @@ class SubscriptionTest extends TestCase
         $processing = Processing::create(['user_id' => $user->id, 'tool' => 'xml-to-excel', 'status' => 'pending', 'files_count' => 2]);
         $this->expectException(BillingException::class);
         $service->accept($processing, $user);
+    }
+
+    public function test_summary_derives_actions_from_contract_not_effective_free_usage(): void
+    {
+        config(['monetization.pro.price_id' => 'price_pro']);
+        $user = User::factory()->create();
+        $this->actingAs($user);
+        $this->getJson('/api/account/subscription')->assertJsonPath('data.actions.checkout', true);
+        $sub = $this->subscription($user);
+        foreach (['active' => 'active', 'past_due' => 'payment_due', 'unpaid' => 'payment_due',
+            'incomplete' => 'payment_pending', 'paused' => 'paused', 'trialing' => 'trialing'] as $status => $state) {
+            $sub->update(['status' => $status]);
+            $this->getJson('/api/account/subscription')->assertOk()->assertJsonPath('data.state', $state)
+                ->assertJsonPath('data.actions.checkout', false)->assertJsonPath('data.actions.resume_checkout', false)
+                ->assertJsonPath('data.actions.portal', true);
+            $this->postJson('/api/account/subscription/checkout')->assertConflict()->assertJsonPath('code', 'subscription_exists');
+        }
+        $sub->update(['status' => 'active', 'cancel_at_period_end' => true]);
+        $this->getJson('/api/account/subscription')->assertJsonPath('data.state', 'cancel_scheduled')->assertJsonPath('data.subscription.grants_pro', true);
+        $sub->update(['current_period_end' => now()->subMinute()]);
+        $this->getJson('/api/account/subscription')->assertJsonPath('data.state', 'period_ended')->assertJsonPath('data.actions.checkout', false);
+        foreach (['canceled', 'incomplete_expired'] as $status) {
+            $sub->update(['status' => $status]);
+            $this->getJson('/api/account/subscription')->assertJsonPath('data.state', 'ended')->assertJsonPath('data.actions.checkout', true);
+        }
+        $sub->update(['status' => 'incomplete', 'provider_subscription_id' => null]);
+        $this->getJson('/api/account/subscription')->assertJsonPath('data.state', 'checkout_pending')->assertJsonPath('data.actions.resume_checkout', true);
+        $sub->update(['created_at' => now()->subDays(2)]);
+        $this->getJson('/api/account/subscription')->assertJsonPath('data.state', 'reconciliation_required')->assertJsonPath('data.actions.resume_checkout', false);
+        $this->postJson('/api/account/subscription/checkout')->assertConflict()->assertJsonPath('code', 'subscription_reconciliation_required');
+    }
+
+    public function test_portal_and_contract_price_survive_missing_new_offer(): void
+    {
+        $user = User::factory()->create();
+        $sub = $this->subscription($user);
+        $sub->update(['contract_amount' => 2990, 'contract_currency' => 'brl']);
+        config(['monetization.pro.price_id' => null, 'monetization.pro.amount' => 9999]);
+        $gateway = Mockery::mock(StripeSubscriptionGateway::class)->makePartial();
+        $gateway->shouldReceive('portal')->once()->with($user->stripe_customer_id)->andReturn('https://billing.stripe.com/p/session/test');
+        $this->app->instance(StripeSubscriptionGateway::class, $gateway);
+        $this->actingAs($user)->getJson('/api/account/subscription')->assertOk()
+            ->assertJsonPath('data.offer.available', false)->assertJsonPath('data.actions.portal', true)
+            ->assertJsonPath('data.actions.checkout', false)->assertJsonPath('data.subscription.amount', 2990);
+        $this->postJson('/api/account/subscription/portal')->assertOk();
+        $this->postJson('/api/account/subscription/checkout')->assertServiceUnavailable()->assertJsonPath('code', 'checkout_unavailable');
+    }
+
+    public function test_completed_session_is_not_reopened_or_replaced_by_a_second_subscription(): void
+    {
+        config(['monetization.pro.price_id' => 'price_pro']);
+        $user = User::factory()->create();
+        $sub = $this->subscription($user, 'incomplete');
+        $sub->update(['provider_subscription_id' => null, 'checkout_session_id' => 'cs_test_existing',
+            'checkout_url' => 'https://checkout.stripe.com/existing', 'checkout_expires_at' => now()->addHour()]);
+        $gateway = Mockery::mock(StripeSubscriptionGateway::class)->makePartial();
+        $gateway->shouldReceive('session')->once()->andReturn(Session::constructFrom(['id' => 'cs_test_existing', 'livemode' => false, 'status' => 'complete', 'url' => 'https://checkout.stripe.com/existing']));
+        $gateway->shouldNotReceive('checkout');
+        $this->app->instance(StripeSubscriptionGateway::class, $gateway);
+        $this->actingAs($user)->postJson('/api/account/subscription/checkout')->assertConflict()->assertJsonPath('code', 'subscription_confirmation_pending');
+        $this->assertDatabaseCount('subscriptions', 1);
+    }
+
+    public function test_portal_sdk_does_not_fetch_or_require_a_new_offer_price(): void
+    {
+        config(['monetization.pro.price_id' => null]);
+        $http = Mockery::mock(ClientInterface::class);
+        $http->shouldReceive('request')->once()->ordered()->withArgs(fn ($method, $url) => $method === 'get' && str_ends_with($url, '/v1/customers/cus_fixture'))
+            ->andReturn([json_encode(['id' => 'cus_fixture', 'object' => 'customer', 'livemode' => false]), 200, []]);
+        $http->shouldReceive('request')->once()->ordered()->withArgs(function ($method, $url, $headers, $params) {
+            $this->assertSame('cus_fixture', $params['customer']);
+            $this->assertStringEndsWith('/conta/assinatura', $params['return_url']);
+
+            return $method === 'post' && str_ends_with($url, '/v1/billing_portal/sessions');
+        })->andReturn([json_encode(['id' => 'bps_fixture', 'object' => 'billing_portal.session', 'livemode' => false, 'customer' => 'cus_fixture', 'url' => 'https://billing.stripe.com/p/session/fixture']), 200, []]);
+        ApiRequestor::setHttpClient($http);
+        try {
+            $this->assertSame('https://billing.stripe.com/p/session/fixture', app(StripeSubscriptionGateway::class)->portal('cus_fixture'));
+        } finally {
+            ApiRequestor::setHttpClient(null);
+        }
+    }
+
+    public function test_commercial_mutations_require_session_and_csrf_without_creating_an_attempt(): void
+    {
+        $this->postJson('/api/account/subscription/checkout')->assertUnauthorized();
+        $this->postJson('/api/account/subscription/portal')->assertUnauthorized();
+        $this->actingAs(User::factory()->create());
+        $this->app->detectEnvironment(fn () => 'local');
+        ApiRequestor::setHttpClient(Mockery::mock(ClientInterface::class));
+        try {
+            $this->postJson('/api/account/subscription/checkout')->assertStatus(419);
+            $this->postJson('/api/account/subscription/portal')->assertStatus(419);
+        } finally {
+            ApiRequestor::setHttpClient(null);
+        }
+        $this->assertDatabaseCount('subscriptions', 0);
     }
 }

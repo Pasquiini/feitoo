@@ -38,7 +38,8 @@ class QuotationStripeGateway extends StripeCheckoutGateway
         }
         $this->verifyPrice($order->price_id);
         $metadata = ['quotation_order' => $order->uuid, 'operation' => 'quotation_credits'];
-        $base = rtrim(config('feitoo.auth.frontend_url'), '/').'/gerador-de-orcamentos?quotation_order='.$order->uuid;
+        $path = $order->return_destination === 'account' ? '/conta/creditos' : '/gerador-de-orcamentos';
+        $base = rtrim(config('feitoo.auth.frontend_url'), '/').$path.'?quotation_order='.$order->uuid;
         $session = $client->checkout->sessions->create(['mode' => 'payment', 'payment_method_types' => ['card'],
             'adaptive_pricing' => ['enabled' => false], 'automatic_tax' => ['enabled' => false], 'allow_promotion_codes' => false,
             'client_reference_id' => $order->uuid, 'metadata' => $metadata, 'payment_intent_data' => ['metadata' => $metadata],

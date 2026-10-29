@@ -1,0 +1,3747 @@
+[
+  {
+    "name": "visao-geral-320",
+    "scenario": "free-zero",
+    "url": "/conta",
+    "width": 320,
+    "scrollWidth": 305,
+    "height": 975,
+    "words": 55,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Conhecer o Pro",
+        "y": 457,
+        "bottom": 502
+      },
+      {
+        "text": "Comprar créditos",
+        "y": 737,
+        "bottom": 782
+      },
+      {
+        "text": "Ver todos os arquivos",
+        "y": 858,
+        "bottom": 902
+      },
+      {
+        "text": "Escolher ferramenta",
+        "y": 992,
+        "bottom": 1010
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "assinatura-320",
+    "scenario": "free-zero",
+    "url": "/conta/assinatura",
+    "width": 320,
+    "scrollWidth": 305,
+    "height": 1343,
+    "words": 139,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinar Feitoo Pro",
+        "y": 538,
+        "bottom": 584
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "creditos-320",
+    "scenario": "free-zero",
+    "url": "/conta/creditos",
+    "width": 320,
+    "scrollWidth": 305,
+    "height": 1261,
+    "words": 111,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Atualizar saldo",
+        "y": 492,
+        "bottom": 536
+      },
+      {
+        "text": "Comprar 5 créditos",
+        "y": 748,
+        "bottom": 794
+      },
+      {
+        "text": "Consultar termos",
+        "y": 1290,
+        "bottom": 1308
+      },
+      {
+        "text": "Atualizar pedidos",
+        "y": 1106,
+        "bottom": 1150
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "arquivos-320",
+    "scenario": "free-zero",
+    "url": "/conta/arquivos",
+    "width": 320,
+    "scrollWidth": 305,
+    "height": 494,
+    "words": 31,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Atualizar histórico",
+        "y": 311,
+        "bottom": 355
+      },
+      {
+        "text": "Converter XML para Excel",
+        "y": 468,
+        "bottom": 513
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "perfil-320",
+    "scenario": "free-zero",
+    "url": "/conta/perfil",
+    "width": 320,
+    "scrollWidth": 305,
+    "height": 1270,
+    "words": 86,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Salvar nome",
+        "y": 661,
+        "bottom": 706
+      },
+      {
+        "text": "Vincular Google",
+        "y": 931,
+        "bottom": 976
+      },
+      {
+        "text": "Atualizar senha",
+        "y": 1442,
+        "bottom": 1488
+      },
+      {
+        "text": "Segurança",
+        "y": 1308,
+        "bottom": 1334
+      },
+      {
+        "text": "Privacidade",
+        "y": 1308,
+        "bottom": 1334
+      },
+      {
+        "text": "Termos",
+        "y": 1308,
+        "bottom": 1334
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "visao-geral-375",
+    "scenario": "free-zero",
+    "url": "/conta",
+    "width": 375,
+    "scrollWidth": 360,
+    "height": 915,
+    "words": 55,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Conhecer o Pro",
+        "y": 427,
+        "bottom": 473
+      },
+      {
+        "text": "Comprar créditos",
+        "y": 707,
+        "bottom": 753
+      },
+      {
+        "text": "Ver todos os arquivos",
+        "y": 798,
+        "bottom": 842
+      },
+      {
+        "text": "Escolher ferramenta",
+        "y": 932,
+        "bottom": 950
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "assinatura-375",
+    "scenario": "free-zero",
+    "url": "/conta/assinatura",
+    "width": 375,
+    "scrollWidth": 360,
+    "height": 1273,
+    "words": 139,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinar Feitoo Pro",
+        "y": 514,
+        "bottom": 559
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "creditos-375",
+    "scenario": "free-zero",
+    "url": "/conta/creditos",
+    "width": 375,
+    "scrollWidth": 360,
+    "height": 1141,
+    "words": 111,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Atualizar saldo",
+        "y": 467,
+        "bottom": 511
+      },
+      {
+        "text": "Comprar 5 créditos",
+        "y": 702,
+        "bottom": 747
+      },
+      {
+        "text": "Consultar termos",
+        "y": 1203,
+        "bottom": 1221
+      },
+      {
+        "text": "Atualizar pedidos",
+        "y": 1010,
+        "bottom": 1054
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "arquivos-375",
+    "scenario": "free-zero",
+    "url": "/conta/arquivos",
+    "width": 375,
+    "scrollWidth": 360,
+    "height": 494,
+    "words": 31,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Atualizar histórico",
+        "y": 311,
+        "bottom": 355
+      },
+      {
+        "text": "Converter XML para Excel",
+        "y": 468,
+        "bottom": 513
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "perfil-375",
+    "scenario": "free-zero",
+    "url": "/conta/perfil",
+    "width": 375,
+    "scrollWidth": 360,
+    "height": 1227,
+    "words": 86,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Salvar nome",
+        "y": 639,
+        "bottom": 684
+      },
+      {
+        "text": "Vincular Google",
+        "y": 909,
+        "bottom": 954
+      },
+      {
+        "text": "Atualizar senha",
+        "y": 1399,
+        "bottom": 1444
+      },
+      {
+        "text": "Segurança",
+        "y": 1265,
+        "bottom": 1291
+      },
+      {
+        "text": "Privacidade",
+        "y": 1265,
+        "bottom": 1291
+      },
+      {
+        "text": "Termos",
+        "y": 1265,
+        "bottom": 1291
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "visao-geral-390",
+    "scenario": "free-zero",
+    "url": "/conta",
+    "width": 390,
+    "scrollWidth": 375,
+    "height": 883,
+    "words": 55,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Conhecer o Pro",
+        "y": 417,
+        "bottom": 463
+      },
+      {
+        "text": "Comprar créditos",
+        "y": 697,
+        "bottom": 743
+      },
+      {
+        "text": "Ver todos os arquivos",
+        "y": 788,
+        "bottom": 832
+      },
+      {
+        "text": "Escolher ferramenta",
+        "y": 900,
+        "bottom": 918
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "assinatura-390",
+    "scenario": "free-zero",
+    "url": "/conta/assinatura",
+    "width": 390,
+    "scrollWidth": 375,
+    "height": 1222,
+    "words": 139,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinar Feitoo Pro",
+        "y": 482,
+        "bottom": 527
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "creditos-390",
+    "scenario": "free-zero",
+    "url": "/conta/creditos",
+    "width": 390,
+    "scrollWidth": 375,
+    "height": 1131,
+    "words": 111,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Atualizar saldo",
+        "y": 457,
+        "bottom": 501
+      },
+      {
+        "text": "Comprar 5 créditos",
+        "y": 692,
+        "bottom": 737
+      },
+      {
+        "text": "Consultar termos",
+        "y": 1193,
+        "bottom": 1211
+      },
+      {
+        "text": "Atualizar pedidos",
+        "y": 1000,
+        "bottom": 1044
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "arquivos-390",
+    "scenario": "free-zero",
+    "url": "/conta/arquivos",
+    "width": 390,
+    "scrollWidth": 375,
+    "height": 484,
+    "words": 31,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Atualizar histórico",
+        "y": 301,
+        "bottom": 345
+      },
+      {
+        "text": "Converter XML para Excel",
+        "y": 458,
+        "bottom": 503
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "perfil-390",
+    "scenario": "free-zero",
+    "url": "/conta/perfil",
+    "width": 390,
+    "scrollWidth": 375,
+    "height": 1217,
+    "words": 86,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Salvar nome",
+        "y": 629,
+        "bottom": 674
+      },
+      {
+        "text": "Vincular Google",
+        "y": 899,
+        "bottom": 944
+      },
+      {
+        "text": "Atualizar senha",
+        "y": 1389,
+        "bottom": 1434
+      },
+      {
+        "text": "Segurança",
+        "y": 1255,
+        "bottom": 1281
+      },
+      {
+        "text": "Privacidade",
+        "y": 1255,
+        "bottom": 1281
+      },
+      {
+        "text": "Termos",
+        "y": 1255,
+        "bottom": 1281
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "visao-geral-768",
+    "scenario": "free-zero",
+    "url": "/conta",
+    "width": 768,
+    "scrollWidth": 753,
+    "height": 707,
+    "words": 55,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Conhecer o Pro",
+        "y": 447,
+        "bottom": 492
+      },
+      {
+        "text": "Comprar créditos",
+        "y": 512,
+        "bottom": 558
+      },
+      {
+        "text": "Ver todos os arquivos",
+        "y": 619,
+        "bottom": 663
+      },
+      {
+        "text": "Escolher ferramenta",
+        "y": 731,
+        "bottom": 749
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "assinatura-768",
+    "scenario": "free-zero",
+    "url": "/conta/assinatura",
+    "width": 768,
+    "scrollWidth": 753,
+    "height": 1083,
+    "words": 139,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinar Feitoo Pro",
+        "y": 511,
+        "bottom": 557
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "creditos-768",
+    "scenario": "free-zero",
+    "url": "/conta/creditos",
+    "width": 768,
+    "scrollWidth": 753,
+    "height": 965,
+    "words": 112,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Atualizar saldo",
+        "y": 600,
+        "bottom": 644
+      },
+      {
+        "text": "Comprar 5 créditos",
+        "y": 502,
+        "bottom": 547
+      },
+      {
+        "text": "Consultar termos",
+        "y": 940,
+        "bottom": 958
+      },
+      {
+        "text": "Atualizar pedidos",
+        "y": 840,
+        "bottom": 884
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "arquivos-768",
+    "scenario": "free-zero",
+    "url": "/conta/arquivos",
+    "width": 768,
+    "scrollWidth": 753,
+    "height": 389,
+    "words": 31,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Atualizar histórico",
+        "y": 227,
+        "bottom": 271
+      },
+      {
+        "text": "Converter XML para Excel",
+        "y": 369,
+        "bottom": 414
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "perfil-768",
+    "scenario": "free-zero",
+    "url": "/conta/perfil",
+    "width": 768,
+    "scrollWidth": 753,
+    "height": 837,
+    "words": 86,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Salvar nome",
+        "y": 658,
+        "bottom": 704
+      },
+      {
+        "text": "Vincular Google",
+        "y": 504,
+        "bottom": 550
+      },
+      {
+        "text": "Atualizar senha",
+        "y": 994,
+        "bottom": 1039
+      },
+      {
+        "text": "Segurança",
+        "y": 881,
+        "bottom": 907
+      },
+      {
+        "text": "Privacidade",
+        "y": 881,
+        "bottom": 907
+      },
+      {
+        "text": "Termos",
+        "y": 881,
+        "bottom": 907
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "visao-geral-1024",
+    "scenario": "free-zero",
+    "url": "/conta",
+    "width": 1024,
+    "scrollWidth": 1009,
+    "height": 714,
+    "words": 55,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Conhecer o Pro",
+        "y": 453,
+        "bottom": 498
+      },
+      {
+        "text": "Comprar créditos",
+        "y": 519,
+        "bottom": 564
+      },
+      {
+        "text": "Ver todos os arquivos",
+        "y": 625,
+        "bottom": 669
+      },
+      {
+        "text": "Escolher ferramenta",
+        "y": 737,
+        "bottom": 755
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "assinatura-1024",
+    "scenario": "free-zero",
+    "url": "/conta/assinatura",
+    "width": 1024,
+    "scrollWidth": 1009,
+    "height": 1089,
+    "words": 139,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinar Feitoo Pro",
+        "y": 518,
+        "bottom": 563
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "creditos-1024",
+    "scenario": "free-zero",
+    "url": "/conta/creditos",
+    "width": 1024,
+    "scrollWidth": 1009,
+    "height": 931,
+    "words": 112,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Atualizar saldo",
+        "y": 606,
+        "bottom": 650
+      },
+      {
+        "text": "Comprar 5 créditos",
+        "y": 508,
+        "bottom": 553
+      },
+      {
+        "text": "Consultar termos",
+        "y": 884,
+        "bottom": 902
+      },
+      {
+        "text": "Atualizar pedidos",
+        "y": 806,
+        "bottom": 850
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "arquivos-1024",
+    "scenario": "free-zero",
+    "url": "/conta/arquivos",
+    "width": 1024,
+    "scrollWidth": 1009,
+    "height": 395,
+    "words": 31,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Atualizar histórico",
+        "y": 230,
+        "bottom": 274
+      },
+      {
+        "text": "Converter XML para Excel",
+        "y": 375,
+        "bottom": 420
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "perfil-1024",
+    "scenario": "free-zero",
+    "url": "/conta/perfil",
+    "width": 1024,
+    "scrollWidth": 1009,
+    "height": 821,
+    "words": 86,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Salvar nome",
+        "y": 665,
+        "bottom": 710
+      },
+      {
+        "text": "Vincular Google",
+        "y": 489,
+        "bottom": 534
+      },
+      {
+        "text": "Atualizar senha",
+        "y": 978,
+        "bottom": 1024
+      },
+      {
+        "text": "Segurança",
+        "y": 865,
+        "bottom": 892
+      },
+      {
+        "text": "Privacidade",
+        "y": 865,
+        "bottom": 892
+      },
+      {
+        "text": "Termos",
+        "y": 865,
+        "bottom": 892
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "visao-geral-1440",
+    "scenario": "free-zero",
+    "url": "/conta",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "height": 714,
+    "words": 55,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Conhecer o Pro",
+        "y": 453,
+        "bottom": 498
+      },
+      {
+        "text": "Comprar créditos",
+        "y": 519,
+        "bottom": 564
+      },
+      {
+        "text": "Ver todos os arquivos",
+        "y": 625,
+        "bottom": 669
+      },
+      {
+        "text": "Escolher ferramenta",
+        "y": 737,
+        "bottom": 755
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "assinatura-1440",
+    "scenario": "free-zero",
+    "url": "/conta/assinatura",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "height": 1089,
+    "words": 139,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinar Feitoo Pro",
+        "y": 518,
+        "bottom": 563
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "creditos-1440",
+    "scenario": "free-zero",
+    "url": "/conta/creditos",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "height": 910,
+    "words": 112,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Atualizar saldo",
+        "y": 606,
+        "bottom": 650
+      },
+      {
+        "text": "Comprar 5 créditos",
+        "y": 508,
+        "bottom": 553
+      },
+      {
+        "text": "Consultar termos",
+        "y": 842,
+        "bottom": 860
+      },
+      {
+        "text": "Atualizar pedidos",
+        "y": 785,
+        "bottom": 829
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "arquivos-1440",
+    "scenario": "free-zero",
+    "url": "/conta/arquivos",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "height": 395,
+    "words": 31,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Atualizar histórico",
+        "y": 230,
+        "bottom": 274
+      },
+      {
+        "text": "Converter XML para Excel",
+        "y": 375,
+        "bottom": 420
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "perfil-1440",
+    "scenario": "free-zero",
+    "url": "/conta/perfil",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "height": 821,
+    "words": 86,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Salvar nome",
+        "y": 665,
+        "bottom": 710
+      },
+      {
+        "text": "Vincular Google",
+        "y": 489,
+        "bottom": 534
+      },
+      {
+        "text": "Atualizar senha",
+        "y": 978,
+        "bottom": 1024
+      },
+      {
+        "text": "Segurança",
+        "y": 865,
+        "bottom": 892
+      },
+      {
+        "text": "Privacidade",
+        "y": 865,
+        "bottom": 892
+      },
+      {
+        "text": "Termos",
+        "y": 865,
+        "bottom": 892
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "overview-three-files-390",
+    "scenario": "many-history",
+    "url": "/conta",
+    "width": 390,
+    "scrollWidth": 375,
+    "height": 1055,
+    "words": 72,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Conhecer o Pro",
+        "y": 417,
+        "bottom": 463
+      },
+      {
+        "text": "Comprar créditos",
+        "y": 697,
+        "bottom": 743
+      },
+      {
+        "text": "Ver todos os arquivos",
+        "y": 788,
+        "bottom": 832
+      },
+      {
+        "text": "Abrir",
+        "y": 879,
+        "bottom": 902
+      },
+      {
+        "text": "Abrir",
+        "y": 971,
+        "bottom": 993
+      },
+      {
+        "text": "Abrir",
+        "y": 1062,
+        "bottom": 1084
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-pro-active-390",
+    "scenario": "pro-active",
+    "url": "/conta/assinatura",
+    "width": 390,
+    "scrollWidth": 375,
+    "height": 1260,
+    "words": 138,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Gerenciar assinatura",
+        "y": 520,
+        "bottom": 565
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-pro-active-768",
+    "scenario": "pro-active",
+    "url": "/conta/assinatura",
+    "width": 768,
+    "scrollWidth": 753,
+    "height": 1121,
+    "words": 138,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Gerenciar assinatura",
+        "y": 550,
+        "bottom": 595
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-pro-active-1440",
+    "scenario": "pro-active",
+    "url": "/conta/assinatura",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "height": 1127,
+    "words": 138,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Gerenciar assinatura",
+        "y": 556,
+        "bottom": 601
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-scheduled-390",
+    "scenario": "scheduled",
+    "url": "/conta/assinatura",
+    "width": 390,
+    "scrollWidth": 375,
+    "height": 1260,
+    "words": 140,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Gerenciar assinatura",
+        "y": 520,
+        "bottom": 565
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-scheduled-768",
+    "scenario": "scheduled",
+    "url": "/conta/assinatura",
+    "width": 768,
+    "scrollWidth": 753,
+    "height": 1121,
+    "words": 140,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Gerenciar assinatura",
+        "y": 550,
+        "bottom": 595
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-scheduled-1440",
+    "scenario": "scheduled",
+    "url": "/conta/assinatura",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "height": 1127,
+    "words": 140,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Gerenciar assinatura",
+        "y": 556,
+        "bottom": 601
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-pro-pending-390",
+    "scenario": "pro-pending",
+    "url": "/conta/assinatura",
+    "width": 390,
+    "scrollWidth": 375,
+    "height": 1447,
+    "words": 155,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Retomar assinatura",
+        "y": 586,
+        "bottom": 631
+      },
+      {
+        "text": "Acessar gerenciamento",
+        "y": 647,
+        "bottom": 691
+      },
+      {
+        "text": "Consultar confirmação",
+        "y": 799,
+        "bottom": 844
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-pro-pending-768",
+    "scenario": "pro-pending",
+    "url": "/conta/assinatura",
+    "width": 768,
+    "scrollWidth": 753,
+    "height": 1223,
+    "words": 155,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Retomar assinatura",
+        "y": 591,
+        "bottom": 636
+      },
+      {
+        "text": "Acessar gerenciamento",
+        "y": 591,
+        "bottom": 635
+      },
+      {
+        "text": "Consultar confirmação",
+        "y": 737,
+        "bottom": 782
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-pro-pending-1440",
+    "scenario": "pro-pending",
+    "url": "/conta/assinatura",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "height": 1229,
+    "words": 155,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Retomar assinatura",
+        "y": 597,
+        "bottom": 642
+      },
+      {
+        "text": "Acessar gerenciamento",
+        "y": 597,
+        "bottom": 641
+      },
+      {
+        "text": "Consultar confirmação",
+        "y": 743,
+        "bottom": 788
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-remote-incomplete-390",
+    "scenario": "remote-incomplete",
+    "url": "/conta/assinatura",
+    "width": 390,
+    "scrollWidth": 375,
+    "height": 1412,
+    "words": 153,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Gerenciar assinatura",
+        "y": 611,
+        "bottom": 656
+      },
+      {
+        "text": "Consultar confirmação",
+        "y": 764,
+        "bottom": 809
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-remote-incomplete-768",
+    "scenario": "remote-incomplete",
+    "url": "/conta/assinatura",
+    "width": 768,
+    "scrollWidth": 753,
+    "height": 1223,
+    "words": 153,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Gerenciar assinatura",
+        "y": 591,
+        "bottom": 636
+      },
+      {
+        "text": "Consultar confirmação",
+        "y": 737,
+        "bottom": 782
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-remote-incomplete-1440",
+    "scenario": "remote-incomplete",
+    "url": "/conta/assinatura",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "height": 1229,
+    "words": 153,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Gerenciar assinatura",
+        "y": 597,
+        "bottom": 642
+      },
+      {
+        "text": "Consultar confirmação",
+        "y": 743,
+        "bottom": 788
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-past-due-390",
+    "scenario": "past-due",
+    "url": "/conta/assinatura",
+    "width": 390,
+    "scrollWidth": 375,
+    "height": 1526,
+    "words": 167,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Regularizar pagamento",
+        "y": 725,
+        "bottom": 770
+      },
+      {
+        "text": "Consultar confirmação",
+        "y": 878,
+        "bottom": 923
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-past-due-768",
+    "scenario": "past-due",
+    "url": "/conta/assinatura",
+    "width": 768,
+    "scrollWidth": 753,
+    "height": 1312,
+    "words": 167,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Regularizar pagamento",
+        "y": 680,
+        "bottom": 725
+      },
+      {
+        "text": "Consultar confirmação",
+        "y": 826,
+        "bottom": 871
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-past-due-1440",
+    "scenario": "past-due",
+    "url": "/conta/assinatura",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "height": 1294,
+    "words": 167,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Regularizar pagamento",
+        "y": 661,
+        "bottom": 706
+      },
+      {
+        "text": "Consultar confirmação",
+        "y": 807,
+        "bottom": 852
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-period-expired-390",
+    "scenario": "period-expired",
+    "url": "/conta/assinatura",
+    "width": 390,
+    "scrollWidth": 375,
+    "height": 1412,
+    "words": 156,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Gerenciar assinatura",
+        "y": 611,
+        "bottom": 656
+      },
+      {
+        "text": "Consultar confirmação",
+        "y": 764,
+        "bottom": 809
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-period-expired-768",
+    "scenario": "period-expired",
+    "url": "/conta/assinatura",
+    "width": 768,
+    "scrollWidth": 753,
+    "height": 1248,
+    "words": 156,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Gerenciar assinatura",
+        "y": 615,
+        "bottom": 660
+      },
+      {
+        "text": "Consultar confirmação",
+        "y": 761,
+        "bottom": 807
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-period-expired-1440",
+    "scenario": "period-expired",
+    "url": "/conta/assinatura",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "height": 1229,
+    "words": 156,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Gerenciar assinatura",
+        "y": 597,
+        "bottom": 642
+      },
+      {
+        "text": "Consultar confirmação",
+        "y": 743,
+        "bottom": 788
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-paused-390",
+    "scenario": "paused",
+    "url": "/conta/assinatura",
+    "width": 390,
+    "scrollWidth": 375,
+    "height": 1387,
+    "words": 153,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Gerenciar assinatura",
+        "y": 586,
+        "bottom": 631
+      },
+      {
+        "text": "Consultar confirmação",
+        "y": 739,
+        "bottom": 784
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-paused-768",
+    "scenario": "paused",
+    "url": "/conta/assinatura",
+    "width": 768,
+    "scrollWidth": 753,
+    "height": 1223,
+    "words": 153,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Gerenciar assinatura",
+        "y": 591,
+        "bottom": 636
+      },
+      {
+        "text": "Consultar confirmação",
+        "y": 737,
+        "bottom": 782
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-paused-1440",
+    "scenario": "paused",
+    "url": "/conta/assinatura",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "height": 1229,
+    "words": 153,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Gerenciar assinatura",
+        "y": 597,
+        "bottom": 642
+      },
+      {
+        "text": "Consultar confirmação",
+        "y": 743,
+        "bottom": 788
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-subscription-error-390",
+    "scenario": "subscription-error",
+    "url": "/conta/assinatura",
+    "width": 390,
+    "scrollWidth": 375,
+    "height": 439,
+    "words": 36,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Consultar assinatura novamente",
+        "y": 363,
+        "bottom": 408
+      }
+    ],
+    "status": [
+      "Não foi possível concluir a consulta. Tente novamente.",
+      "A consulta automática foi interrompida. Você pode consultar novamente."
+    ]
+  },
+  {
+    "name": "subscription-subscription-error-768",
+    "scenario": "subscription-error",
+    "url": "/conta/assinatura",
+    "width": 768,
+    "scrollWidth": 753,
+    "height": 407,
+    "words": 36,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Consultar assinatura novamente",
+        "y": 362,
+        "bottom": 407
+      }
+    ],
+    "status": [
+      "Não foi possível concluir a consulta. Tente novamente.",
+      "A consulta automática foi interrompida. Você pode consultar novamente."
+    ]
+  },
+  {
+    "name": "subscription-subscription-error-1440",
+    "scenario": "subscription-error",
+    "url": "/conta/assinatura",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "height": 413,
+    "words": 36,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Consultar assinatura novamente",
+        "y": 368,
+        "bottom": 413
+      }
+    ],
+    "status": [
+      "Não foi possível concluir a consulta. Tente novamente.",
+      "A consulta automática foi interrompida. Você pode consultar novamente."
+    ]
+  },
+  {
+    "name": "subscription-offer-unavailable-390",
+    "scenario": "offer-unavailable",
+    "url": "/conta/assinatura",
+    "width": 390,
+    "scrollWidth": 375,
+    "height": 1236,
+    "words": 145,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-offer-unavailable-768",
+    "scenario": "offer-unavailable",
+    "url": "/conta/assinatura",
+    "width": 768,
+    "scrollWidth": 753,
+    "height": 1075,
+    "words": 145,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "subscription-offer-unavailable-1440",
+    "scenario": "offer-unavailable",
+    "url": "/conta/assinatura",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "height": 1082,
+    "words": 145,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      }
+    ],
+    "status": []
+  },
+  {
+    "name": "credit-pending-390",
+    "scenario": "purchase-pending",
+    "url": "/conta/creditos?quotation_order=12345678-1234-4234-8234-123456789abc&payment=success",
+    "width": 390,
+    "scrollWidth": 375,
+    "height": 1375,
+    "words": 135,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Atualizar saldo",
+        "y": 457,
+        "bottom": 501
+      },
+      {
+        "text": "Retomar pedido pendente",
+        "y": 692,
+        "bottom": 737
+      },
+      {
+        "text": "Consultar pagamento",
+        "y": 1020,
+        "bottom": 1065
+      },
+      {
+        "text": "Consultar termos",
+        "y": 1358,
+        "bottom": 1376
+      },
+      {
+        "text": "Atualizar pedidos",
+        "y": 1165,
+        "bottom": 1209
+      },
+      {
+        "text": "Consultar pedido",
+        "y": 1299,
+        "bottom": 1343
+      },
+      {
+        "text": "Retomar pagamento",
+        "y": 1299,
+        "bottom": 1343
+      }
+    ],
+    "status": [
+      "Pagamento pendente. O saldo será liberado após confirmação. Você pode consultar ou retomar o mesmo pedido."
+    ]
+  },
+  {
+    "name": "credit-paid-390",
+    "scenario": "purchase-pending",
+    "url": "/conta/creditos?quotation_order=12345678-1234-4234-8234-123456789abc&payment=success",
+    "width": 390,
+    "scrollWidth": 375,
+    "height": 1215,
+    "words": 117,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Atualizar saldo",
+        "y": 457,
+        "bottom": 501
+      },
+      {
+        "text": "Comprar 5 créditos",
+        "y": 692,
+        "bottom": 737
+      },
+      {
+        "text": "Consultar termos",
+        "y": 1247,
+        "bottom": 1265
+      },
+      {
+        "text": "Atualizar pedidos",
+        "y": 1054,
+        "bottom": 1098
+      }
+    ],
+    "status": [
+      "Pagamento confirmado. Saldo atualizado."
+    ]
+  },
+  {
+    "name": "files-populated-390",
+    "scenario": "many-history",
+    "url": "/conta/arquivos",
+    "width": 390,
+    "scrollWidth": 375,
+    "height": 3057,
+    "words": 304,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Assinatura",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Créditos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Arquivos",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Perfil",
+        "y": 134,
+        "bottom": 182
+      },
+      {
+        "text": "Atualizar histórico",
+        "y": 301,
+        "bottom": 345
+      },
+      {
+        "text": "Baixar Excel",
+        "y": 535,
+        "bottom": 579
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 535,
+        "bottom": 579
+      },
+      {
+        "text": "Baixar Excel",
+        "y": 799,
+        "bottom": 843
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 799,
+        "bottom": 843
+      },
+      {
+        "text": "Baixar PDFs (.zip)",
+        "y": 1006,
+        "bottom": 1050
+      },
+      {
+        "text": "Ver PDFs",
+        "y": 1006,
+        "bottom": 1050
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 1058,
+        "bottom": 1102
+      },
+      {
+        "text": "Consultar orçamento",
+        "y": 1265,
+        "bottom": 1309
+      },
+      {
+        "text": "Baixar orçamento em PDF",
+        "y": 1317,
+        "bottom": 1361
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 1369,
+        "bottom": 1413
+      },
+      {
+        "text": "Baixar Excel",
+        "y": 1605,
+        "bottom": 1649
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 1605,
+        "bottom": 1649
+      },
+      {
+        "text": "Baixar Excel",
+        "y": 1869,
+        "bottom": 1913
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 1869,
+        "bottom": 1913
+      },
+      {
+        "text": "Baixar PDFs (.zip)",
+        "y": 2076,
+        "bottom": 2120
+      },
+      {
+        "text": "Ver PDFs",
+        "y": 2076,
+        "bottom": 2120
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 2128,
+        "bottom": 2172
+      },
+      {
+        "text": "Consultar orçamento",
+        "y": 2335,
+        "bottom": 2379
+      },
+      {
+        "text": "Baixar orçamento em PDF",
+        "y": 2387,
+        "bottom": 2431
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 2439,
+        "bottom": 2483
+      },
+      {
+        "text": "Baixar Excel",
+        "y": 2675,
+        "bottom": 2719
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 2675,
+        "bottom": 2719
+      },
+      {
+        "text": "Baixar Excel",
+        "y": 2938,
+        "bottom": 2982
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 2938,
+        "bottom": 2982
+      },
+      {
+        "text": "Anterior",
+        "y": 3025,
+        "bottom": 3069
+      },
+      {
+        "text": "Próxima",
+        "y": 3077,
+        "bottom": 3121
+      }
+    ],
+    "status": [
+      "Página 1 de 5 · 45 processamentos"
+    ]
+  },
+  {
+    "name": "files-populated-768",
+    "scenario": "many-history",
+    "url": "/conta/arquivos",
+    "width": 768,
+    "scrollWidth": 753,
+    "height": 2022,
+    "words": 304,
+    "focus": "BUTTON",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Atualizar histórico",
+        "y": 227,
+        "bottom": 271
+      },
+      {
+        "text": "Baixar Excel",
+        "y": 366,
+        "bottom": 410
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 366,
+        "bottom": 410
+      },
+      {
+        "text": "Baixar Excel",
+        "y": 556,
+        "bottom": 600
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 556,
+        "bottom": 600
+      },
+      {
+        "text": "Baixar PDFs (.zip)",
+        "y": 705,
+        "bottom": 749
+      },
+      {
+        "text": "Ver PDFs",
+        "y": 705,
+        "bottom": 749
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 757,
+        "bottom": 801
+      },
+      {
+        "text": "Consultar orçamento",
+        "y": 853,
+        "bottom": 897
+      },
+      {
+        "text": "Baixar orçamento em PDF",
+        "y": 853,
+        "bottom": 897
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 905,
+        "bottom": 949
+      },
+      {
+        "text": "Baixar Excel",
+        "y": 1040,
+        "bottom": 1084
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 1040,
+        "bottom": 1084
+      },
+      {
+        "text": "Baixar Excel",
+        "y": 1230,
+        "bottom": 1274
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 1230,
+        "bottom": 1274
+      },
+      {
+        "text": "Baixar PDFs (.zip)",
+        "y": 1379,
+        "bottom": 1423
+      },
+      {
+        "text": "Ver PDFs",
+        "y": 1379,
+        "bottom": 1423
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 1431,
+        "bottom": 1475
+      },
+      {
+        "text": "Consultar orçamento",
+        "y": 1527,
+        "bottom": 1571
+      },
+      {
+        "text": "Baixar orçamento em PDF",
+        "y": 1527,
+        "bottom": 1571
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 1579,
+        "bottom": 1623
+      },
+      {
+        "text": "Baixar Excel",
+        "y": 1714,
+        "bottom": 1758
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 1714,
+        "bottom": 1758
+      },
+      {
+        "text": "Baixar Excel",
+        "y": 1904,
+        "bottom": 1948
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 1904,
+        "bottom": 1948
+      },
+      {
+        "text": "Anterior",
+        "y": 2049,
+        "bottom": 2093
+      },
+      {
+        "text": "Próxima",
+        "y": 2049,
+        "bottom": 2093
+      }
+    ],
+    "status": [
+      "Página 1 de 5 · 45 processamentos"
+    ]
+  },
+  {
+    "name": "files-populated-1440",
+    "scenario": "many-history",
+    "url": "/conta/arquivos",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "height": 2029,
+    "words": 304,
+    "focus": "BUTTON",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Atualizar histórico",
+        "y": 230,
+        "bottom": 274
+      },
+      {
+        "text": "Baixar Excel",
+        "y": 372,
+        "bottom": 416
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 372,
+        "bottom": 416
+      },
+      {
+        "text": "Baixar Excel",
+        "y": 562,
+        "bottom": 606
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 562,
+        "bottom": 606
+      },
+      {
+        "text": "Baixar PDFs (.zip)",
+        "y": 711,
+        "bottom": 755
+      },
+      {
+        "text": "Ver PDFs",
+        "y": 711,
+        "bottom": 755
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 763,
+        "bottom": 807
+      },
+      {
+        "text": "Consultar orçamento",
+        "y": 859,
+        "bottom": 903
+      },
+      {
+        "text": "Baixar orçamento em PDF",
+        "y": 859,
+        "bottom": 903
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 911,
+        "bottom": 955
+      },
+      {
+        "text": "Baixar Excel",
+        "y": 1046,
+        "bottom": 1090
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 1046,
+        "bottom": 1090
+      },
+      {
+        "text": "Baixar Excel",
+        "y": 1236,
+        "bottom": 1280
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 1236,
+        "bottom": 1280
+      },
+      {
+        "text": "Baixar PDFs (.zip)",
+        "y": 1385,
+        "bottom": 1429
+      },
+      {
+        "text": "Ver PDFs",
+        "y": 1385,
+        "bottom": 1429
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 1437,
+        "bottom": 1481
+      },
+      {
+        "text": "Consultar orçamento",
+        "y": 1533,
+        "bottom": 1577
+      },
+      {
+        "text": "Baixar orçamento em PDF",
+        "y": 1533,
+        "bottom": 1577
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 1585,
+        "bottom": 1629
+      },
+      {
+        "text": "Baixar Excel",
+        "y": 1720,
+        "bottom": 1764
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 1720,
+        "bottom": 1764
+      },
+      {
+        "text": "Baixar Excel",
+        "y": 1910,
+        "bottom": 1954
+      },
+      {
+        "text": "Excluir arquivos",
+        "y": 1910,
+        "bottom": 1954
+      },
+      {
+        "text": "Anterior",
+        "y": 2055,
+        "bottom": 2099
+      },
+      {
+        "text": "Próxima",
+        "y": 2055,
+        "bottom": 2099
+      }
+    ],
+    "status": [
+      "Página 1 de 5 · 45 processamentos"
+    ]
+  },
+  {
+    "name": "credit-error-1440",
+    "scenario": "api-error",
+    "url": "/conta/creditos",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "height": 874,
+    "words": 109,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Atualizar saldo",
+        "y": 446,
+        "bottom": 490
+      },
+      {
+        "text": "Comprar 5 créditos",
+        "y": 508,
+        "bottom": 553
+      },
+      {
+        "text": "Consultar termos",
+        "y": 842,
+        "bottom": 860
+      },
+      {
+        "text": "Atualizar pedidos",
+        "y": 785,
+        "bottom": 829
+      }
+    ],
+    "status": [
+      "Não foi possível concluir a consulta. Tente novamente.",
+      "Não foi possível concluir a consulta. Tente novamente."
+    ]
+  },
+  {
+    "name": "credit-loading-1440",
+    "scenario": "loading",
+    "url": "/conta/creditos",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "height": 874,
+    "words": 96,
+    "focus": "H1",
+    "actions": [
+      {
+        "text": "Visão geral",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Assinatura",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Créditos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Arquivos",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Perfil",
+        "y": 140,
+        "bottom": 188
+      },
+      {
+        "text": "Atualizando…",
+        "y": 446,
+        "bottom": 490
+      },
+      {
+        "text": "Comprar 5 créditos",
+        "y": 508,
+        "bottom": 553
+      },
+      {
+        "text": "Consultar termos",
+        "y": 842,
+        "bottom": 860
+      },
+      {
+        "text": "Atualizar pedidos",
+        "y": 785,
+        "bottom": 829
+      }
+    ],
+    "status": [
+      "Consultando saldo…",
+      "Carregando compras…"
+    ]
+  }
+]

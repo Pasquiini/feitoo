@@ -466,4 +466,61 @@ class QuotationCommerceTest extends TestCase
         $this->getJson('/api/quotations/credit-orders')->assertUnauthorized();
         $this->getJson('/api/quotations/entitlements')->assertUnauthorized();
     }
+
+    public function test_direct_account_purchase_is_available_before_free_or_pro_quota_is_exhausted(): void
+    {
+        foreach ([false, true] as $pro) {
+            if ($pro) {
+                Subscription::create(['user_id' => $this->owner->id, 'provider_customer_id' => 'cus_fixture',
+                    'provider_price_id' => 'price_pro', 'provider_subscription_id' => 'sub_fixture',
+                    'status' => 'active', 'current_period_start' => now(), 'current_period_end' => now()->addMonth()]);
+            }
+            $gateway = Mockery::mock(QuotationStripeGateway::class)->makePartial();
+            $gateway->shouldReceive('checkout')->once()->andReturnUsing(function ($order) {
+                $this->assertSame('account', $order->return_destination);
+
+                return $this->checkoutSession($order, ['id' => 'cs_test_'.$order->uuid, 'status' => 'open', 'payment_status' => 'unpaid',
+                    'payment_intent' => null, 'url' => 'https://checkout.stripe.com/c/pay/fixture']);
+            });
+            $this->app->instance(QuotationStripeGateway::class, $gateway);
+            $this->app->forgetInstance(QuotationOrderService::class);
+            $key = (string) Str::uuid();
+            $response = $this->withHeader('Idempotency-Key', $key)->postJson('/api/quotations/credit-orders', ['return_destination' => 'account'])
+                ->assertCreated()->assertJsonPath('data.status', 'pending')->assertJsonPath('data.actions.resume_checkout', true);
+            // A replay cannot change the original return payload or create another Session.
+            $this->withHeader('Idempotency-Key', $key)->postJson('/api/quotations/credit-orders', ['return_destination' => 'editor'])
+                ->assertCreated()->assertJsonPath('data.id', $response->json('data.id'));
+            $this->assertDatabaseCount('quotation_credit_grants', 0);
+        }
+        $this->assertDatabaseCount('quotation_credit_orders', 2);
+        $this->withHeader('Idempotency-Key', (string) Str::uuid())->postJson('/api/quotations/credit-orders', ['return_destination' => 'https://evil.test'])->assertUnprocessable();
+        $this->postJson('/api/quotations/credit-orders', ['return_destination' => 'account', 'amount' => 1])->assertUnprocessable();
+    }
+
+    public function test_resume_actions_require_pending_unexpired_checkout_and_remote_open_session(): void
+    {
+        $order = $this->order();
+        $order->update(['checkout_url' => 'https://checkout.stripe.com/c/pay/fixture']);
+        $this->getJson('/api/quotations/credit-orders')->assertJsonPath('data.0.actions.resume_checkout', true);
+        $gateway = Mockery::mock(QuotationStripeGateway::class)->makePartial();
+        $gateway->shouldReceive('session')->once()->andReturn($this->checkoutSession($order, ['status' => 'complete', 'payment_status' => 'unpaid', 'payment_intent' => null]));
+        $this->app->instance(QuotationStripeGateway::class, $gateway);
+        $this->getJson('/api/quotations/credit-orders/'.$order->uuid.'?payment=success')->assertOk()
+            ->assertJsonPath('data.status', 'pending')->assertJsonPath('data.checkout_url', null)->assertJsonPath('data.actions.resume_checkout', false);
+        $this->assertDatabaseCount('quotation_credit_grants', 0);
+        $order->update(['expires_at' => now()->subSecond(), 'checkout_url' => 'https://checkout.stripe.com/old']);
+        $this->getJson('/api/quotations/credit-orders')->assertJsonPath('data.0.checkout_url', null)->assertJsonPath('data.0.actions.resume_checkout', false);
+    }
+
+    public function test_direct_purchase_requires_csrf_and_does_not_create_attempt_when_session_is_expired(): void
+    {
+        $this->app->detectEnvironment(fn () => 'local');
+        $this->withHeader('Idempotency-Key', (string) Str::uuid())->postJson('/api/quotations/credit-orders', ['return_destination' => 'account'])->assertStatus(419);
+        $this->assertDatabaseCount('quotation_credit_orders', 0);
+        $this->app->detectEnvironment(fn () => 'testing');
+        Auth::forgetGuards();
+        $this->app['session']->flush();
+        $this->postJson('/api/quotations/credit-orders', ['return_destination' => 'account'])->assertUnauthorized();
+        $this->assertDatabaseCount('quotation_credit_orders', 0);
+    }
 }
