@@ -21,7 +21,8 @@ class StripeWebhookService
         if (app(SubscriptionService::class)->handle($event)) {
             return;
         }
-        if (! in_array($event->type, ['checkout.session.completed', 'checkout.session.expired', 'payment_intent.payment_failed', 'charge.refunded'], true)) {
+        if (! in_array($event->type, ['checkout.session.completed', 'checkout.session.async_payment_succeeded',
+            'checkout.session.async_payment_failed', 'checkout.session.expired', 'payment_intent.payment_failed', 'charge.refunded'], true)) {
             return;
         }
         DB::transaction(function () use ($event): void {
@@ -50,30 +51,17 @@ class StripeWebhookService
             if (! $purchase || ! $processing) {
                 return;
             }
+            if ($purchase->provider_checkout_session_id
+                && ! str_starts_with($purchase->provider_checkout_session_id, 'cs_'.config('monetization.stripe.mode').'_')) {
+                throw new \RuntimeException('Purchase belongs to another Stripe environment.');
+            }
             if (str_starts_with($event->type, 'checkout.session.')) {
-                if (! $purchase->provider_checkout_session_id) {
-                    // Do not permanently deduplicate an event that preceded Session persistence.
-                    throw new \RuntimeException('Checkout registration is not ready.');
-                }
-                if ($object->id !== $purchase->provider_checkout_session_id
-                    || ($object->metadata->processing_uuid ?? null) !== $processing->uuid
-                    || ($object->metadata->package_code ?? null) !== $purchase->package_code) {
-                    return;
-                }
-                if ($event->type === 'checkout.session.completed') {
-                    if ($object->mode !== 'payment' || $object->payment_status !== 'paid'
-                        || $object->amount_total !== $purchase->amount || $object->currency !== $purchase->currency
-                        || ! is_string($object->payment_intent) || $purchase->status === PurchaseStatus::Refunded) {
-                        return;
-                    }
-                    $purchase->update(['status' => PurchaseStatus::Paid, 'paid_at' => $purchase->paid_at ?? now(),
-                        'provider_payment_intent_id' => $object->payment_intent, 'checkout_url' => null]);
-                } elseif (! in_array($purchase->status, [PurchaseStatus::Paid, PurchaseStatus::Refunded], true)) {
-                    $purchase->update(['status' => PurchaseStatus::Expired, 'checkout_url' => null, 'checkout_closed_at' => now()]);
-                }
+                app(PurchaseService::class)->applySession($purchase, $processing, $object, $event->type);
             } elseif ($event->type === 'payment_intent.payment_failed') {
                 if ($object->amount !== $purchase->amount || $object->currency !== $purchase->currency
                     || ($object->metadata->processing_uuid ?? null) !== $processing->uuid
+                    || ($object->metadata->package_code ?? null) !== $purchase->package_code
+                    || ($purchase->provider_payment_intent_id && $purchase->provider_payment_intent_id !== $object->id)
                     || ! in_array($purchase->status, [PurchaseStatus::Pending, PurchaseStatus::Failed], true)) {
                     return;
                 }

@@ -33,6 +33,13 @@ class SubscriptionTest extends TestCase
             'current_period_end' => now()->addMonth()]);
     }
 
+    private function invoice(User $user): array
+    {
+        return ['object' => 'invoice', 'id' => 'in_fixture', 'livemode' => false, 'status' => 'paid',
+            'customer' => $user->stripe_customer_id, 'currency' => 'brl', 'total' => 2990,
+            'parent' => ['subscription_details' => ['subscription' => 'sub_test']]];
+    }
+
     public function test_upgrade_downgrade_preserves_daily_usage_and_applies_pro_limits(): void
     {
         $user = User::factory()->create();
@@ -83,6 +90,9 @@ class SubscriptionTest extends TestCase
         $this->assertSame('cus_reused', $user->fresh()->stripe_customer_id);
         $parameters = $gateway->parameters(Subscription::first());
         $this->assertSame('subscription', $parameters['mode']);
+        foreach (['payment_method_types', 'allowed_payment_method_types', 'excluded_payment_method_types', 'automatic_payment_methods'] as $key) {
+            $this->assertArrayNotHasKey($key, $parameters);
+        }
         $this->assertSame('price_pro', $parameters['line_items'][0]['price']);
         $this->assertArrayNotHasKey('trial_period_days', $parameters['subscription_data']);
         $this->assertSame('free', app(EntitlementService::class)->usage($user)['plan']);
@@ -94,8 +104,9 @@ class SubscriptionTest extends TestCase
         $sub = $this->subscription($user, 'incomplete');
         $gateway = Mockery::mock(StripeSubscriptionGateway::class);
         $remote = ['id' => 'sub_test', 'customer' => $user->stripe_customer_id, 'livemode' => false,
+            'collection_method' => 'charge_automatically', 'latest_invoice' => $this->invoice($user),
             'metadata' => ['feitoo_subscription' => (string) $sub->id], 'status' => 'active',
-            'items' => ['data' => [['price' => ['id' => 'price_pro'], 'current_period_start' => now()->timestamp, 'current_period_end' => now()->addMonth()->timestamp]]],
+            'items' => ['data' => [['quantity' => 1, 'price' => ['id' => 'price_pro', 'unit_amount' => 2990, 'currency' => 'brl'], 'current_period_start' => now()->timestamp, 'current_period_end' => now()->addMonth()->timestamp]]],
             'cancel_at_period_end' => true, 'canceled_at' => null];
         $gateway->shouldReceive('retrieve')->once()->andReturn(\Stripe\Subscription::constructFrom($remote));
         $this->app->instance(StripeSubscriptionGateway::class, $gateway);
@@ -116,8 +127,9 @@ class SubscriptionTest extends TestCase
             $gateway = Mockery::mock(StripeSubscriptionGateway::class);
             $gateway->shouldReceive('retrieve')->once()->andReturn(\Stripe\Subscription::constructFrom([
                 'id' => 'sub_test', 'customer' => $user->stripe_customer_id, 'livemode' => false,
+                'collection_method' => 'charge_automatically', 'latest_invoice' => $this->invoice($user),
                 'metadata' => ['feitoo_subscription' => (string) $sub->id], 'status' => $status,
-                'items' => ['data' => [['price' => ['id' => 'price_pro'], 'current_period_end' => now()->addMonth()->timestamp]]],
+                'items' => ['data' => [['quantity' => 1, 'price' => ['id' => 'price_pro', 'unit_amount' => 2990, 'currency' => 'brl'], 'current_period_end' => now()->addMonth()->timestamp]]],
                 'cancel_at_period_end' => false, 'canceled_at' => null]));
             $this->app->instance(StripeSubscriptionGateway::class, $gateway);
             $this->app->forgetInstance(SubscriptionService::class);
@@ -151,8 +163,9 @@ class SubscriptionTest extends TestCase
         $gateway = Mockery::mock(StripeSubscriptionGateway::class);
         $gateway->shouldReceive('retrieve')->once()->with('sub_test')->andReturn(\Stripe\Subscription::constructFrom([
             'id' => 'sub_test', 'customer' => $user->stripe_customer_id, 'livemode' => false,
+            'collection_method' => 'charge_automatically', 'latest_invoice' => $this->invoice($user),
             'metadata' => ['feitoo_subscription' => (string) $sub->id], 'status' => 'active',
-            'items' => ['data' => [['price' => ['id' => 'price_pro'], 'current_period_end' => now()->addMonth()->timestamp]]],
+            'items' => ['data' => [['quantity' => 1, 'price' => ['id' => 'price_pro', 'unit_amount' => 2990, 'currency' => 'brl'], 'current_period_end' => now()->addMonth()->timestamp]]],
             'cancel_at_period_end' => false, 'canceled_at' => null]));
         $this->app->instance(StripeSubscriptionGateway::class, $gateway);
         $body = ['id' => 'evt_checkout_pro', 'object' => 'event', 'livemode' => false, 'type' => 'checkout.session.completed',

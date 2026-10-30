@@ -78,6 +78,7 @@ class QuotationCommerceTest extends TestCase
         return Session::constructFrom(array_replace(['id' => $order->session_id, 'object' => 'checkout.session', 'livemode' => $order->stripe_mode === 'live',
             'mode' => 'payment', 'status' => 'complete', 'client_reference_id' => $order->uuid, 'amount_total' => 990, 'currency' => 'brl',
             'payment_status' => 'paid', 'payment_intent' => 'pi_'.$order->uuid,
+            'line_items' => ['data' => [['quantity' => 1, 'price' => ['id' => $order->price_id, 'unit_amount' => 990, 'currency' => 'brl', 'livemode' => $order->stripe_mode === 'live']]], 'has_more' => false],
             'metadata' => ['quotation_order' => $order->uuid, 'operation' => 'quotation_credits']], $overrides));
     }
 

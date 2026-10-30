@@ -75,7 +75,7 @@ class StripeSubscriptionGateway
 
     public function retrieve(string $id): \Stripe\Subscription
     {
-        $subscription = $this->client()->subscriptions->retrieve($id);
+        $subscription = $this->client()->subscriptions->retrieve($id, ['expand' => ['latest_invoice']]);
         app(StripeEnvironment::class)->assertObject($subscription);
 
         return $subscription;

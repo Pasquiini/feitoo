@@ -156,6 +156,8 @@ class QuotationCheckoutFailureTest extends TestCase
     public function test_recovery_of_already_paid_session_confirms_only_once(): void
     {
         $this->price();
+        $this->http->shouldReceive('request')->withArgs(fn ($method, $url) => $method === 'get' && str_ends_with($url, '/line_items'))
+            ->andReturn([json_encode(['object' => 'list', 'data' => [['quantity' => 1, 'price' => ['id' => 'price_fixture', 'unit_amount' => 990, 'currency' => 'brl', 'livemode' => false]]], 'has_more' => false]), 200, []]);
         $this->http->shouldReceive('request')->once()->withArgs(fn ($method) => $method === 'post')
             ->andThrow(new ApiConnectionException('SECRET lost response'));
         $this->http->shouldReceive('request')->once()->withArgs(fn ($method, $url) => $method === 'get' && str_ends_with($url, '/checkout/sessions'))

@@ -11,7 +11,7 @@ class PurchaseResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
-        $expired = in_array($this->status, [PurchaseStatus::Pending, PurchaseStatus::Failed], true) && ! $this->expires_at->isFuture();
+        $expired = ! $this->resource->awaitingPayment() && in_array($this->status, [PurchaseStatus::Pending, PurchaseStatus::Failed], true) && ! $this->expires_at->isFuture();
 
         return [
             'id' => $this->uuid, 'processing_id' => $this->processing->uuid, 'tool' => $this->processing->tool->value,

@@ -33,7 +33,19 @@ class StripeEnvironmentTest extends TestCase
     {
         $http = Mockery::mock(ClientInterface::class);
         foreach ($objects as $object) {
-            $http->shouldReceive('request')->once()->ordered()->andReturn([json_encode($object), 200, []]);
+            $http->shouldReceive('request')->once()->ordered()->withArgs(function ($method, $url, $headers, $params) {
+                if ($method === 'post' && str_ends_with($url, '/checkout/sessions')) {
+                    foreach (['payment_method_types', 'allowed_payment_method_types', 'excluded_payment_method_types', 'automatic_payment_methods'] as $key) {
+                        $this->assertArrayNotHasKey($key, $params);
+                    }
+                    $this->assertSame('subscription', $params['mode']);
+                    $this->assertSame('price_pro', $params['line_items'][0]['price']);
+                    $this->assertSame(1, $params['line_items'][0]['quantity']);
+                    $this->assertStringContainsString('Idempotency-Key', implode(' ', $headers));
+                }
+
+                return true;
+            })->andReturn([json_encode($object), 200, []]);
         }
         ApiRequestor::setHttpClient($http);
     }

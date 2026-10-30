@@ -167,13 +167,35 @@ class SubscriptionService
                 || ($local->provider_subscription_id && $local->provider_subscription_id !== $remote->id)) {
                 return;
             }
+            if ($item->quantity !== 1 || $item->price->unit_amount !== ($local->contract_amount ?? (int) config('monetization.pro.amount'))
+                || $item->price->currency !== ($local->contract_currency ?? 'brl')) {
+                throw new \RuntimeException('Subscription item does not match its contract.');
+            }
             $status = SubscriptionStatus::tryFrom($remote->status);
             if (! $status) {
                 throw new \RuntimeException('Unknown subscription status.');
             }
+            // With delayed methods Stripe can report active while the invoice is still unpaid (or void).
+            // Never use completion of Checkout, or a stale invoice event, as financial confirmation.
+            $invoice = $remote->latest_invoice;
+            if ($status === SubscriptionStatus::Active) {
+                if ($remote->collection_method !== 'charge_automatically'
+                    || ! is_object($invoice) || $invoice->status !== 'paid') {
+                    $status = in_array($local->status, [SubscriptionStatus::Active, SubscriptionStatus::PastDue, SubscriptionStatus::Unpaid], true)
+                        ? SubscriptionStatus::PastDue : SubscriptionStatus::Incomplete;
+                } else {
+                    app(StripeEnvironment::class)->assertObject($invoice);
+                    $invoiceSubscription = $invoice->parent?->subscription_details?->subscription ?? $invoice->subscription;
+                    if ($invoice->customer !== $local->provider_customer_id || $invoiceSubscription !== $remote->id
+                        || $invoice->currency !== ($local->contract_currency ?? 'brl')
+                        || $invoice->total !== ($local->contract_amount ?? (int) config('monetization.pro.amount'))) {
+                        throw new \RuntimeException('Subscription payment does not match its contract.');
+                    }
+                }
+            }
             $local->update(['provider_subscription_id' => $remote->id, 'status' => $status,
-                'contract_amount' => $item->price->unit_amount ?? $local->contract_amount,
-                'contract_currency' => $item->price->currency ?? $local->contract_currency,
+                'contract_amount' => $local->contract_amount ?? $item->price->unit_amount,
+                'contract_currency' => $local->contract_currency ?? $item->price->currency,
                 'current_period_start' => isset($item->current_period_start) ? Carbon::createFromTimestamp($item->current_period_start) : null,
                 'current_period_end' => isset($item->current_period_end) ? Carbon::createFromTimestamp($item->current_period_end) : null,
                 'cancel_at_period_end' => (bool) $remote->cancel_at_period_end,

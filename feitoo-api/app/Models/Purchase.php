@@ -30,4 +30,9 @@ class Purchase extends Model
     {
         return $this->belongsTo(Processing::class);
     }
+
+    public function awaitingPayment(): bool
+    {
+        return $this->status === PurchaseStatus::Pending && $this->provider_payment_intent_id && $this->checkout_closed_at;
+    }
 }

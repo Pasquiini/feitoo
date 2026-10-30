@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ProcessingTool;
-use App\Enums\PurchaseStatus;
 use App\Http\Resources\PurchaseResource;
 use App\Models\Processing;
 use App\Models\Purchase;
@@ -28,14 +27,9 @@ class BillingController extends Controller
         return response()->json(['data' => ['purchase' => (new PurchaseResource($result['purchase']))->resolve(), 'checkout_url' => $result['checkout_url']]]);
     }
 
-    public function show(Processing $processing)
+    public function show(Processing $processing, PurchaseService $service)
     {
-        $purchase = Purchase::query()->where('processing_id', $processing->id)->firstOrFail();
-        if (in_array($purchase->status, [PurchaseStatus::Pending, PurchaseStatus::Failed], true) && ! $purchase->expires_at->isFuture()) {
-            Purchase::query()->whereKey($purchase->id)->whereIn('status', [PurchaseStatus::Pending->value, PurchaseStatus::Failed->value])
-                ->where('expires_at', '<=', now())->update(['status' => PurchaseStatus::Expired->value, 'checkout_url' => null]);
-            $purchase->refresh();
-        }
+        $purchase = $service->refresh($processing);
 
         return new PurchaseResource($purchase);
     }

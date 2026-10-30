@@ -53,6 +53,9 @@ class QuotationStripeGatewayTest extends TestCase
             $this->assertStringContainsString($destination === 'account' ? '/conta/creditos?' : '/gerador-de-orcamentos?', $params['cancel_url']);
             $this->assertStringContainsString('quotation-order-technical-uuid', implode(' ', $headers));
             $this->assertArrayNotHasKey('customer_email', $params);
+            foreach (['payment_method_types', 'allowed_payment_method_types', 'excluded_payment_method_types', 'automatic_payment_methods'] as $key) {
+                $this->assertArrayNotHasKey($key, $params);
+            }
             $this->assertArrayNotHasKey('price_data', $params['line_items'][0]);
 
             return $method === 'post' && str_ends_with($url, '/v1/checkout/sessions');

@@ -158,7 +158,9 @@ class MonetizationTest extends TestCase
     private function webhook(Purchase $purchase, array $overrides = [], string $eventId = 'evt_test_one', string $type = 'checkout.session.completed')
     {
         $object = array_replace_recursive(['id' => $purchase->provider_checkout_session_id, 'object' => 'checkout.session', 'livemode' => false,
-            'mode' => 'payment', 'payment_status' => 'paid', 'amount_total' => $purchase->amount, 'currency' => $purchase->currency,
+            'mode' => 'payment', 'status' => 'complete', 'client_reference_id' => $purchase->uuid,
+            'payment_status' => 'paid', 'amount_total' => $purchase->amount, 'currency' => $purchase->currency,
+            'line_items' => ['data' => [['quantity' => 1, 'price' => ['unit_amount' => $purchase->amount, 'currency' => $purchase->currency, 'livemode' => false]]], 'has_more' => false],
             'payment_intent' => 'pi_test_one', 'metadata' => ['purchase_uuid' => $purchase->uuid,
                 'processing_uuid' => $purchase->processing->uuid, 'package_code' => $purchase->package_code]], $overrides);
         $body = json_encode(['id' => $eventId, 'object' => 'event', 'type' => $type, 'livemode' => false, 'data' => ['object' => $object]]);
@@ -228,6 +230,7 @@ class MonetizationTest extends TestCase
             $this->assertSame('xml_250', $purchase->package_code);
             $parameters = (new StripeCheckoutGateway)->parameters($purchase, $processing);
             $this->assertSame(690, $parameters['line_items'][0]['price_data']['unit_amount']);
+            $this->assertArrayNotHasKey('payment_method_types', $parameters);
             $this->assertSame(['purchase_uuid', 'processing_uuid', 'package_code'], array_keys($parameters['metadata']));
             $this->assertStringNotContainsString('test-1.xml', json_encode($parameters));
 
@@ -276,9 +279,9 @@ class MonetizationTest extends TestCase
     {
         $p = $this->batch();
         $purchase = $this->purchase($p);
-        foreach ([['amount_total' => 1], ['payment_status' => 'unpaid'], ['livemode' => true], ['id' => 'cs_test_other']] as $i => $data) {
+        foreach ([['amount_total' => 1], ['payment_status' => 'unpaid', 'status' => 'open'], ['livemode' => true], ['id' => 'cs_test_other']] as $i => $data) {
             $response = $this->webhook($purchase, $data, 'evt_wrong_'.$i);
-            $response->assertStatus(isset($data['livemode']) ? 400 : 200);
+            $response->assertStatus(isset($data['livemode']) ? 400 : (isset($data['payment_status']) ? 200 : 422));
             $this->assertSame(PurchaseStatus::Pending, $purchase->fresh()->status);
         }
     }
@@ -288,9 +291,15 @@ class MonetizationTest extends TestCase
         $p = $this->batch();
         $purchase = $this->purchase($p);
         $purchase->update(['expires_at' => now()->subSecond()]);
+        $gateway = Mockery::mock(StripeCheckoutGateway::class);
+        $gateway->shouldReceive('session')->once()->andReturn(Session::constructFrom(['id' => $purchase->provider_checkout_session_id,
+            'livemode' => false, 'mode' => 'payment', 'status' => 'open', 'payment_status' => 'unpaid',
+            'client_reference_id' => $purchase->uuid, 'amount_total' => 490, 'currency' => 'brl', 'metadata' => [
+                'purchase_uuid' => $purchase->uuid, 'processing_uuid' => $p->uuid, 'package_code' => 'xml_100']]));
+        $this->app->instance(StripeCheckoutGateway::class, $gateway);
         $this->getJson($this->url($p).'/purchase')->assertJsonPath('data.status', 'expired');
         $this->postJson($this->url($p).'/start')->assertUnprocessable()->assertJsonPath('code', 'payment_pending');
-        $this->webhook($purchase, [], 'evt_expire', 'checkout.session.expired')->assertOk();
+        $this->webhook($purchase, ['status' => 'expired', 'payment_status' => 'unpaid'], 'evt_expire', 'checkout.session.expired')->assertOk();
         $this->postJson($this->url($p).'/start')->assertStatus(202);
     }
 

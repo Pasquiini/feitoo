@@ -15,6 +15,8 @@ class ExpirePendingPurchases extends Command
     public function handle(): int
     {
         $count = Purchase::query()->whereIn('status', [PurchaseStatus::Pending->value, PurchaseStatus::Failed->value])
+            ->where(fn ($query) => $query->whereNull('checkout_closed_at')->orWhereNull('provider_payment_intent_id')
+                ->orWhere('status', PurchaseStatus::Failed->value))
             ->where('expires_at', '<=', now())->update(['status' => PurchaseStatus::Expired->value, 'checkout_url' => null]);
         $this->info('Expired purchases: '.$count);
 

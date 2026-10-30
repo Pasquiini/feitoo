@@ -98,6 +98,18 @@ class QuotationOrderService
             || $session->amount_total !== $order->amount || $session->currency !== $order->currency) {
             throw new QuotationGenerationException('payment_mismatch', 422);
         }
+        // Checkout events omit line_items. Resolve the immutable Price before granting or recovering payment.
+        if ($session->payment_status === 'paid') {
+            $items = $session->line_items ?? $this->stripe->lineItems($session->id);
+            $session->line_items = $items;
+            $item = $items->data[0] ?? null;
+            $price = $item?->price;
+            if (count($items->data) !== 1 || $items->has_more || $item->quantity !== 1
+                || $price?->id !== $order->price_id || $price->currency !== $order->currency
+                || $price->unit_amount !== $order->amount || $price->livemode !== ($order->stripe_mode === 'live')) {
+                throw new QuotationGenerationException('payment_mismatch', 422);
+            }
+        }
     }
 
     public function refresh(QuotationCreditOrder $order): QuotationCreditOrder
@@ -107,7 +119,7 @@ class QuotationOrderService
         if ($order->status === 'pending' && ! $order->session_id && $order->expires_at->lessThan(now()->addMinutes(30))) {
             return $this->recoverSession($order);
         }
-        if ($order->status === 'pending' && $order->session_id) {
+        if (in_array($order->status, ['pending', 'failed'], true) && $order->session_id) {
             QuotationOrderDiagnostics::stage('stripe_session_retrieve', $order);
             $session = $this->stripe->session($order->session_id);
             QuotationOrderDiagnostics::stage('session_reconcile', $order);
@@ -162,7 +174,7 @@ class QuotationOrderService
                 'granted' => $order->credits, 'created_at' => now(), 'updated_at' => now()]);
         } elseif ($session->status === 'expired' && $order->status !== 'paid') {
             $order->update(['status' => 'cancelled', 'checkout_url' => null]);
-        } elseif ($session->status !== 'open') {
+        } elseif ($session->status !== 'open' && $order->status !== 'paid') {
             $order->update(['checkout_url' => null]);
         }
     }
@@ -276,7 +288,7 @@ class QuotationOrderService
             'credits' => $order->credits, 'status' => $order->status,
             'checkout_url' => $order->status === 'pending' && $order->expires_at->isFuture() ? $order->checkout_url : null,
             'expires_at' => $order->expires_at->toIso8601String(),
-            'actions' => ['refresh' => $order->status === 'pending', 'resume_checkout' => $order->status === 'pending' && $order->expires_at->isFuture() && (bool) $order->checkout_url],
+            'actions' => ['refresh' => in_array($order->status, ['pending', 'failed'], true), 'resume_checkout' => $order->status === 'pending' && $order->expires_at->isFuture() && (bool) $order->checkout_url],
             'created_at' => $order->created_at->toIso8601String(), 'paid_at' => $order->paid_at?->toIso8601String(), 'refunded_amount' => $order->refunded_amount];
     }
 

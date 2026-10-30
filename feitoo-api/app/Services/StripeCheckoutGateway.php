@@ -6,7 +6,9 @@ use App\Exceptions\BillingException;
 use App\Models\Processing;
 use App\Models\Purchase;
 use Stripe\Checkout\Session;
+use Stripe\Collection;
 use Stripe\HttpClient\CurlClient;
+use Stripe\PaymentIntent;
 use Stripe\StripeClient;
 
 class StripeCheckoutGateway
@@ -34,7 +36,7 @@ class StripeCheckoutGateway
         $metadata = ['purchase_uuid' => $purchase->uuid, 'processing_uuid' => $processing->uuid, 'package_code' => $purchase->package_code];
 
         return [
-            'mode' => 'payment', 'payment_method_types' => ['card'],
+            'mode' => 'payment',
             'expires_at' => $purchase->expires_at->timestamp,
             'success_url' => $frontend.$processing->tool->path().'?processing='.$processing->uuid.'&payment=success',
             'cancel_url' => $frontend.$processing->tool->path().'?processing='.$processing->uuid.'&payment=cancelled',
@@ -58,10 +60,47 @@ class StripeCheckoutGateway
 
     public function session(string $id): Session
     {
-        $session = $this->client()->checkout->sessions->retrieve($id);
+        $session = $this->client()->checkout->sessions->retrieve($id, ['expand' => ['line_items.data.price']]);
         app(StripeEnvironment::class)->assertSession($session);
 
         return $session;
+    }
+
+    public function lineItems(string $session): Collection
+    {
+        return $this->client()->checkout->sessions->allLineItems($session, ['limit' => 2]);
+    }
+
+    public function paymentIntent(string $id): PaymentIntent
+    {
+        $intent = $this->client()->paymentIntents->retrieve($id);
+        app(StripeEnvironment::class)->assertObject($intent);
+
+        return $intent;
+    }
+
+    /** Bounded GET recovery: never infer remote absence from an empty local Session field. */
+    public function findPurchaseSession(Purchase $purchase): ?Session
+    {
+        $sessions = $this->client()->checkout->sessions->all(['limit' => 100,
+            'created' => ['gte' => $purchase->created_at->timestamp - 5, 'lte' => $purchase->expires_at->timestamp]]);
+        $found = null;
+        $scanned = 0;
+        foreach ($sessions->autoPagingIterator() as $session) {
+            if (++$scanned > 200) {
+                throw new BillingException('checkout_unavailable', 'Consulte o pagamento novamente.', 503);
+            }
+            if ($session->client_reference_id !== $purchase->uuid || ($session->metadata->purchase_uuid ?? null) !== $purchase->uuid) {
+                continue;
+            }
+            app(StripeEnvironment::class)->assertSession($session);
+            if ($found) {
+                throw new BillingException('payment_mismatch', 'Mais de uma sessão encontrada para a compra.', 422);
+            }
+            $found = $session;
+        }
+
+        return $found;
     }
 
     public function expire(string $session): Session

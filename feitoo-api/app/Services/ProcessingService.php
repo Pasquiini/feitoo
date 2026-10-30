@@ -7,6 +7,7 @@ use App\Enums\ProcessingFileKind;
 use App\Enums\ProcessingFileStatus;
 use App\Enums\ProcessingStatus;
 use App\Enums\ProcessingTool;
+use App\Enums\PurchaseStatus;
 use App\Exceptions\BillingException;
 use App\Models\Processing;
 use App\Models\ProcessingFileResult;
@@ -132,6 +133,13 @@ class ProcessingService
             $locked = Processing::query()->lockForUpdate()->findOrFail($processing->id);
             if ($owner) {
                 abort_unless((int) $locked->user_id === (int) $owner->id, 404);
+            }
+            if ($onlyIfExpired && $locked->status === ProcessingStatus::Pending && $locked->expires_at?->isPast()
+                && $locked->purchase
+                && in_array($locked->purchase->status, [PurchaseStatus::Pending, PurchaseStatus::Failed, PurchaseStatus::Expired], true)) {
+                // Cleanup uses GET reconciliation; communication errors retain files for the next scheduled attempt.
+                app(PurchaseService::class)->refresh($locked);
+                $locked->refresh();
             }
             if ($onlyIfExpired && (! $locked->expires_at || $locked->expires_at->isFuture())) {
                 return $locked;
