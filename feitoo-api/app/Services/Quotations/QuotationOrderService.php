@@ -10,6 +10,8 @@ use App\Services\StripeEnvironment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Stripe\Event;
+use Stripe\Exception\ApiConnectionException;
+use Stripe\Exception\ApiErrorException;
 
 class QuotationOrderService
 {
@@ -17,6 +19,7 @@ class QuotationOrderService
 
     public function checkout(User $owner, string $key, string $destination = 'editor'): QuotationCreditOrder
     {
+        QuotationOrderDiagnostics::stage('checkout_configuration');
         if (! in_array($destination, ['editor', 'account'], true)) {
             throw new QuotationGenerationException('invalid_request', 422);
         }
@@ -24,6 +27,7 @@ class QuotationOrderService
             throw new QuotationGenerationException('checkout_unavailable', 503);
         }
         // Persist before remote I/O: ambiguous failures reuse exactly the same provider key and payload.
+        QuotationOrderDiagnostics::stage('order_persist');
         $order = DB::transaction(function () use ($owner, $key, $destination) {
             User::whereKey($owner->id)->lockForUpdate()->firstOrFail();
 
@@ -32,6 +36,7 @@ class QuotationOrderService
                     'credits' => 5, 'price_id' => config('quotations.credit_price_id'), 'return_destination' => $destination, 'expires_at' => now()->addHour()]);
         }, 5);
 
+        QuotationOrderDiagnostics::stage('order_reload', $order);
         $order->refresh(); // Load database defaults on newly created Eloquent instances too.
         $this->assertMode($order);
         if ($order->status !== 'pending') {
@@ -48,9 +53,27 @@ class QuotationOrderService
             }
             throw new QuotationGenerationException('checkout_expired', 409);
         }
-        $session = $this->stripe->checkout($order);
+        QuotationOrderDiagnostics::stage('stripe_checkout', $order);
+        try {
+            $session = $this->stripe->checkout($order);
+        } catch (ApiErrorException $error) {
+            if (! $error instanceof ApiConnectionException && $error->getHttpStatus() < 500) {
+                throw $error;
+            }
+            QuotationOrderDiagnostics::report($error);
+            // A timeout or provider 5xx can hide a successful creation. Reuse bounded GET recovery immediately.
+            $recovered = $this->recoverSession($order);
+            if ($recovered->session_id || $recovered->status !== 'pending') {
+                return $recovered;
+            }
+            // An empty search during the original lifetime is not proof of remote absence.
+            throw $error;
+        }
+        QuotationOrderDiagnostics::stage('session_validate', $order);
         $this->validate($order, $session, false);
         app(StripeEnvironment::class)->assertSession($session, true);
+
+        QuotationOrderDiagnostics::stage('session_persist', $order);
 
         return DB::transaction(function () use ($owner, $order, $session) {
             User::whereKey($owner->id)->lockForUpdate()->firstOrFail();
@@ -79,36 +102,46 @@ class QuotationOrderService
 
     public function refresh(QuotationCreditOrder $order): QuotationCreditOrder
     {
+        QuotationOrderDiagnostics::stage('order_refresh', $order);
         $this->assertMode($order);
         if ($order->status === 'pending' && ! $order->session_id && $order->expires_at->lessThan(now()->addMinutes(30))) {
-            $session = $this->stripe->findSession($order);
-            DB::transaction(function () use ($order, $session) {
-                User::whereKey($order->user_id)->lockForUpdate()->firstOrFail();
-                $locked = QuotationCreditOrder::whereKey($order->id)->lockForUpdate()->firstOrFail();
-                if ($locked->status !== 'pending' || $locked->session_id) {
-                    return;
-                }
-                if ($session) {
-                    $this->validate($locked, $session, false);
-                    app(StripeEnvironment::class)->assertSession($session, $session->status === 'open');
-                    $locked->update(['session_id' => $session->id, 'checkout_url' => $session->status === 'open' ? $session->url : null]);
-                    $this->applySession($locked, $session);
-                } elseif ($locked->expires_at->isPast()) {
-                    // The original session lifetime ended and an exhaustive bounded GET found no session.
-                    $locked->update(['status' => 'cancelled', 'checkout_url' => null]);
-                }
-            }, 5);
-
-            return $order->fresh();
+            return $this->recoverSession($order);
         }
         if ($order->status === 'pending' && $order->session_id) {
+            QuotationOrderDiagnostics::stage('stripe_session_retrieve', $order);
             $session = $this->stripe->session($order->session_id);
+            QuotationOrderDiagnostics::stage('session_reconcile', $order);
             DB::transaction(function () use ($order, $session) {
                 User::whereKey($order->user_id)->lockForUpdate()->firstOrFail();
                 $locked = QuotationCreditOrder::whereKey($order->id)->lockForUpdate()->firstOrFail();
                 $this->applySession($locked, $session);
             }, 5);
         }
+
+        return $order->fresh();
+    }
+
+    private function recoverSession(QuotationCreditOrder $order): QuotationCreditOrder
+    {
+        QuotationOrderDiagnostics::stage('stripe_session_recovery', $order);
+        $session = $this->stripe->findSession($order);
+        QuotationOrderDiagnostics::stage('session_recovery_persist', $order);
+        DB::transaction(function () use ($order, $session) {
+            User::whereKey($order->user_id)->lockForUpdate()->firstOrFail();
+            $locked = QuotationCreditOrder::whereKey($order->id)->lockForUpdate()->firstOrFail();
+            if ($locked->status !== 'pending' || $locked->session_id) {
+                return;
+            }
+            if ($session) {
+                $this->validate($locked, $session, false);
+                app(StripeEnvironment::class)->assertSession($session, $session->status === 'open');
+                $locked->update(['session_id' => $session->id, 'checkout_url' => $session->status === 'open' ? $session->url : null]);
+                $this->applySession($locked, $session);
+            } elseif ($locked->expires_at->isPast()) {
+                // The original session lifetime ended and an exhaustive bounded GET found no session.
+                $locked->update(['status' => 'cancelled', 'checkout_url' => null]);
+            }
+        }, 5);
 
         return $order->fresh();
     }

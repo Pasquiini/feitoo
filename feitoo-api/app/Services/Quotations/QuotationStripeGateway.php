@@ -29,6 +29,7 @@ class QuotationStripeGateway extends StripeCheckoutGateway
 
     public function checkout(QuotationCreditOrder $order): Session
     {
+        QuotationOrderDiagnostics::stage('stripe_client', $order);
         if (! $this->available()) {
             throw new QuotationGenerationException('checkout_unavailable', 503);
         }
@@ -36,16 +37,20 @@ class QuotationStripeGateway extends StripeCheckoutGateway
         if ($order->stripe_mode !== config('monetization.stripe.mode')) {
             throw new QuotationGenerationException('payment_mismatch', 422);
         }
+        QuotationOrderDiagnostics::stage('stripe_price_verify', $order);
         $this->verifyPrice($order->price_id);
+        QuotationOrderDiagnostics::stage('stripe_session_parameters', $order);
         $metadata = ['quotation_order' => $order->uuid, 'operation' => 'quotation_credits'];
         $path = $order->return_destination === 'account' ? '/conta/creditos' : '/gerador-de-orcamentos';
         $base = rtrim(config('feitoo.auth.frontend_url'), '/').$path.'?quotation_order='.$order->uuid;
+        QuotationOrderDiagnostics::stage('stripe_session_create', $order);
         $session = $client->checkout->sessions->create(['mode' => 'payment', 'payment_method_types' => ['card'],
             'adaptive_pricing' => ['enabled' => false], 'automatic_tax' => ['enabled' => false], 'allow_promotion_codes' => false,
             'client_reference_id' => $order->uuid, 'metadata' => $metadata, 'payment_intent_data' => ['metadata' => $metadata],
             'line_items' => [['price' => $order->price_id, 'quantity' => 1]], 'expires_at' => $order->expires_at->timestamp,
             'success_url' => $base.'&payment=confirming', 'cancel_url' => $base.'&payment=cancelled'],
             ['idempotency_key' => 'quotation-order-'.$order->uuid]);
+        QuotationOrderDiagnostics::stage('stripe_session_response', $order);
         app(StripeEnvironment::class)->assertSession($session, true);
 
         return $session;

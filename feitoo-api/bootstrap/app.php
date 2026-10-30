@@ -5,6 +5,7 @@ use App\Exceptions\BillingException;
 use App\Exceptions\QuotationGenerationException;
 use App\Http\Middleware\PrivateApiResponse;
 use App\Models\Processing;
+use App\Services\Quotations\QuotationOrderDiagnostics;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -12,6 +13,7 @@ use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
+use Stripe\Exception\ApiErrorException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
@@ -35,6 +37,10 @@ return Application::configure(basePath: dirname(__DIR__))
             if (! request()->is('api/*')) {
                 return null;
             }
+            if (request()->is('api/quotations/credit-orders*')) {
+                // The renderer also sees HttpExceptions that Laravel intentionally does not report.
+                return false;
+            }
 
             // Never log exception messages/traces/SQL bindings from hostile uploads.
             $processing = request()->route('processing');
@@ -46,6 +52,18 @@ return Application::configure(basePath: dirname(__DIR__))
             return false;
         });
         $exceptions->render(function (Throwable $exception, Request $request) {
+            if ($request->is('api/quotations/credit-orders*')) {
+                $status = $exception instanceof AuthenticationException ? 401 : ($exception instanceof ValidationException ? 422
+                    : ($exception instanceof HttpExceptionInterface ? $exception->getStatusCode() : 500));
+                if ($status >= 500 || ($exception instanceof QuotationGenerationException && $exception->reason === 'payment_mismatch')) {
+                    QuotationOrderDiagnostics::report($exception);
+                }
+                if ($exception instanceof ApiErrorException) {
+                    $failure = new QuotationGenerationException('checkout_unavailable', 503);
+
+                    return response()->json(['code' => $failure->reason, 'message' => $failure->getMessage()], 503);
+                }
+            }
             if ($exception instanceof QuotationGenerationException) {
                 return response()->json(['code' => $exception->reason, 'message' => $exception->getMessage()], $exception->getStatusCode());
             }
